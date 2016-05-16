@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.viglle.carmanual.action.model.BaseEventModel;
+import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.base.UIType;
 import com.viglle.carmanual.factory.EventFactory;

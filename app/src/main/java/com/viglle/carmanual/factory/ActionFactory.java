@@ -22,11 +22,8 @@ import com.viglle.carmanual.utils.ToastUtil;
 import com.viglle.carmanual.utils.net.HttpHandlerInterface;
 import com.viglle.carmanual.utils.net.HttpUtil;
 import com.viglle.carmanual.utils.net.TwoValues;
-import com.viglle.carmanual.validation.BaseValidModel;
-import com.viglle.carmanual.validation.ValidLengthModel;
-import com.viglle.carmanual.validation.ValidMatcherModel;
-import com.viglle.carmanual.validation.ValidType;
 import com.viglle.carmanual.widget.entity.ViewTreeBean;
+import com.viglle.carmanual.widget.model.BaseTextViewModel;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 import com.viglle.carmanual.widget.model.VgTextFieldModel;
 import com.viglle.carmanual.widget.model.VgTextViewModel;
@@ -61,6 +58,7 @@ public class ActionFactory{
         switch (actionType){
             case ActionType.ACTION_SHOW_TOAST://显示Toast
                 ActionToastModel modelToast= (ActionToastModel) model;
+                UpdateViewFactory.modifyViews(ctx, viewTreeBean, model);
                 ToastUtil.showToast(ctx,modelToast.getText());
                 break;
             case ActionType.ACTION_SHOW_SNACKBAR://显示Snackbar
@@ -80,6 +78,7 @@ public class ActionFactory{
                 break;
             case ActionType.ACTION_NEW_PANEL://打开一个新界面
                 ActionNewUIModel uiModel= (ActionNewUIModel) model;
+                UpdateViewFactory.modifyViews(ctx,viewTreeBean,model);
                 Intent intentuiModel=new Intent(ctx,LoginActivity.class);
                 intentuiModel.putExtra("params", (Serializable) model.getParams());
                 intentuiModel.putExtra("url", uiModel.getUrl());
@@ -92,7 +91,7 @@ public class ActionFactory{
             case ActionType.ACTION_CLOSE_AND_NEW_PANEL://打开一个新界面并关闭上一个界面
                 ActionCloseNewModel closeNewModel= (ActionCloseNewModel) model;
                 Intent intent=new Intent(ctx,LoginActivity.class);
-
+                UpdateViewFactory.modifyViews(ctx,viewTreeBean,model);
                 List<TwoValues<String,String>> refUIList = configRefUIParams(ctx,model,viewTreeBean);
                 List<TwoValues<String,String>> staticList= configStaticParams(ctx,model,viewTreeBean);
 
@@ -103,7 +102,7 @@ public class ActionFactory{
                 ((Activity)ctx).finish();
                 break;
             case ActionType.ACTION_SEND_HTTP_REQUEST://发送httpq请求
-                createHttpRequestAction(ctx,viewTreeBean,(ActionHttpModel) model);
+                createHttpRequestAction(ctx, viewTreeBean, (ActionHttpModel) model);
                 break;
             case ActionType.ACTION_COUNT_TIMER://计时
 
@@ -117,6 +116,9 @@ public class ActionFactory{
             case ActionType.ACTION_DIMISS_DIALOG://隐藏对话框
 
                 break;
+            case ActionType.ACTION_MODIFY_VIEW_VALUE://修改View的某个属性
+
+                break;
 
         }
     }
@@ -125,13 +127,13 @@ public class ActionFactory{
         if(model==null){
             return;
         }
-        if(!validRefUIParams(ctx, model, viewTreeBean)){
+        if(!ValidFactory.validRefUIParams(ctx, model, viewTreeBean)){
             return;
         }
         List<TwoValues<String,String>> list = configRefUIParams(ctx, model, viewTreeBean);//获取控件上的值组装成请求参数的格式
         List<TwoValues<String,String>> staticListParams=configStaticParams(ctx, model, viewTreeBean);
         list.addAll(staticListParams);//合并参数
-
+        UpdateViewFactory.modifyViews(ctx, viewTreeBean, model);
         HttpUtil.httpPost(model.getUrl(),list , new HttpHandlerInterface() {
             @Override
             public void onSuccess(String data) {
@@ -147,7 +149,6 @@ public class ActionFactory{
                     if(res_type.equals(BaseActivity.RES_TYPE_1001)){
                         BaseViewModel treeModel = VgUIParsor.parserUIModelTree(ctx, resultObj);
                         ((BaseActivity)ctx).setContentView(ViewFactory.createViewTree(ctx,treeModel,viewTreeBean));
-
                     }else if(res_type.equals(BaseActivity.RES_TYPE_1002)){
                         EventFactory.createEventLink(ctx, viewTreeBean, VgEventParsor.parsorEventLink(resultObj));
                     }
@@ -164,69 +165,6 @@ public class ActionFactory{
         });
     }
 
-    private static boolean validRefUIParams(Context ctx, BaseActionModel modelHttp, ViewTreeBean allViewMap) {
-
-        List<Integer> refUI=modelHttp.getRef_ui();
-//        List<TwoValues<String,String>> list=new ArrayList<>();
-        for(int i=0;i<refUI.size();i++){
-            int view_id=refUI.get(i);
-            BaseViewModel baseViewModel = allViewMap.getViewModelById(view_id);
-            if(baseViewModel!=null){
-                int view_type=baseViewModel.getView_type();
-                switch (view_type){
-                    case VgViewType.VgTextField:
-                        return checkTextParam(ctx,baseViewModel);
-                    case VgViewType.VgRadioButton:
-
-                        break;
-                    case VgViewType.VgCheckBox:
-
-                        break;
-                     case VgViewType.VgTextView:
-                       return checkTextParam(ctx,baseViewModel);
-                }
-            }
-        }
-        return true;
-    }
-    private static boolean checkTextParam(Context ctx,BaseViewModel baseViewModel){
-
-        TwoValues<String ,String> keyvalue=getTextFieldKeyValue(baseViewModel);
-        List<BaseValidModel> validLink=baseViewModel.getValidLink();
-        for(BaseValidModel model:validLink){
-            int validId= model.getValid_id();
-            switch (validId){
-                case ValidType.REQUIRE:
-                    if(keyvalue.value==null||keyvalue.value.equals("")){
-                        ToastUtil.showToast(ctx,model.getValid_msg());
-                        return false;
-                    }
-                    break;
-                case ValidType.LENGT:
-                    int min=((ValidLengthModel)model).getMin();
-                    int max=((ValidLengthModel)model).getMax();
-                    if(keyvalue.value==null||keyvalue.value.equals("")){
-                        ToastUtil.showToast(ctx,model.getValid_msg());
-                        return false;
-                    }else{
-                        if(keyvalue.value.length()>=min&&keyvalue.value.length()<=max){
-                            return true;
-                        }else {
-                            ToastUtil.showToast(ctx,model.getValid_msg());
-                            return false;
-                        }
-                    }
-                case ValidType.MATCHER:
-                    ValidMatcherModel matcherModel=(ValidMatcherModel)model;
-                    if(!AppUtil.isMatcherStr(matcherModel.getRule(),keyvalue.value)){
-                        ToastUtil.showToast(ctx,model.getValid_msg());
-                        return false;
-                    }
-                    return true;
-            }
-        }
-        return true;
-    }
 
     private static List<TwoValues<String,String>> configRefUIParams(Context ctx, BaseActionModel modelHttp, ViewTreeBean allViewMap) {
         List<Integer> refUI=modelHttp.getRef_ui();
@@ -238,7 +176,7 @@ public class ActionFactory{
                 int view_type=baseViewModel.getView_type();
                 switch (view_type){
                     case VgViewType.VgTextField:
-                        list.add(getTextFieldKeyValue(baseViewModel));
+                        list.add(getTextFieldKeyValue((BaseTextViewModel)baseViewModel));
                         break;
                     case VgViewType.VgRadioButton:
 
@@ -277,7 +215,7 @@ public class ActionFactory{
         return params;
     }
 
-    private static TwoValues<String,String> getTextFieldKeyValue(BaseViewModel model){
+    private static TwoValues<String,String> getTextFieldKeyValue(BaseTextViewModel model){
         VgTextFieldModel textFieldModel= (VgTextFieldModel)model;
         String  key=textFieldModel.getKey();
         EditText editText=textFieldModel.getVgView();
@@ -291,4 +229,6 @@ public class ActionFactory{
         String value=textView.getText().toString();
         return new TwoValues<>(key,value);
     }
+
+
 }

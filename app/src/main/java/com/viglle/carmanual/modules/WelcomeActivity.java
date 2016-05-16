@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
-import com.viglle.carmanual.action.model.BaseEventModel;
+import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.base.UIType;
 import com.viglle.carmanual.widget.model.BaseViewModel;
@@ -19,7 +18,6 @@ import com.viglle.carmanual.utils.net.HttpUtil;
 import com.viglle.carmanual.factory.EventFactory;
 import com.viglle.carmanual.factory.ViewFactory;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;

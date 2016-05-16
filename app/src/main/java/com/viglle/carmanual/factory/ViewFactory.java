@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.viglle.carmanual.action.model.BaseEventModel;
+import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.modules.user.LoginActivity;
 import com.viglle.carmanual.seletor.SelectorFactory;
 import com.viglle.carmanual.utils.AppUtil;

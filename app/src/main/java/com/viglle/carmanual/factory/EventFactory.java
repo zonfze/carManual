@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 
-import com.viglle.carmanual.action.EventType;
+import com.viglle.carmanual.event.EventType;
 import com.viglle.carmanual.action.model.BaseActionModel;
-import com.viglle.carmanual.action.model.BaseEventModel;
-import com.viglle.carmanual.action.model.EventAutoModel;
-import com.viglle.carmanual.action.model.EventClickModel;
-import com.viglle.carmanual.action.model.EventTimerModel;
+import com.viglle.carmanual.event.BaseEventModel;
+import com.viglle.carmanual.event.EventAutoModel;
+import com.viglle.carmanual.event.EventClickModel;
+import com.viglle.carmanual.event.EventTimerModel;
 import com.viglle.carmanual.utils.LogUtil;
 import com.viglle.carmanual.widget.entity.ViewTreeBean;
 

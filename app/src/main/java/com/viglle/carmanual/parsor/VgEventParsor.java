@@ -1,12 +1,12 @@
 package com.viglle.carmanual.parsor;
 
-import com.viglle.carmanual.action.EventType;
-import com.viglle.carmanual.action.model.BaseEventModel;
-import com.viglle.carmanual.action.model.EventAutoModel;
-import com.viglle.carmanual.action.model.EventClickModel;
-import com.viglle.carmanual.action.model.EventFlipModel;
-import com.viglle.carmanual.action.model.EventLongClickModel;
-import com.viglle.carmanual.action.model.EventTimerModel;
+import com.viglle.carmanual.event.EventType;
+import com.viglle.carmanual.event.BaseEventModel;
+import com.viglle.carmanual.event.EventAutoModel;
+import com.viglle.carmanual.event.EventClickModel;
+import com.viglle.carmanual.event.EventFlipModel;
+import com.viglle.carmanual.event.EventLongClickModel;
+import com.viglle.carmanual.event.EventTimerModel;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 

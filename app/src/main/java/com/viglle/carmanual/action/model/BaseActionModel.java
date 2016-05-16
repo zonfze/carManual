@@ -21,6 +21,14 @@ public abstract class BaseActionModel {
     private List<Integer>ref_ui=new ArrayList<>();
     public static final String REF_UI="ref_ui";
 
+    /**
+     * 该action需要修改的view的队列
+     */
+    private List<BaseFModel> modifidLink=new ArrayList<>();
+    public static final String MODIFY_LINK="modify";
+
+
+
     public int getActionType() {
         if(actionType==null||actionType.equals("")||actionType.equals("null")){
             return 0;
@@ -78,5 +86,21 @@ public abstract class BaseActionModel {
             }
             ref_ui.add(Integer.parseInt(item));
         }
+    }
+    public List<BaseFModel> getModifidLink() {
+        return modifidLink;
+    }
+
+    public void setModifidLink(List<BaseFModel> link) {
+        if(link==null||link.isEmpty()){
+            return;
+        }
+        if(modifidLink==null){
+            modifidLink=new ArrayList<>();
+        }
+        if(!modifidLink.isEmpty()){
+            modifidLink.clear();
+        }
+        this.modifidLink.addAll(link);
     }
 }

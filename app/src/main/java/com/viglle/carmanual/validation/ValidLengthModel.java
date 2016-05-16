@@ -27,10 +27,10 @@ public class ValidLengthModel extends BaseValidModel{
 
     public int getMin() {
         if(min==null||min.equals("")||min.equalsIgnoreCase("null")){
-            return -1;
+            return 0;
         }
         if(!AppUtil.isNumeric(min)){
-            return -1;
+            return 0;
         }
         return Integer.parseInt(min);
     }

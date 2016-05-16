@@ -6,11 +6,16 @@ import com.viglle.carmanual.utils.AppUtil;
  * Created by Administrator on 2016/4/18.
  */
 public class VgImageViewModel extends BaseViewModel{
+    /**
+     * 图片路径
+     */
     private String src;
-    public static final String SRC="imageUrl";//图片路径
-
+    public static final String SRC="imageUrl";
+    /**
+     * 0 按图片大小显示;1充满控件;2在控件内部;3如果图片太大久截取部分显示
+     */
     private String scaleType;
-    public static final String SCALE_TYPE="scaleType";//0 按图片大小显示;1充满控件;2在控件内部;3如果图片太大久截取部分显示
+    public static final String SCALE_TYPE="scaleType";
 
     public String getSrc() {
         if(src==null||src.equals("null")){

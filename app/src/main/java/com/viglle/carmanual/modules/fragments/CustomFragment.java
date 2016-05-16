@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.viglle.carmanual.action.model.BaseEventModel;
+import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.factory.EventFactory;
 import com.viglle.carmanual.factory.ViewFactory;

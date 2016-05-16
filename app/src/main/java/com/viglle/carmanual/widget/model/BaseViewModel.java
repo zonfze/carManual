@@ -2,7 +2,7 @@ package com.viglle.carmanual.widget.model;
 
 import android.view.View;
 
-import com.viglle.carmanual.action.model.BaseEventModel;
+import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.validation.BaseValidModel;
 

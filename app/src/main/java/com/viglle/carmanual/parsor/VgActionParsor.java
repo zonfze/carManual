@@ -7,7 +7,9 @@ import com.viglle.carmanual.action.model.ActionHttpModel;
 import com.viglle.carmanual.action.model.ActionNewUIModel;
 import com.viglle.carmanual.action.model.ActionToastModel;
 import com.viglle.carmanual.action.model.BaseActionModel;
-import com.viglle.carmanual.action.model.BaseEventModel;
+import com.viglle.carmanual.action.model.BaseFModel;
+import com.viglle.carmanual.action.model.FModel;
+import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.net.TwoValues;
 
@@ -60,59 +62,63 @@ public class VgActionParsor {
                 modelToast.setText(jsonObject.getString(ActionToastModel.TEXT));
                 modelToast.setActionType(actionTypeStr);
                 modelToast.setParams(parsorParams(jsonObject));
+                modelToast.setModifidLink(parsorFModelLink(jsonObject));
                 return modelToast;
-            case ActionType.ACTION_SHOW_SNACKBAR:
+            case ActionType.ACTION_SHOW_SNACKBAR://弹出Snackbar提示
 
                 break;
-            case ActionType.ACTION_OBTAIN_PARAM_FROM_SDCARD:
+            case ActionType.ACTION_OBTAIN_PARAM_FROM_SDCARD://从sdcard读取数据
 
                 break;
-            case ActionType.ACTION_SAVE_PARAM_TO_SDCARD:
+            case ActionType.ACTION_SAVE_PARAM_TO_SDCARD://保存数据到sdcard上
 
                 break;
-            case ActionType.ACTION_OBTAIN_PARAM_FROM_VIEW:
+            case ActionType.ACTION_OBTAIN_PARAM_FROM_VIEW://获取View控件上的值
 
                 break;
             case ActionType.ACTION_UPDATE_VIEW:
 
                 break;
-            case ActionType.ACTION_NEW_PANEL:
+            case ActionType.ACTION_NEW_PANEL://打开一个界面
                 ActionNewUIModel uiModel=new ActionNewUIModel();
                 uiModel.setUrl(jsonObject.getString(ActionNewUIModel.URL));
                 uiModel.setActionType(actionTypeStr);
                 uiModel.setParams(parsorParams(jsonObject));
+                uiModel.setModifidLink(parsorFModelLink(jsonObject));
                 return uiModel;
-            case ActionType.ACTION_CLOSE_PANEL:
+            case ActionType.ACTION_CLOSE_PANEL://关闭一个界面
                 ActionCloseUIModel closeUIModel=new ActionCloseUIModel();
                 closeUIModel.setActionType(actionTypeStr);
                 closeUIModel.setParams(parsorParams(jsonObject));
+                closeUIModel.setModifidLink(parsorFModelLink(jsonObject));
                 return closeUIModel;
-            case ActionType.ACTION_CLOSE_AND_NEW_PANEL:
+            case ActionType.ACTION_CLOSE_AND_NEW_PANEL://打开一个界面并关闭上一个界面
                 ActionCloseNewModel closeNewModel=new ActionCloseNewModel();
                 closeNewModel.setUrl(jsonObject.getString(ActionCloseNewModel.URL));
                 closeNewModel.setActionType(actionTypeStr);
                 closeNewModel.setParams(parsorParams(jsonObject));
+                closeNewModel.setModifidLink(parsorFModelLink(jsonObject));
                 return closeNewModel;
-            case ActionType.ACTION_SEND_HTTP_REQUEST:
+            case ActionType.ACTION_SEND_HTTP_REQUEST://http请求
                 ActionHttpModel  modelHttp=new ActionHttpModel();
                 modelHttp.setUrl(jsonObject.getString(ActionHttpModel.URL));
                 modelHttp.setActionType(actionTypeStr);
                 modelHttp.setRef_ui(parsorRefUi(jsonObject));
                 modelHttp.setParams(parsorParams(jsonObject));
+                modelHttp.setModifidLink(parsorFModelLink(jsonObject));
                 return modelHttp;
-            case ActionType.ACTION_COUNT_TIMER:
+            case ActionType.ACTION_COUNT_TIMER://计时
 
                 break;
-            case ActionType.ACTION_COUNT_DOWN_TIMER:
+            case ActionType.ACTION_COUNT_DOWN_TIMER://倒计时
 
                 break;
-            case ActionType.ACTION_SHOW_DIALOG:
+            case ActionType.ACTION_SHOW_DIALOG://弹出对话框
 
                 break;
-            case ActionType.ACTION_DIMISS_DIALOG:
+            case ActionType.ACTION_DIMISS_DIALOG://关闭对话框
 
                 break;
-
         }
 
         return null;
@@ -146,6 +152,42 @@ public class VgActionParsor {
 
         return list;
     }
+
+    private static List<BaseFModel> parsorFModelLink(JSONObject Obj) throws JSONException {
+        if(!checkObj(Obj)){
+            return null;
+        }
+        List<BaseFModel> list = new ArrayList<>();
+        JSONArray array=Obj.getJSONArray(BaseActionModel.MODIFY_LINK);
+        if(!checkJSONArray(array)){
+            return null;
+        }
+        for(int i=0;i<array.length();i++){
+            JSONObject object=array.getJSONObject(i);
+            BaseFModel model=parsorFModel(object);
+            if(model!=null){
+                list.add(model);
+            }
+        }
+        return list;
+    }
+
+    private static BaseFModel parsorFModel(JSONObject fmodelObj) throws JSONException {
+        if(!checkObj(fmodelObj)){
+            return null;
+        }
+        FModel model=new FModel();
+        String f_type_str=fmodelObj.getString(BaseFModel.F_TYPE);
+        model.setF_type(f_type_str);
+        if(model.getF_type()<0){//f_type小于0的话;就是找不到相应的f_type;因此返回null
+            return null;
+        }
+        model.setF_value(fmodelObj.getString(BaseFModel.F_VALUE));
+        model.setRef_id(fmodelObj.getString(BaseFModel.REF_ID));
+        return model;
+    }
+
+
 
     private static boolean checkJSONArray(JSONArray array) {
         if(array==null||array.length()<1){//避免空指针异常

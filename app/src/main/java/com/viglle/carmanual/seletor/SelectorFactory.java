@@ -1,12 +1,10 @@
 package com.viglle.carmanual.seletor;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
-import android.text.Selection;
 
 import com.viglle.carmanual.utils.AppUtil;
 
@@ -23,6 +21,21 @@ public class SelectorFactory {
         }
         return instance;
     }
+
+     public StateListDrawable newSelector(Context context,String normalColor ) {
+         StateListDrawable bg = new StateListDrawable();
+
+         ColorDrawable normal=setStateColor(normalColor,ColorConstant.STATE_NORMAL_COLOR);
+         ColorDrawable pressed=setStateColor(normalColor,ColorConstant.STATE_PRESS_COLOR);
+         ColorDrawable focused=setStateColor(normalColor,ColorConstant.STATE_FOCUS_COLOR);
+         ColorDrawable unable =setStateColor(normalColor,ColorConstant.STATE_UNABLE_COLOR);
+         bg.addState(new int[]{android.R.attr.state_enabled,android.R.attr.state_pressed},pressed);
+         bg.addState(new int[]{android.R.attr.state_enabled,android.R.attr.state_focused},focused);
+         bg.addState(new int[]{android.R.attr.state_enabled},normal);
+         bg.addState(new int[]{android.R.attr.state_focused},focused);
+         bg.addState(new int[]{android.R.attr.state_window_focused},unable);
+         return bg;
+     };
     /**
      *
      * @param context

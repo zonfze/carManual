@@ -26,4 +26,8 @@ public class ActionType {
     public static final int ACTION_DIMISS_DIALOG=10013;//隐藏对话框
 
     public static final int ACTION_SEND_HTTP_REQUEST=10014;//发送http请求
+
+    public static final int ACTION_MODIFY_VIEW_VALUE=10015;//清空某个控件的值(修改某个控件的属性)
+
+
 }
