@@ -29,5 +29,7 @@ public class ActionType {
 
     public static final int ACTION_MODIFY_VIEW_VALUE=10015;//清空某个控件的值(修改某个控件的属性)
 
+    public static final int ACTION_KEY_BACK_DOUBLE=10016;//双击back按键
+
 
 }
