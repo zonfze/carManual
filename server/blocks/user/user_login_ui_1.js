@@ -349,6 +349,26 @@ var json_login_ui_1={
 				actionType:'10014',
 				url:'http://192.168.16.198:8083/',
 				ref_ui:['3','6'],
+				result:{
+					onOk:[{
+						event_type:'1000',
+						actionLink:[{
+							actionType:'10001',
+							text:'登陆成功',
+							params:[],
+							modify:[]
+						},{
+							actionType:'10009',
+							url:'http://192.168.16.198:8083/',
+							params:[
+								'device_id=12345678',
+								'code=main'
+							],
+							modify:[]
+						}]
+					}],
+					onFail:[]
+				},
 				params:[
 					'device_id=12345678',
 					'code=loginAction'
