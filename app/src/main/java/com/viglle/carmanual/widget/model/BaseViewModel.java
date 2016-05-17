@@ -62,6 +62,9 @@ public class BaseViewModel implements Serializable{
     private String bg_focus_color;
     public static final String BG_FOCUS_COLOR="bg_focus_color";
 
+    private String visible;//控件的可见性;0代表不可见且不占用屏幕空间;1代表可见;2代表不可见带是占用屏幕空间
+    public static final String VISIBLE="visible";
+
 
     private BaseEventModel actionLink;
     public static final String ACTION_LINK="actionLink";
@@ -81,7 +84,7 @@ public class BaseViewModel implements Serializable{
 //    public static final String ORIENTATION="orientation";
 
     public int getView_id() {
-        if(view_id==null||view_id.equals("")||view_id.equals("null")){
+        if(isaNull(view_id)){
             new Exception("view_id 不能为空"+view_id);
             return 0;
         }
@@ -97,7 +100,7 @@ public class BaseViewModel implements Serializable{
     }
 
     public int getView_type() {
-        if(view_type==null||view_type.equals("")||view_type.equals("null")){
+        if(isaNull(view_type)){
             new Exception("view_type 不能为空"+view_type);
             return 9999;
         }
@@ -184,7 +187,7 @@ public class BaseViewModel implements Serializable{
         List<Integer> refsId=new ArrayList<>();
         List<String> refsKey=new ArrayList<>();
         for(int i = 0;i<refS.size();i++) {
-            if(refS.get(i)==null||refS.get(i).equals("")||refS.get(i).equals("null")){
+            if(isaNull(refS.get(i))){
                 new Exception("refs 不能为无效"+refS.get(i));
                 return;
             }
@@ -215,7 +218,7 @@ public class BaseViewModel implements Serializable{
     }
 
     public int getView_width() {
-        if(view_width==null||view_width.equals("")||view_width.equals("null")){
+        if(isaNull(view_width)){
             new Exception("view_width 不能为空"+view_width);
             return 0;
         }
@@ -234,11 +237,11 @@ public class BaseViewModel implements Serializable{
     }
 
     public int getView_height() {
-        if(view_id==null||view_id.equals("")||view_id.equals("null")){
+        if(isaNull(view_height)){
             new Exception("view_height 不能为空"+view_height);
             return 0;
         }
-        if(!AppUtil.isNumeric(view_id)){
+        if(!AppUtil.isNumeric(view_height)){
             new Exception("view_height 不能为非数字字符"+view_height);
             return 0;
         }
@@ -262,7 +265,7 @@ public class BaseViewModel implements Serializable{
             return;
         }
         for(int i = 0;i<viewOf.length;i++) {
-            if(viewOf[i]==null||viewOf[i].equals("")||viewOf[i].equals("null")){
+            if(isaNull(viewOf[i])){
                 new Exception("view_of 不能为无效"+viewOf[i]);
                 view_of[i]=-1;
                 continue;
@@ -289,7 +292,7 @@ public class BaseViewModel implements Serializable{
             return;
         }
         for(int i = 0;i<viewMargins.length;i++) {
-            if(viewMargins[i]==null||viewMargins[i].equals("")||viewMargins[i].equals("null")){
+            if(isaNull(viewMargins[i])){
                 new Exception("view_paddings 不能为无效"+viewMargins[i]).printStackTrace();
                 return;
             }
@@ -314,7 +317,7 @@ public class BaseViewModel implements Serializable{
             return;
         }
         for(int i = 0;i<viewPaddings.length;i++) {
-            if(viewPaddings[i]==null||viewPaddings[i].equals("")||viewPaddings[i].equals("null")){
+            if(isaNull(viewPaddings[i])){
                 new Exception("view_paddings 不能为无效"+viewPaddings[i]);
                 return;
             }
@@ -335,7 +338,10 @@ public class BaseViewModel implements Serializable{
     }
 
     public String getBg_normal_color() {
-        if(bg_normal_color==null||bg_normal_color.equals("")||bg_normal_color.equals("null")){
+        if(isaNull(bg_normal_color)){
+            return "#00000000";//透明
+        }
+        if(!AppUtil.isColor(bg_normal_color)){
             return "#00000000";//透明
         }
         return bg_normal_color;
@@ -346,10 +352,31 @@ public class BaseViewModel implements Serializable{
     }
 
     public String getBg_focus_color() {
-        if(bg_focus_color==null||bg_focus_color.equals("")||bg_focus_color.equals("null")){
+        if(isaNull(bg_focus_color)){
+            return getBg_normal_color();
+        }
+        if(!AppUtil.isColor(bg_focus_color)){
             return getBg_normal_color();
         }
         return bg_focus_color;
+    }
+
+    private boolean isaNull(String str) {
+        return str==null||str.equals("")||str.equalsIgnoreCase("null");
+    }
+
+    public int getVisible() {
+        if(isaNull(visible)){
+            return 0;
+        }
+        if(!AppUtil.isNumeric(visible)){
+            return 0;
+        }
+        return Integer.parseInt(visible);
+    }
+
+    public void setVisible(String visible) {
+        this.visible = visible;
     }
 
     public void setBg_focus_color(String bg_focus_color) {
