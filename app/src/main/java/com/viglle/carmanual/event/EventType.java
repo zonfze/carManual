@@ -11,5 +11,8 @@ public class EventType {
     public static final int TOUCH_FLIP_DRIVE=1004;//快速轻弹滑动
     public static final int TOUCH_LONG_CLICK_DRIVE=1005;//长按
     public static final int TOUCH_DRAG_DRIVE=1006;//拖曳
+    public static final int TOUCH_BACKKEY_DRVIE=1007;//返回按钮事件
+
+
 
 }
