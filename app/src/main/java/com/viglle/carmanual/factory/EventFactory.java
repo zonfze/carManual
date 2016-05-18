@@ -2,14 +2,15 @@ package com.viglle.carmanual.factory;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.KeyEvent;
 import android.view.View;
 
-import com.viglle.carmanual.event.EventType;
 import com.viglle.carmanual.action.model.BaseActionModel;
 import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.event.EventAutoModel;
 import com.viglle.carmanual.event.EventClickModel;
 import com.viglle.carmanual.event.EventTimerModel;
+import com.viglle.carmanual.event.EventType;
 import com.viglle.carmanual.utils.LogUtil;
 import com.viglle.carmanual.widget.entity.ViewTreeBean;
 
@@ -58,6 +59,9 @@ public class EventFactory {
                 break;
             case EventType.TOUCH_SCROLL_DRIVE://滚动
 
+                break;
+            case EventType.TOUCH_BACKKEY_DRVIE:
+                /**已注入onKeyDown {@link com.viglle.carmanual.modules.user.LoginActivity#onKeyDown(int, KeyEvent)}*/
                 break;
         }
     }

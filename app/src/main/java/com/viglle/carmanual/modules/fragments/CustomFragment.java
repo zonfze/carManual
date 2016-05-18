@@ -18,6 +18,7 @@ import com.viglle.carmanual.utils.net.HttpHandlerInterface;
 import com.viglle.carmanual.utils.net.HttpUtil;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class CustomFragment extends BaseFragment{
         HttpUtil.httpGet(mUrl, new HttpHandlerInterface() {
             @Override
             public void onSuccess(String data) {
-                JSONObject rootObj = null;
+                JSONObject rootObj ;
                 try {
                     rootObj = new JSONObject(data);
                     if (rootObj.getInt("retCode") != 101) {
@@ -60,15 +61,16 @@ public class CustomFragment extends BaseFragment{
 
                         BaseViewModel treeModel = VgUIParsor.parserUIModelTree(getActivity(), resultObj);
                         View view=ViewFactory.createViewTree(getActivity(), treeModel, viewTreeBean);
-
-                        List<BaseEventModel> eventModelList=VgEventParsor.parsorEventLink(resultObj);
+                        JSONArray array=resultObj.getJSONArray(BaseActivity.EVENT_LINK);
+                        List<BaseEventModel> eventModelList=VgEventParsor.parsorEventLink(array);
                         EventFactory.createEventLink(getActivity(), viewTreeBean, eventModelList);
                         if(view!=null){
                             mRootView.addView(view);
                         }
 
                     } else if (res_type.equals(BaseActivity.RES_TYPE_1002)) {
-                        List<BaseEventModel> eventModelList=VgEventParsor.parsorEventLink(resultObj);
+                        JSONArray array=resultObj.getJSONArray(BaseActivity.EVENT_LINK);
+                        List<BaseEventModel> eventModelList=VgEventParsor.parsorEventLink(array);
                         EventFactory.createEventLink(getActivity(), viewTreeBean,eventModelList);
                     }
 

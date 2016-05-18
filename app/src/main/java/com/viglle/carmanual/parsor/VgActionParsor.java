@@ -9,8 +9,10 @@ import com.viglle.carmanual.action.model.ActionToastModel;
 import com.viglle.carmanual.action.model.BaseActionModel;
 import com.viglle.carmanual.action.model.BaseFModel;
 import com.viglle.carmanual.action.model.FModel;
+import com.viglle.carmanual.action.model.ResultModel;
 import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.utils.AppUtil;
+import com.viglle.carmanual.utils.LogUtil;
 import com.viglle.carmanual.utils.net.TwoValues;
 
 import org.json.JSONArray;
@@ -26,8 +28,8 @@ import java.util.List;
 public class VgActionParsor {
 
 
-    public static List<BaseActionModel> parsorActionLink(JSONObject jsonObject)throws JSONException{
-        JSONArray array=jsonObject.getJSONArray(BaseEventModel.ACTION_LINK);
+    public static List<BaseActionModel> parsorActionLink(JSONArray array)throws JSONException{
+
         List<BaseActionModel> list = new ArrayList<>();
         if (!checkJSONArray(array)) return null;
         for (int i=0;i<array.length();i++){
@@ -103,6 +105,8 @@ public class VgActionParsor {
                 ActionHttpModel  modelHttp=new ActionHttpModel();
                 modelHttp.setUrl(jsonObject.getString(ActionHttpModel.URL));
                 modelHttp.setActionType(actionTypeStr);
+                ResultModel resultModel=parsorResultModel(jsonObject);
+                modelHttp.setResult(resultModel);
                 modelHttp.setRef_ui(parsorRefUi(jsonObject));
                 modelHttp.setParams(parsorParams(jsonObject));
                 modelHttp.setModifidLink(parsorFModelLink(jsonObject));
@@ -122,6 +126,28 @@ public class VgActionParsor {
         }
 
         return null;
+    }
+
+
+    private static ResultModel parsorResultModel(JSONObject resultObj) throws JSONException {
+        if(!checkObj(resultObj)){
+            return null;
+        }
+        ResultModel resultModel=new ResultModel();
+        JSONObject onResultObj=resultObj.getJSONObject(ActionHttpModel.RESULT);
+        if(!checkObj(onResultObj)){
+            return null;
+        }
+        LogUtil.log_e("result="+onResultObj.toString());
+        JSONArray arrayOk=onResultObj.getJSONArray(ResultModel.ON_OK);
+        JSONArray arrayFail=onResultObj.getJSONArray(ResultModel.ON_FAIL);
+        List<BaseEventModel> modelsOk=VgEventParsor.parsorEventLink(arrayOk);
+        resultModel.setOnOkList(modelsOk);
+        List<BaseEventModel> modelsFail=VgEventParsor.parsorEventLink(arrayFail);
+        resultModel.setOnFailList(modelsFail);
+
+
+        return resultModel;
     }
 
     private static List<String> parsorRefUi(JSONObject json) throws JSONException {
@@ -197,7 +223,7 @@ public class VgActionParsor {
     }
 
     private static boolean checkObj(JSONObject json) {
-        if(json==null||json.toString().equals("")||json.toString().equals("null")||json.toString().equals("{}")){//判断参数是否合法
+        if(json==null||json.toString().equals("")||json.toString().equalsIgnoreCase("null")||json.toString().equals("{}")){//判断参数是否合法
             return false;
         }
         return true;

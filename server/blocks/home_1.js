@@ -28,7 +28,7 @@ var json_home_ui_1={
 				childs:[{
 					view_id:'14',
 					parent_id:'0',
-					view_type:'9999',
+					view_type:'20006',
 					view_name:'VgContentLayout',
 					view_width:'1080',
 					view_height:'136',

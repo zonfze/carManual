@@ -15,6 +15,7 @@ import com.viglle.carmanual.widget.model.VgRadioButtonModel;
 import com.viglle.carmanual.widget.model.VgSwitchViewModel;
 import com.viglle.carmanual.widget.model.VgTextFieldModel;
 import com.viglle.carmanual.widget.model.VgTextViewModel;
+import com.viglle.carmanual.widget.model.VgTopActionBarModel;
 import com.viglle.carmanual.widget.model.VgViewPagerModel;
 import com.viglle.carmanual.widget.model.VgViewType;
 
@@ -151,8 +152,11 @@ public class VgUIParsor {
                 parsorCommonParams(rootObj, view_type, viewPagerModel);
                 return viewPagerModel;
             case VgViewType.VgTopActionBar:
-
-                return null;
+                VgTopActionBarModel topActionBar=new VgTopActionBarModel();
+                parsorCommonParams(rootObj, view_type, topActionBar);
+                List<BaseViewModel> barList = parsorChilds(context, rootObj);
+                topActionBar.setChilds(barList);
+                return topActionBar;
         }
         return null;
     }

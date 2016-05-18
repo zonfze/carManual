@@ -1,5 +1,6 @@
 package com.viglle.carmanual.parsor;
 
+import com.viglle.carmanual.event.EventBackKeyModel;
 import com.viglle.carmanual.event.EventType;
 import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.event.EventAutoModel;
@@ -41,24 +42,24 @@ public class VgEventParsor {
             e.printStackTrace();
             return null;
         }
-
+        JSONArray array=obj.getJSONArray(BaseEventModel.ACTION_LINK);;
         switch (event_type){
             case EventType.AUTO_DRIVE://自动触发
                 EventAutoModel autoModel=new EventAutoModel();
                 autoModel.setEventType(eventTypeStr);
-                autoModel.setActionLink(VgActionParsor.parsorActionLink(obj));
+                autoModel.setActionLink(VgActionParsor.parsorActionLink(array));
                 return autoModel;
             case EventType.TIME_DRIVE://倒计时触发
                 EventTimerModel timerEventModel = new EventTimerModel();
                 timerEventModel.setEventType(eventTypeStr);
-                timerEventModel.setActionLink(VgActionParsor.parsorActionLink(obj));
+                timerEventModel.setActionLink(VgActionParsor.parsorActionLink(array));
                 timerEventModel.setTime(obj.getString(EventTimerModel.TIME));
                 return timerEventModel;
             case EventType.TOUCH_CLICK_DRIVE://点击触发
                 EventClickModel eventClickModel = new EventClickModel();
                 eventClickModel.setEventType(eventTypeStr);
                 eventClickModel.setView_id(obj.getString(BaseViewModel.VIEW_ID));
-                eventClickModel.setActionLink(VgActionParsor.parsorActionLink(obj));
+                eventClickModel.setActionLink(VgActionParsor.parsorActionLink(array));
 
                 return eventClickModel;
             case EventType.TOUCH_DRAG_DRIVE://拖曳
@@ -67,16 +68,21 @@ public class VgEventParsor {
             case EventType.TOUCH_FLIP_DRIVE://轻触快速划过
                 EventFlipModel eventFlipModel=new EventFlipModel();
                 eventFlipModel.setEventType(eventTypeStr);
-                eventFlipModel.setActionLink(VgActionParsor.parsorActionLink(obj));
+                eventFlipModel.setActionLink(VgActionParsor.parsorActionLink(array));
                 return eventFlipModel;
             case EventType.TOUCH_LONG_CLICK_DRIVE://长按
                 EventLongClickModel eventLongClickModel = new EventLongClickModel();
                 eventLongClickModel.setEventType(eventTypeStr);
-                eventLongClickModel.setActionLink(VgActionParsor.parsorActionLink(obj));
+                eventLongClickModel.setActionLink(VgActionParsor.parsorActionLink(array));
                 return eventLongClickModel;
             case EventType.TOUCH_SCROLL_DRIVE://滚动
 
                 break;
+            case EventType.TOUCH_BACKKEY_DRVIE:
+                EventBackKeyModel backKeyModel = new EventBackKeyModel();
+                backKeyModel.setEventType(eventTypeStr);
+                backKeyModel.setActionLink(VgActionParsor.parsorActionLink(array));
+                return backKeyModel;
         }
         return null;
     }
@@ -92,12 +98,12 @@ public class VgEventParsor {
         return true;
     }
 
-    public static List<BaseEventModel> parsorEventLink(JSONObject obj) throws JSONException {
+    public static List<BaseEventModel> parsorEventLink(JSONArray array) throws JSONException {
 
-        if(!checkObj(obj)){
-            return null;
-        };
-        JSONArray array=obj.getJSONArray(EVENT_LINK);
+//        if(!checkObj(obj)){
+//            return null;
+//        };
+//        JSONArray array=obj.getJSONArray(EVENT_LINK);
         if(array==null||array.length()<1){
             return null;
         }

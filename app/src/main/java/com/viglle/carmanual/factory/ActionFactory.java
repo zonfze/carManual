@@ -14,7 +14,6 @@ import com.viglle.carmanual.action.model.ActionToastModel;
 import com.viglle.carmanual.action.model.BaseActionModel;
 import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.modules.user.LoginActivity;
-import com.viglle.carmanual.parsor.VgEventParsor;
 import com.viglle.carmanual.parsor.VgUIParsor;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.SharedPrefUtil;
@@ -123,7 +122,7 @@ public class ActionFactory{
         }
     }
 
-    private static void createHttpRequestAction(final Context ctx,final ViewTreeBean viewTreeBean,ActionHttpModel model){
+    private static void createHttpRequestAction(final Context ctx,final ViewTreeBean viewTreeBean, final ActionHttpModel model){
         if(model==null){
             return;
         }
@@ -150,7 +149,8 @@ public class ActionFactory{
                         BaseViewModel treeModel = VgUIParsor.parserUIModelTree(ctx, resultObj);
                         ((BaseActivity)ctx).setContentView(ViewFactory.createViewTree(ctx,treeModel,viewTreeBean));
                     }else if(res_type.equals(BaseActivity.RES_TYPE_1002)){
-                        EventFactory.createEventLink(ctx, viewTreeBean, VgEventParsor.parsorEventLink(resultObj));
+//                        JSONArray array=resultObj.getJSONArray(BaseActivity.EVENT_LINK);
+                        EventFactory.createEventLink(ctx, viewTreeBean, model.getResult().getOnOkList());
                     }
 
                 } catch (Exception e) {

@@ -35,6 +35,7 @@ import com.viglle.carmanual.widget.entity.ViewTreeBean;
 import com.viglle.carmanual.widget.layout.VgBottomNavLayout;
 import com.viglle.carmanual.widget.layout.VgBottomNavPupopLayout;
 import com.viglle.carmanual.widget.layout.VgContentLayout;
+import com.viglle.carmanual.widget.layout.VgTopActionBar;
 import com.viglle.carmanual.widget.layout.VgViewPager;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 import com.viglle.carmanual.widget.model.VgBottomNavModel;
@@ -47,6 +48,7 @@ import com.viglle.carmanual.widget.model.VgRadioButtonModel;
 import com.viglle.carmanual.widget.model.VgSwitchViewModel;
 import com.viglle.carmanual.widget.model.VgTextFieldModel;
 import com.viglle.carmanual.widget.model.VgTextViewModel;
+import com.viglle.carmanual.widget.model.VgTopActionBarModel;
 import com.viglle.carmanual.widget.model.VgViewPagerModel;
 import com.viglle.carmanual.widget.model.VgViewType;
 
@@ -123,7 +125,11 @@ public class ViewFactory {
             case VgViewType.VgBottomNavPupopLayout:
                 return createBottomNavPupLayout(ctx,(VgBottomNavPupopLayoutModel)modelTree,viewTreeBean);
             case VgViewType.VgTopActionBar:
-                return null;
+                VgTopActionBar vgTopActionBar=createVgTopActionBar(ctx, (VgTopActionBarModel) modelTree, viewTreeBean);
+                for(int i=0;i<modelTree.getChilds().size();i++){
+                    vgTopActionBar.addView(createViewTree(ctx,modelTree.getChilds().get(i),viewTreeBean));
+                }
+                return vgTopActionBar;
             case VgViewType.VgViewPager:
                 return createVgViewPager(ctx, (VgViewPagerModel) modelTree, viewTreeBean);
         }
@@ -201,6 +207,35 @@ public class ViewFactory {
         model.setVgView(rootLayout);
         modelMap.put(model);
 //        createEvent(ctx, rootLayout, model);
+        return rootLayout;
+    }
+
+    public static final int STATUS_BAR_HEIGHT=25*3;
+
+    public static VgTopActionBar createVgTopActionBar(Context ctx,VgTopActionBarModel model,ViewTreeBean modelMap){
+
+        VgTopActionBar rootLayout=new VgTopActionBar(ctx);
+        RelativeLayout.LayoutParams params= null;//setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
+        if(Build.VERSION.SDK_INT>=19){
+            params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height()+STATUS_BAR_HEIGHT);
+            int padd[]= model.getView_paddings();
+            if(padd!=null&&padd.length==4){
+                padd[1]=padd[1]+STATUS_BAR_HEIGHT;
+                setVgViewPaddings(ctx, rootLayout,padd[0],padd[1],padd[2],padd[3]);
+            }
+        }else{
+            params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
+            setVgViewPaddings(ctx, rootLayout, model);//设置内边距
+        }
+
+        setVgViewOf(model, params);
+        setVgViewMargins(ctx, params, model);//设置外边距
+
+        setVgViewBackground(ctx, model, rootLayout);//设置背景样式
+        rootLayout.setLayoutParams(params);
+        rootLayout.setId(model.getView_id());
+        model.setVgView(rootLayout);
+        modelMap.put(model);
         return rootLayout;
     }
 
@@ -547,11 +582,29 @@ public class ViewFactory {
         if(view_paddings==null||view_paddings.length<1){
             return;
         }
+        if(view==null){
+            return;
+        }
         try{
             view.setPadding(AppUtil.calWidth(context, view_paddings[0]),
                     AppUtil.calWidth(context, view_paddings[1]),
                     AppUtil.calWidth(context, view_paddings[2]),
                     AppUtil.calWidth(context, view_paddings[3]));
+//            view.setPadding(view_paddings[0],view_paddings[1],view_paddings[2],view_paddings[3]);
+//                    view.setPadding(AppUtil.dip2px(context, view_paddings[0]), AppUtil.dip2px(context, view_paddings[1]), AppUtil.dip2px(context, view_paddings[2]), AppUtil.dip2px(context, view_paddings[3]));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private static void setVgViewPaddings(Context context, View view, int left,int top,int right,int bottom) {
+        if(view==null){
+            return;
+        }
+        try{
+            view.setPadding(AppUtil.calWidth(context, left),
+                    AppUtil.calWidth(context, top),
+                    AppUtil.calWidth(context, right),
+                    AppUtil.calWidth(context, bottom));
 //            view.setPadding(view_paddings[0],view_paddings[1],view_paddings[2],view_paddings[3]);
 //                    view.setPadding(AppUtil.dip2px(context, view_paddings[0]), AppUtil.dip2px(context, view_paddings[1]), AppUtil.dip2px(context, view_paddings[2]), AppUtil.dip2px(context, view_paddings[3]));
         }catch (Exception e){

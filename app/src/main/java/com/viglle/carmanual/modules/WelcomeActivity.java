@@ -2,22 +2,21 @@ package com.viglle.carmanual.modules;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
-import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.base.UIType;
-import com.viglle.carmanual.widget.model.BaseViewModel;
+import com.viglle.carmanual.event.BaseEventModel;
+import com.viglle.carmanual.factory.EventFactory;
+import com.viglle.carmanual.factory.ViewFactory;
 import com.viglle.carmanual.parsor.VgEventParsor;
 import com.viglle.carmanual.parsor.VgUIParsor;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.LogUtil;
 import com.viglle.carmanual.utils.net.HttpHandlerInterface;
 import com.viglle.carmanual.utils.net.HttpUtil;
-import com.viglle.carmanual.factory.EventFactory;
-import com.viglle.carmanual.factory.ViewFactory;
+import com.viglle.carmanual.widget.model.BaseViewModel;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -32,8 +31,20 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         mUiType= UIType.UI_WELCOME;
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){//4.4 全透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+//
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0 全透明实现
+//            Window window = getWindow();
+//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(Color.TRANSPARENT);//calculateStatusColor(Color.WHITE, (int) alphaValue)
+//        }
         HttpUtil.httpGet(AppUtil.FIRST_URL, new HttpHandlerInterface() {
             @Override
             public void onSuccess(String data) {
@@ -58,15 +69,16 @@ public class WelcomeActivity extends BaseActivity {
             if(res_type.equals(RES_TYPE_1001)){
                 BaseViewModel treeModel = VgUIParsor.parserUIModelTree(mCtx, resultObj);
                 View view=ViewFactory.createViewTree(mCtx, treeModel, mViewTreeBean);
-
-                List<BaseEventModel> eventModelList=VgEventParsor.parsorEventLink(resultObj);
+                JSONArray array=resultObj.getJSONArray(EVENT_LINK);
+                List<BaseEventModel> eventModelList=VgEventParsor.parsorEventLink(array);
                 EventFactory.createEventLink(mCtx, mViewTreeBean, eventModelList);
                 if(view!=null){
                     setContentView(view);
                 }
 
             }else if(res_type.equals(RES_TYPE_1002)){
-                EventFactory.createEventLink(mCtx, mViewTreeBean, VgEventParsor.parsorEventLink(resultObj));
+                JSONArray array=resultObj.getJSONArray(EVENT_LINK);
+                EventFactory.createEventLink(mCtx, mViewTreeBean, VgEventParsor.parsorEventLink(array));
             }
 
         } catch (Exception e) {

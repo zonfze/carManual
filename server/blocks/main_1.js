@@ -85,7 +85,10 @@ var json_main_ui_1={
 					]
 				}]
 			},
-		eventLink:[]
+		eventLink:[{
+			event_type:'1007',
+			actionLink:[]
+		}]
 	}
 }
 function loadMain1(req,res,DATA){

@@ -1,10 +1,5 @@
 package com.viglle.carmanual.action.model;
 
-import com.viglle.carmanual.utils.AppUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/5/3.
  */
@@ -16,6 +11,9 @@ public class ActionHttpModel extends BaseActionModel{
 //    public static final String REF_UI="ref_ui";
 
 
+    private ResultModel result;
+    public static final String RESULT="result";
+
 
     public String getUrl() {
         return url;
@@ -25,5 +23,11 @@ public class ActionHttpModel extends BaseActionModel{
         this.url = url;
     }
 
+    public ResultModel getResult() {
+        return result;
+    }
 
+    public void setResult(ResultModel result) {
+        this.result = result;
+    }
 }
