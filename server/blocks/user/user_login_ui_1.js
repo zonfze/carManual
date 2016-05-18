@@ -6,6 +6,7 @@ var json_login_ui_1={
 			ui:{
 				view_id:'0',
 				parent_id:'-1',
+				visible:'1',
 				view_type:'9999',
 				view_name:'VgContentLayout',
 				view_width:'1080',
@@ -27,6 +28,7 @@ var json_login_ui_1={
 				childs:[{
 					view_id:'1',
 					parent_id:'0',
+					visible:'1',
 					view_type:'9999',
 					view_name:'VgContentLayout',
 					view_width:'1080',
@@ -48,6 +50,7 @@ var json_login_ui_1={
 					childs:[{
 						view_id:'2',
 						parent_id:'1',
+						visible:'1',
 						view_type:'10001',
 						view_name:'VgTextView',
 						view_width:'256',
@@ -76,6 +79,7 @@ var json_login_ui_1={
 					},{
 						view_id:'3',
 						parent_id:'1',
+						visible:'1',
 						view_type:'10002',
 						view_name:'VgTextField',
 						view_width:'824',
@@ -109,6 +113,7 @@ var json_login_ui_1={
 				},{
 						view_id:'4',
 						parent_id:'0',
+						visible:'1',
 						view_type:'9999',
 						view_name:'VgContentLayout',
 						view_width:'1080',
@@ -131,6 +136,7 @@ var json_login_ui_1={
 						childs:[{
 								view_id:'5',
 								parent_id:'4',
+								visible:'1',
 								view_type:'10001',
 								view_name:'VgTextView',
 								view_width:'256',
@@ -159,6 +165,7 @@ var json_login_ui_1={
 							},{
 								view_id:'6',
 								parent_id:'4',
+								visible:'1',
 								view_type:'10002',
 								view_name:'VgTextField',
 								view_width:'824',
@@ -193,6 +200,7 @@ var json_login_ui_1={
 					},{
 						view_id:'7',
 						parent_id:'0',
+						visible:'1',
 						view_type:'10003',
 						view_name:'VgButton',
 						view_width:'1080',
@@ -231,6 +239,7 @@ var json_login_ui_1={
 					},{
 						view_id:'8',
 						parent_id:'0',
+						visible:'1',
 						view_type:'9999',
 						view_name:'VgContentLayout',
 						view_width:'1080',
@@ -252,6 +261,7 @@ var json_login_ui_1={
 						childs:[{
 								view_id:'9',
 								parent_id:'8',
+								visible:'1',
 								view_type:'10001',
 								view_name:'VgTextView',
 								view_width:'256',
@@ -280,6 +290,7 @@ var json_login_ui_1={
 							},{
 								view_id:'10',
 								parent_id:'8',
+								visible:'1',
 								view_type:'10001',
 								view_name:'VgTextView',
 								view_width:'256',
@@ -310,6 +321,7 @@ var json_login_ui_1={
 					},{
 						view_id:'11',
 						parent_id:'0',
+						visible:'1',
 						view_type:'10006',
 						view_name:'VgRadioButton',
 						view_width:'256',

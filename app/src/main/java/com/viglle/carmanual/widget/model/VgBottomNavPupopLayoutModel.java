@@ -39,6 +39,7 @@ public class VgBottomNavPupopLayoutModel extends BaseViewModel{
             BottomNavPoupItemModel bean=new BottomNavPoupItemModel();
             bean.setLabelId(object.getString(BottomNavPoupItemModel.LABEL_ID));
             bean.setUrl(object.getString(BottomNavPoupItemModel.URL));
+            bean.setShowType(object.getString(BottomNavPoupItemModel.SHOW_TYPE));
             bean.setSubMenu(parsorSubMenu(object.getJSONArray(BottomNavPoupItemModel.SUB_MENU)));
             bean.setTitle(object.getString(BottomNavPoupItemModel.TAB_TEXT));
             list.add(bean);
@@ -55,6 +56,7 @@ public class VgBottomNavPupopLayoutModel extends BaseViewModel{
             BottomNavPoupItemModel model = new BottomNavPoupItemModel();
             model.setLabelId(object.getString(BottomNavPoupItemModel.LABEL_ID));
             model.setUrl(object.getString(BottomNavPoupItemModel.URL));
+            model.setShowType(object.getString(BottomNavPoupItemModel.SHOW_TYPE));
             model.setSubMenu(parsorSubMenu(object.getJSONArray(BottomNavPoupItemModel.SUB_MENU)));
             model.setTitle(object.getString(BottomNavPoupItemModel.TAB_TEXT));
             list.add(model);

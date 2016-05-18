@@ -32,9 +32,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.viglle.carmanual.base.BaseActivity;
-import com.viglle.carmanual.modules.user.LoginActivity;
 import com.viglle.carmanual.modules.fragments.BaseFragment;
 import com.viglle.carmanual.modules.fragments.CustomFragment;
+import com.viglle.carmanual.modules.fragments.WebViewFragment;
+import com.viglle.carmanual.modules.user.LoginActivity;
 import com.viglle.carmanual.seletor.SelectorFactory;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.LogUtil;
@@ -196,10 +197,22 @@ public class VgBottomNavPupopLayout extends LinearLayout {
         for (int i=0;i<mDatas.size();i++){
             BottomNavPoupItemModel model = mDatas.get(i);
             addView(createItem(model, i));
-            BaseFragment fragment=new CustomFragment();
-            fragment.setUrl(model.getUrl());
-            fragment.setmTag(model.getLabelId());
-            fragmentList.add(fragment);
+            if(model.getSubMenu()==null||model.getSubMenu().isEmpty()){//如果子菜单为空，则说明只有一级菜单界面，显示一级菜单届；否则弹出二级子菜单
+                if(model.getShowType()==BottomNavPoupItemModel.SHOW_TYPE_WEB){
+                    BaseFragment fragment=new WebViewFragment();
+                    fragment.setUrl(model.getUrl());
+                    fragment.setmTag(model.getLabelId());
+                    fragmentList.add(fragment);
+                }else{
+                    BaseFragment fragment=new CustomFragment();
+                    fragment.setUrl(model.getUrl());
+                    fragment.setmTag(model.getLabelId());
+                    fragmentList.add(fragment);
+                }
+            }else{
+
+            }
+
         }
 
         VgViewPager viewPager= getVgViewPager();

@@ -25,6 +25,7 @@ public final class VgViewType {
     public static final int VgBottomNavPupopLayout = 20005;
     public static final int VgTopActionBar = 20006;
     public static final int VgViewPager = 20008;
+    public static final int VgWebView = 20009;
 
 
 }

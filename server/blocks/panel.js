@@ -7,6 +7,7 @@ var json_panel_ui={
 				view_id:'0',
 				parent_id:'-1',
 				view_type:'9999',
+				visible:'1',
 				view_name:'VgContentLayout',
 				view_width:'1080',
 				view_height:'1920',
@@ -27,6 +28,7 @@ var json_panel_ui={
 				childs:[{
 					view_id:'1',
 					parent_id:'-1',
+					visible:'1',
 					view_type:'20006',
 					view_name:'VgTopActionBar',
 					view_width:'1080',
@@ -48,6 +50,7 @@ var json_panel_ui={
 					childs:[{
 							view_id:'2',
 							parent_id:'1',
+							visible:'1',
 							view_type:'10003',
 							view_name:'VgTextView',
 							view_width:'156',
@@ -80,6 +83,7 @@ var json_panel_ui={
 						view_type:'10001',
 						view_name:'VgTextView',
 						view_width:'256',
+						visible:'1',
 						view_height:'136',
 						bg_normal_color:'#ffff0000',
 						bg_focus_color:'#ffff0000',

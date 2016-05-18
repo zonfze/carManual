@@ -157,6 +157,12 @@ public class VgUIParsor {
                 List<BaseViewModel> barList = parsorChilds(context, rootObj);
                 topActionBar.setChilds(barList);
                 return topActionBar;
+            case VgViewType.VgGridView:
+
+                return null;
+            case VgViewType.VgWebView:
+
+                return null;
         }
         return null;
     }
@@ -191,16 +197,17 @@ public class VgUIParsor {
 
         contentModel.setView_type(view_type + "");
         contentModel.setView_name(rootObj.getString(BaseViewModel.VIEW_NAME));
-        contentModel.setAction(rootObj.getString(BaseViewModel.ACTION));
+//        contentModel.setAction(rootObj.getString(BaseViewModel.ACTION));
 
 
         contentModel.setView_height(rootObj.getString(BaseViewModel.VIEW_HEIGHT));
         contentModel.setView_width(rootObj.getString(BaseViewModel.VIEW_WIDTH));
 
-        contentModel.setActionType(rootObj.getString(BaseViewModel.ACTION_TYPE));
+//        contentModel.setActionType(rootObj.getString(BaseViewModel.ACTION_TYPE));
         contentModel.setBg_normal_color(rootObj.getString(BaseViewModel.BG_NORMAL_COLOR));
         contentModel.setBg_focus_color(rootObj.getString(BaseViewModel.BG_FOCUS_COLOR));
         contentModel.setKey(rootObj.getString(BaseViewModel.KEY));
+        contentModel.setVisible(rootObj.getString(BaseViewModel.VISIBLE));//可见性
         contentModel.setValidLink(VgValidParsor.parsorValidLink(rootObj));
 
 

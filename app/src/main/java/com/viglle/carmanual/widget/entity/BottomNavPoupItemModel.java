@@ -1,5 +1,7 @@
 package com.viglle.carmanual.widget.entity;
 
+import com.viglle.carmanual.utils.AppUtil;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +19,15 @@ public class BottomNavPoupItemModel implements Serializable{
     private List<BottomNavPoupItemModel> subMenu=new ArrayList<>();
     public static final String SUB_MENU="sub_menu";//子菜单
 
-    public String url;
+    private String url;
     public static final String URL="url";
+
+    private String showType;//1表示在WebView中打开;0 表示请求一个UI界面；默认是0
+    public static final String SHOW_TYPE="showType";
+    public static final int SHOW_TYPE_WEB=1;
+    public static final int SHOW_TYPE_UI=0;
+
+
 
     public String getUrl() {
         return url;
@@ -101,5 +110,19 @@ public class BottomNavPoupItemModel implements Serializable{
                 ", subMenu=" + subMenu +
                 ", url='" + url + '\'' +
                 '}';
+    }
+
+    public int getShowType() {
+        if(showType==null||showType.equals("")||showType.equalsIgnoreCase("null")){
+            return 0;
+        }
+        if(!AppUtil.isNumeric(showType)){
+            return 0;
+        }
+        return Integer.parseInt(showType);
+    }
+
+    public void setShowType(String showType) {
+        this.showType = showType;
     }
 }

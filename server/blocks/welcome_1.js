@@ -6,6 +6,7 @@ var json_ui_1={
 		ui:{
 			view_id:'0',
 			parent_id:'-1',
+			visible:'1',
 			view_type:'9999',
 			view_name:'VgContentLayout',
 			view_width:'1080',
@@ -27,6 +28,7 @@ var json_ui_1={
 			childs:[{
 				view_id:'1',
 				parent_id:'0',
+				visible:'1',
 				view_type:'10005',
 				view_name:'VgImageView',
 				view_width:'1080',

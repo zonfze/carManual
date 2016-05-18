@@ -1,7 +1,6 @@
 package com.viglle.carmanual.factory;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -9,21 +8,14 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.viglle.carmanual.event.BaseEventModel;
-import com.viglle.carmanual.modules.user.LoginActivity;
 import com.viglle.carmanual.seletor.SelectorFactory;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.ImageHelper;
-import com.viglle.carmanual.utils.SharedPrefUtil;
-import com.viglle.carmanual.utils.net.HttpHandlerInterface;
-import com.viglle.carmanual.utils.net.HttpUtil;
-import com.viglle.carmanual.utils.net.TwoValues;
 import com.viglle.carmanual.widget.VgButton;
 import com.viglle.carmanual.widget.VgCheckBox;
 import com.viglle.carmanual.widget.VgImageView;
@@ -51,14 +43,6 @@ import com.viglle.carmanual.widget.model.VgTextViewModel;
 import com.viglle.carmanual.widget.model.VgTopActionBarModel;
 import com.viglle.carmanual.widget.model.VgViewPagerModel;
 import com.viglle.carmanual.widget.model.VgViewType;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/4/15.
@@ -145,32 +129,31 @@ public class ViewFactory {
     public static VgBottomNavLayout createBottomNavLayout(Context ctx,VgBottomNavModel model,ViewTreeBean modelMap){
         VgBottomNavLayout bottomNavLayout=new VgBottomNavLayout(ctx);
         RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
         model.setVgView(bottomNavLayout);
-        setVgViewBackground(ctx, model, bottomNavLayout);
+
+        configCommonParams(ctx,model,bottomNavLayout,params);
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         bottomNavLayout.setDatas(model.getDatas());
         bottomNavLayout.setLayoutParams(params);
         bottomNavLayout.setId(model.getView_id());
         modelMap.put(model);
-//        createEvent(ctx,bottomNavLayout,model);
         return bottomNavLayout;
     }
 
     public static VgBottomNavPupopLayout createBottomNavPupLayout(Context ctx,VgBottomNavPupopLayoutModel model,ViewTreeBean modelMap){
-        VgBottomNavPupopLayout bottomNavLayout=new VgBottomNavPupopLayout(ctx);
-        bottomNavLayout.setId(model.getView_id());
-        model.setVgView(bottomNavLayout);
+        VgBottomNavPupopLayout bottomNavPupLayout=new VgBottomNavPupopLayout(ctx);
+        bottomNavPupLayout.setId(model.getView_id());
+        model.setVgView(bottomNavPupLayout);
         modelMap.put(model);
         RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        configCommonParams(ctx,model,bottomNavPupLayout,params);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        setVgViewBackground(ctx, model, bottomNavLayout);
-        bottomNavLayout.setDatas(model.getDatas());
-        bottomNavLayout.setLayoutParams(params);
+        bottomNavPupLayout.setDatas(model.getDatas());
+        bottomNavPupLayout.setLayoutParams(params);
 
 
 //        createEvent(ctx,bottomNavLayout,model);
-        return bottomNavLayout;
+        return bottomNavPupLayout;
     }
 
     public static VgViewPager createVgViewPager(Context ctx,VgViewPagerModel model,ViewTreeBean modelMap){
@@ -180,10 +163,11 @@ public class ViewFactory {
         model.setVgView(vgViewPager);
         vgViewPager.setId(model.getView_id());
         vgViewPager.setNoScroll(model.noNoScroll());
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);//设置外边距
-        setVgViewPaddings(ctx, vgViewPager, model);//设置内边距
-        setVgViewBackground(ctx, model, vgViewPager);//设置背景样式
+//        setVgViewOf(model, params);
+//        setVgViewMargins(ctx, params, model);//设置外边距
+//        setVgViewPaddings(ctx, vgViewPager, model);//设置内边距
+//        setVgViewBackground(ctx, model, vgViewPager);//设置背景样式
+        configCommonParams(ctx,model,vgViewPager,params);
         vgViewPager.setLayoutParams(params);
 
         modelMap.put(model);
@@ -198,10 +182,11 @@ public class ViewFactory {
         VgContentLayout rootLayout=new VgContentLayout(ctx);
 
         RelativeLayout.LayoutParams params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);//设置外边距
-        setVgViewPaddings(ctx, rootLayout, model);//设置内边距
-        setVgViewBackground(ctx, model, rootLayout);//设置背景样式
+//        setVgViewOf(model, params);
+//        setVgViewMargins(ctx, params, model);//设置外边距
+//        setVgViewPaddings(ctx, rootLayout, model);//设置内边距
+//        setVgViewBackground(ctx, model, rootLayout);//设置背景样式
+        configCommonParams(ctx,model,rootLayout,params);
         rootLayout.setLayoutParams(params);
         rootLayout.setId(model.getView_id());
         model.setVgView(rootLayout);
@@ -214,29 +199,29 @@ public class ViewFactory {
 
     public static VgTopActionBar createVgTopActionBar(Context ctx,VgTopActionBarModel model,ViewTreeBean modelMap){
 
-        VgTopActionBar rootLayout=new VgTopActionBar(ctx);
+        VgTopActionBar topActionBar=new VgTopActionBar(ctx);
         RelativeLayout.LayoutParams params= null;//setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
+        int padd[];
         if(Build.VERSION.SDK_INT>=19){
-            params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height()+STATUS_BAR_HEIGHT);
-            int padd[]= model.getView_paddings();
+            params= setWidthAndHeight(ctx, model.getView_width(), model.getView_height() + STATUS_BAR_HEIGHT);
+            padd = model.getView_paddings();
             if(padd!=null&&padd.length==4){
                 padd[1]=padd[1]+STATUS_BAR_HEIGHT;
-                setVgViewPaddings(ctx, rootLayout,padd[0],padd[1],padd[2],padd[3]);
             }
         }else{
             params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
-            setVgViewPaddings(ctx, rootLayout, model);//设置内边距
         }
-
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);//设置外边距
-
-        setVgViewBackground(ctx, model, rootLayout);//设置背景样式
-        rootLayout.setLayoutParams(params);
-        rootLayout.setId(model.getView_id());
-        model.setVgView(rootLayout);
+//        setVgViewPaddings(ctx, rootLayout, model);//设置内边距
+//        setVgViewOf(model, params);
+//        setVgViewMargins(ctx, params, model);//设置外边距
+//
+//        setVgViewBackground(ctx, model, rootLayout);//设置背景样式
+        configCommonParams(ctx,model,topActionBar,params);
+        topActionBar.setLayoutParams(params);
+        topActionBar.setId(model.getView_id());
+        model.setVgView(topActionBar);
         modelMap.put(model);
-        return rootLayout;
+        return topActionBar;
     }
 
     public static VgButton createVgButton(Context ctx,VgButtonModel model,ViewTreeBean modelMap){
@@ -245,10 +230,11 @@ public class ViewFactory {
 //        int width= AppUtil.dip2px(ctx,model.getView_width());
 //        int height= AppUtil.dip2px(ctx,model.getView_height());
         RelativeLayout.LayoutParams params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);//设置外边距
-        setVgViewPaddings(ctx, btn, model);//设置内边距
-        setVgViewBackground(ctx, model, btn);//设置背景样式
+//        setVgViewOf(model, params);
+//        setVgViewMargins(ctx, params, model);//设置外边距
+//        setVgViewPaddings(ctx, btn, model);//设置内边距
+//        setVgViewBackground(ctx, model, btn);//设置背景样式
+        configCommonParams(ctx,model,btn,params);
         btn.setTextSize(getTextSize(ctx, model.getText_size()));
         setTextAlign(btn, model.getText_align());
         btn.setTextColor(Color.parseColor(model.getText_color()));
@@ -269,10 +255,11 @@ public class ViewFactory {
         model.setVgView(checkBox);
 
         RelativeLayout.LayoutParams params = setWidthAndHeight(ctx,model.getView_width(),model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewBackground(ctx, model, checkBox);
-        setVgViewMargins(ctx, params, model);
-        setVgViewPaddings(ctx, checkBox, model);
+//        setVgViewOf(model, params);
+//        setVgViewBackground(ctx, model, checkBox);
+//        setVgViewMargins(ctx, params, model);
+//        setVgViewPaddings(ctx, checkBox, model);
+        configCommonParams(ctx,model,checkBox,params);
         setTextAlign(checkBox, model.getText_align());
         checkBox.setTextSize(getTextSize(ctx, model.getText_size()));
         checkBox.setTextColor(Color.parseColor(model.getText_color()));
@@ -289,10 +276,11 @@ public class ViewFactory {
         model.setVgView(vgRadioButton);
 
         RelativeLayout.LayoutParams params = setWidthAndHeight(ctx,model.getView_width(),model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewBackground(ctx, model, vgRadioButton);
-        setVgViewMargins(ctx, params, model);
-        setVgViewPaddings(ctx, vgRadioButton, model);
+//        setVgViewOf(model, params);
+//        setVgViewBackground(ctx, model, vgRadioButton);
+//        setVgViewMargins(ctx, params, model);
+//        setVgViewPaddings(ctx, vgRadioButton, model);
+        configCommonParams(ctx,model,vgRadioButton,params);
         setTextAlign(vgRadioButton, model.getText_align());
         vgRadioButton.setTextSize(getTextSize(ctx, model.getText_size()));
         vgRadioButton.setTextColor(Color.parseColor(model.getText_color()));
@@ -309,10 +297,11 @@ public class ViewFactory {
         model.setVgView(switchView);
 
         RelativeLayout.LayoutParams params = setWidthAndHeight(ctx,model.getView_width(),model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewBackground(ctx, model, switchView);
-        setVgViewMargins(ctx, params, model);
-        setVgViewPaddings(ctx, switchView, model);
+//        setVgViewOf(model, params);
+//        setVgViewBackground(ctx, model, switchView);
+//        setVgViewMargins(ctx, params, model);
+//        setVgViewPaddings(ctx, switchView, model);
+        configCommonParams(ctx,model,switchView,params);
         switchView.setId(model.getView_id());
         switchView.setState(model.isChecked());
         switchView.setLayoutParams(params);
@@ -324,93 +313,14 @@ public class ViewFactory {
         return AppUtil.px2sp(ctx, text_size);
     }
 
-    private static void setVgButtonClick(final Context ctx, final VgButtonModel model,final Map<Integer,BaseViewModel> modelMap){
-        if(model.getActionType().equals("")){//空字符代表设置动作
-            return;
-        }
-
-        final VgButton currentBtn=model.getVgView();
-
-        currentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int size=model.getRefs().getRefsId().size();
-//                final StringBuffer stringBuffer=new StringBuffer();
-                List<TwoValues<String,String>>list = new ArrayList<TwoValues<String, String>>();
-                for(int i=0;i<size;i++){
-                    int view_id=model.getRefs().getRefsId().get(i);
-                    if(view_id<0){
-                        String key=model.getRefs().getRefsKey().get(i);
-                        String value=SharedPrefUtil.getInstance(ctx).getProperty(key,"");
-//                        stringBuffer.append(key).append("=").append(value).append("&");
-                        list.add(new TwoValues<String, String>(key,value));
-                    }else{
-                        int view_type=modelMap.get(view_id).getView_type();
-                        switch (view_type){
-                            case VgViewType.VgTextField:
-                                VgTextFieldModel textFieldModel= (VgTextFieldModel)modelMap.get(view_id);
-                                String key=model.getRefs().getRefsKey().get(i);
-                                EditText editText=(EditText)textFieldModel.getVgView();
-                                String value=editText.getText().toString();
-//                                stringBuffer.append(key).append("=").append(value).append("&");
-                                list.add(new TwoValues<String, String>(key,value));
-                                break;
-                            case VgViewType.VgRadioButton:
-    //                    VgTextFieldModel textFieldModel1= (VgTextFieldModel)modelMap.get(view_id);
-    //                    String key1=textFieldModel1.getKey();
-    //                    EditText editText1=(EditText)textFieldModel1.getVgView();
-    //                    String value1=editText1.getText().toString();
-    //                    stringBuffer.append(key1).append("=").append(value1).append("&");
-                                break;
-                            case VgViewType.VgTextView:
-
-                                break;
-                        }
-                    }
-                }
-
-                if (model.getActionType().equals("jump")) {
-                    list.add(new TwoValues<String, String>("code", "login"));
-                    HttpUtil.httpPost(list, new HttpHandlerInterface() {
-                        @Override
-                        public void onSuccess(String data) {
-                            try {
-                                JSONObject object = new JSONObject(data);
-                                int retCode = object.getInt("retCode");
-                                if (retCode == 101) {
-                                    Intent intent = new Intent(ctx, LoginActivity.class);
-                                    String url=object.getString("data");
-                                    intent.putExtra("url", url);
-                                    ctx.startActivity(intent);
-                                } else {
-                                    Toast.makeText(ctx, object.getString("msg"), Toast.LENGTH_LONG).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, IOException e) {
-
-                        }
-                    });
-                }
-            }
-        });
-
-    }
-
     public static VgTextField createVgTextField(Context ctx,VgTextFieldModel model,ViewTreeBean modelMap){
         VgTextField btn=new VgTextField(ctx);
 //        int width= AppUtil.dip2px(ctx,model.getView_width());
 //        int height= AppUtil.dip2px(ctx,model.getView_height());
         model.setVgView(btn);
         RelativeLayout.LayoutParams params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);//设置外边距
-        setVgViewPaddings(ctx, btn, model);//设置内边距
-        setVgViewBackground(ctx, model, btn);//设置背景样式
+        configCommonParams(ctx, model, btn, params);
+
         btn.setText(model.getText());
         btn.setTextSize(getTextSize(ctx, model.getText_size()));
         if(model.getPassword()==0){//以密文的形式显示
@@ -431,6 +341,24 @@ public class ViewFactory {
         return btn;
     }
 
+
+    private static void setVgViewVisible(View view, int visible){
+        if(view==null){
+            return;
+        }
+        switch (visible){
+            case 0://不可见且不占用屏幕空间
+                view.setVisibility(View.GONE);
+                break;
+            case 1://可见
+                view.setVisibility(View.VISIBLE);
+                break;
+            case 2://不可见但占用屏幕空间
+                view.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
     private static void setTextAlign(TextView btn,int align){
        if(align==1){//居左对齐
             btn.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
@@ -448,10 +376,11 @@ public class ViewFactory {
 //        int width= AppUtil.dip2px(ctx,model.getView_width());
 //        int height= AppUtil.dip2px(ctx,model.getView_height());
         RelativeLayout.LayoutParams params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);//设置外边距
-        setVgViewPaddings(ctx, btn, model);//设置内边距
-        setVgViewBackground(ctx, model, btn);//设置背景样式
+//        setVgViewOf(model, params);
+//        setVgViewMargins(ctx, params, model);//设置外边距
+//        setVgViewPaddings(ctx, btn, model);//设置内边距
+//        setVgViewBackground(ctx, model, btn);//设置背景样式
+        configCommonParams(ctx,model,btn,params);
         btn.setText(model.getText());
         btn.setTextSize(getTextSize(ctx, model.getText_size()));
         btn.setTextColor(Color.parseColor(model.getText_color()));
@@ -467,10 +396,11 @@ public class ViewFactory {
         VgImageView imageView = new VgImageView(ctx);
         model.setVgView(imageView);
         RelativeLayout.LayoutParams params = setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
-        setVgViewOf(model, params);
-        setVgViewMargins(ctx, params, model);
-        setVgViewPaddings(ctx, imageView, model);
-        setVgViewBackground(ctx, model, imageView);
+        //setVgViewOf(model, params);
+        //setVgViewMargins(ctx, params, model);
+       // setVgViewPaddings(ctx, imageView, model);
+       // setVgViewBackground(ctx, model, imageView);
+        configCommonParams(ctx,model,imageView,params);
         imageView.setLayoutParams(params);
 
         int scaleType=model.getScaleType();
@@ -610,5 +540,14 @@ public class ViewFactory {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+
+    private static void configCommonParams(Context ctx, BaseViewModel model, View view, RelativeLayout.LayoutParams params) {
+        setVgViewOf(model, params);
+        setVgViewMargins(ctx, params, model);//设置外边距
+        setVgViewPaddings(ctx, view, model);//设置内边距
+        setVgViewBackground(ctx, model, view);//设置背景样式
+        setVgViewVisible(view,model.getVisible());
     }
 }
