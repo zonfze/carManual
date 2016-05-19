@@ -18,6 +18,7 @@ import com.viglle.carmanual.utils.ToastUtil;
 import com.viglle.carmanual.utils.net.HttpHandlerInterface;
 import com.viglle.carmanual.utils.net.HttpUtil;
 import com.viglle.carmanual.utils.net.TwoValues;
+import com.viglle.carmanual.widget.entity.BottomNavPoupItemModel;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 
 import org.json.JSONArray;
@@ -31,6 +32,7 @@ import java.util.List;
 public class LoginActivity extends BaseActivity {
 
     String url="";
+    int showType=0;
 //    private String cacheKey="";
 
     @Override
@@ -41,8 +43,10 @@ public class LoginActivity extends BaseActivity {
         Intent intent=getIntent();
         if(intent==null){
             params=new ArrayList<>();
+
         }else{
             url=intent.getStringExtra("url");
+            showType=intent.getIntExtra("showType",0);
             params= (List<TwoValues<String, String>>) intent.getSerializableExtra("params");
         }
       //  cacheKey= AppUtil.buildCacheKey(url,params);
@@ -52,18 +56,22 @@ public class LoginActivity extends BaseActivity {
 //            handlerResult(jsonStr);
 //            return;
 //        }
+        if(showType== BottomNavPoupItemModel.SHOW_TYPE_WEB){
 
-        HttpUtil.httpPost(url,params, new HttpHandlerInterface() {
-            @Override
-            public void onSuccess(String data) {
-                handlerResult(data);
-            }
-            @Override
-            public void onFailure(int statusCode, IOException e) {
+        }else{
+            HttpUtil.httpPost(url,params, new HttpHandlerInterface() {
+                @Override
+                public void onSuccess(String data) {
+                    handlerResult(data);
+                }
+                @Override
+                public void onFailure(int statusCode, IOException e) {
 
-                LogUtil.log_e(e.toString());
-            }
-        });
+                    LogUtil.log_e(e.toString());
+                }
+            });
+        }
+
     }
 
     private void handlerResult(String jsonStr){

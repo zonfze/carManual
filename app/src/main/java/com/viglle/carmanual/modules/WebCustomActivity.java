@@ -1,14 +1,12 @@
-package com.viglle.carmanual.modules.fragments;
+package com.viglle.carmanual.modules;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.GeolocationPermissions;
@@ -21,34 +19,42 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
+import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.factory.ViewFactory;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.LogUtil;
 import com.viglle.carmanual.widget.VgWebView;
 
 /**
- * Created by Administrator on 2016/5/18.
+ * Created by Administrator on 2016/5/19.
  */
-public class WebViewFragment extends BaseFragment{
+public class WebCustomActivity extends BaseActivity{
     VgWebView mVwebView;
     LinearLayout rootLayout;
-
-    boolean isActive=false;
-    @Nullable
+    String url="";
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootLayout=new LinearLayout(getContext());
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+       Intent intent= getIntent();
+
+        if(intent!=null){
+            url=intent.getStringExtra("url");
+        }
+
+        rootLayout=new LinearLayout(mCtx);
         LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         rootLayout.setLayoutParams(params);
         if(Build.VERSION.SDK_INT>=19) {
-            View view = new View(getContext());
+            View view = new View(mCtx);
             view.setBackgroundColor(Color.TRANSPARENT);
             view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    AppUtil.calHeight(getActivity(), ViewFactory.STATUS_BAR_HEIGHT)));
+                    AppUtil.calHeight(mCtx, ViewFactory.STATUS_BAR_HEIGHT)));
             rootLayout.addView(view);
 //            rootLayout.setPadding(0, AppUtil.calHeight(getActivity(), ViewFactory.STATUS_BAR_HEIGHT),0,0);
         }
-        mVwebView=new VgWebView(getContext());
+        mVwebView=new VgWebView(mCtx);
         rootLayout.addView(mVwebView);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams paramsWeb=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -66,38 +72,8 @@ public class WebViewFragment extends BaseFragment{
         mVwebView.setWebViewClient(new MyWebViewClient());
         mVwebView.setWebChromeClient(new MyWebChromeClient());
 //        setBackForward();//设置记录历史，按物理"返回"键回退到上一页
-        mVwebView.loadUrl(mUrl);
-        return rootLayout;
-    }
-
-    private void setBackForward(){
-        mVwebView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction()==KeyEvent.ACTION_DOWN){
-                    if(keyCode==KeyEvent.KEYCODE_BACK){
-                        if(isActive&&mVwebView!=null&&mVwebView.canGoBack()){
-                            mVwebView.goBack();
-                            return true;
-                        }else{
-                            return getActivity().onKeyDown(keyCode,event);
-                        }
-                    }
-                }
-                return  false;
-            }
-        });
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        LogUtil.log_e("visible",isVisibleToUser+"");
-        if(isVisibleToUser){
-            isActive=true;
-        }else{
-            isActive=false;
-        }
-        super.setUserVisibleHint(isVisibleToUser);
+        setContentView(rootLayout);
+        mVwebView.loadUrl(url);
     }
 
     @Override
@@ -125,7 +101,7 @@ public class WebViewFragment extends BaseFragment{
         }
     }
 
-    class MyWebChromeClient extends WebChromeClient{
+    class MyWebChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
@@ -264,7 +240,7 @@ public class WebViewFragment extends BaseFragment{
         }
     }
 
-    class MyWebViewClient extends WebViewClient{
+    class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
@@ -291,6 +267,4 @@ public class WebViewFragment extends BaseFragment{
             super.onPageCommitVisible(view, url);
         }
     }
-
-
 }

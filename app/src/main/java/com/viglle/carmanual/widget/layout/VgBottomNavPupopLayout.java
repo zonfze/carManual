@@ -35,7 +35,6 @@ import com.viglle.carmanual.base.BaseActivity;
 import com.viglle.carmanual.modules.fragments.BaseFragment;
 import com.viglle.carmanual.modules.fragments.CustomFragment;
 import com.viglle.carmanual.modules.fragments.WebViewFragment;
-import com.viglle.carmanual.modules.user.LoginActivity;
 import com.viglle.carmanual.seletor.SelectorFactory;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.LogUtil;
@@ -341,11 +340,10 @@ public class VgBottomNavPupopLayout extends LinearLayout {
                 popupWindow.dismiss();
                 BottomNavPoupItemModel itemModel = (BottomNavPoupItemModel) parent.getItemAtPosition(position);
                 ToastUtil.showToast(getContext(), itemModel.getTitle());
-                Intent intent=new Intent(getContext(),LoginActivity.class);
+                Intent intent=BaseActivity.createIntent(getContext(), itemModel.getShowType());
                 intent.putExtra("url",itemModel.getUrl());
                 intent.putExtra("params", new ArrayList<TwoValues<String,String>>());
                 getContext().startActivity(intent);
-
             }
         });
         popupWindow.setFocusable(true);

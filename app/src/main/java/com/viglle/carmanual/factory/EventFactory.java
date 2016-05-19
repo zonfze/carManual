@@ -61,7 +61,7 @@ public class EventFactory {
 
                 break;
             case EventType.TOUCH_BACKKEY_DRVIE:
-                /**已注入onKeyDown {@link com.viglle.carmanual.modules.user.LoginActivity#onKeyDown(int, KeyEvent)}*/
+                /**已注入onKeyDown {@link com.viglle.carmanual.modules.user.UICustomActivity#onKeyDown(int, KeyEvent)}*/
                 break;
         }
     }

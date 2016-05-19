@@ -1,6 +1,7 @@
 package com.viglle.carmanual.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +12,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.viglle.carmanual.event.BaseEventModel;
+import com.viglle.carmanual.modules.UICustomActivity;
+import com.viglle.carmanual.modules.WebCustomActivity;
 import com.viglle.carmanual.utils.ToastUtil;
+import com.viglle.carmanual.widget.entity.BottomNavPoupItemModel;
 import com.viglle.carmanual.widget.entity.ViewTreeBean;
 
 import java.util.List;
@@ -80,6 +84,23 @@ public abstract class BaseActivity extends AppCompatActivity {
 //
 //        }
 //    }
+
+    /**
+     * 根据showType类型判断是否打开具有WebView的Activity
+     * @param ctx
+     * @param showType
+     * @return
+     */
+    public static Intent createIntent(Context ctx,int showType){
+        Intent intent;
+        if(showType== BottomNavPoupItemModel.SHOW_TYPE_WEB){
+            intent=new Intent(ctx, WebCustomActivity.class);
+        }else{
+            intent=new Intent(ctx, UICustomActivity.class);
+        }
+        return intent;
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

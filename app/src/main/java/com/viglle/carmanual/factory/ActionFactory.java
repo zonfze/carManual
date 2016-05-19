@@ -13,7 +13,7 @@ import com.viglle.carmanual.action.model.ActionNewUIModel;
 import com.viglle.carmanual.action.model.ActionToastModel;
 import com.viglle.carmanual.action.model.BaseActionModel;
 import com.viglle.carmanual.base.BaseActivity;
-import com.viglle.carmanual.modules.user.LoginActivity;
+import com.viglle.carmanual.modules.UICustomActivity;
 import com.viglle.carmanual.parsor.VgUIParsor;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.utils.SharedPrefUtil;
@@ -78,7 +78,7 @@ public class ActionFactory{
             case ActionType.ACTION_NEW_PANEL://打开一个新界面
                 ActionNewUIModel uiModel= (ActionNewUIModel) model;
                 UpdateViewFactory.modifyViews(ctx,viewTreeBean,model);
-                Intent intentuiModel=new Intent(ctx,LoginActivity.class);
+                Intent intentuiModel=new Intent(ctx,UICustomActivity.class);
                 intentuiModel.putExtra("params", (Serializable) model.getParams());
                 intentuiModel.putExtra("url", uiModel.getUrl());
                 ctx.startActivity(intentuiModel);
@@ -89,7 +89,7 @@ public class ActionFactory{
                 break;
             case ActionType.ACTION_CLOSE_AND_NEW_PANEL://打开一个新界面并关闭上一个界面
                 ActionCloseNewModel closeNewModel= (ActionCloseNewModel) model;
-                Intent intent=new Intent(ctx,LoginActivity.class);
+                Intent intent=new Intent(ctx,UICustomActivity.class);
                 UpdateViewFactory.modifyViews(ctx,viewTreeBean,model);
                 List<TwoValues<String,String>> refUIList = configRefUIParams(ctx,model,viewTreeBean);
                 List<TwoValues<String,String>> staticList= configStaticParams(ctx,model,viewTreeBean);

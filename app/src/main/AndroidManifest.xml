@@ -11,13 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".modules.user.LoginActivity"
+            android:name=".modules.UICustomActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-        <activity android:name=".modules.HomeActivity"
+        <activity android:name=".modules.WebCustomActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
 
         <activity android:name=".modules.WelcomeActivity"

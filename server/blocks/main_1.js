@@ -75,10 +75,10 @@ var json_main_ui_1={
 					childs:[],
 					datas:[
 						{labelid:'1',title:'常用资料',url:'http://192.168.16.198:8083/?code=home',showType:'0',sub_menu:[]},
-						{labelid:'2',title:'汽修人',url:'http://192.168.16.198:8083/?code=loginUI',showType:'1',sub_menu:[]},
+						{labelid:'2',title:'汽修人',url:'http://www.baidu.com',showType:'1',sub_menu:[]},
 						{labelid:'3',title:'我',url:'http://192.168.16.198:8083/?code=home',showType:'0',
 							sub_menu:[
-								{labelid:'301',title:'登陆',url:'http://192.168.16.198:8083/?code=loginUI',showType:'0',sub_menu:[]},
+								{labelid:'301',title:'登陆',url:'http://www.baidu.com',showType:'1',sub_menu:[]},
 								{labelid:'302',title:'注册',url:'http://192.168.16.198:8083/?code=registerUI',showType:'0',sub_menu:[]}
 						]}
 					]
