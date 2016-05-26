@@ -2,7 +2,6 @@ package com.viglle.carmanual.widget.model;
 
 import android.view.View;
 
-import com.viglle.carmanual.event.BaseEventModel;
 import com.viglle.carmanual.utils.AppUtil;
 import com.viglle.carmanual.validation.BaseValidModel;
 
@@ -46,11 +45,11 @@ public class BaseViewModel implements Serializable{
     private String key;//作为一个预留字段,在VgTextView;VgTextField;VgRadionButton;VgCheckBox;VgSwitchView中 一般作为action 中的请求参数的key
     public static final String KEY="res_key";
 
-    private String action;//动作指向
-    public static final String ACTION="action";
-
-    private String actionType;//动作类型
-    public static final String ACTION_TYPE="action_type";
+//    private String action;//动作指向
+//    public static final String ACTION="action";
+//
+//    private String actionType;//动作类型
+//    public static final String ACTION_TYPE="action_type";
 
 //    private List<Integer> refs;//动作依赖的View_id;通过view_id获取对应的View控件
     RefsBean refs;
@@ -66,8 +65,8 @@ public class BaseViewModel implements Serializable{
     public static final String VISIBLE="visible";
 
 
-    private BaseEventModel actionLink;
-    public static final String ACTION_LINK="actionLink";
+//    private BaseEventModel actionLink;
+//    public static final String ACTION_LINK="actionLink";
 
     private List<BaseValidModel> validLink;
     public static final String VALID_LINK="validation";
@@ -142,25 +141,25 @@ public class BaseViewModel implements Serializable{
     public void setChilds(List<BaseViewModel> childs) {
         this.childs = childs;
     }
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    public String getActionType() {
-        if(actionType==null||actionType.equals("null")){
-            return "";
-        }
-        return actionType;
-    }
-
-    public void setActionType(String actionType) {
-        this.actionType = actionType;
-    }
+//
+//    public String getAction() {
+//        return action;
+//    }
+//
+//    public void setAction(String action) {
+//        this.action = action;
+//    }
+//
+//    public String getActionType() {
+//        if(actionType==null||actionType.equals("null")){
+//            return "";
+//        }
+//        return actionType;
+//    }
+//
+//    public void setActionType(String actionType) {
+//        this.actionType = actionType;
+//    }
 
     public RefsBean getRefs() {
         if(refs==null){
@@ -361,7 +360,7 @@ public class BaseViewModel implements Serializable{
         return bg_focus_color;
     }
 
-    private boolean isaNull(String str) {
+    public boolean isaNull(String str) {
         return str==null||str.equals("")||str.equalsIgnoreCase("null");
     }
 
@@ -383,13 +382,13 @@ public class BaseViewModel implements Serializable{
         this.bg_focus_color = bg_focus_color;
     }
 
-    public BaseEventModel getActionLink() {
-        return actionLink;
-    }
-
-    public void setActionLink(BaseEventModel actionLink) {
-        this.actionLink = actionLink;
-    }
+//    public BaseEventModel getActionLink() {
+//        return actionLink;
+//    }
+//
+//    public void setActionLink(BaseEventModel actionLink) {
+//        this.actionLink = actionLink;
+//    }
 
 
     //

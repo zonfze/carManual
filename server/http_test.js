@@ -13,6 +13,9 @@ function httpGet(){
 	var user_login_ui=require('./blocks/user/user_login_ui_1');
 	var user_login_action=require('./blocks/user/user_login_action_1');
 	var user_regist_ui=require('./blocks/user/user_register_ui');
+	var user_find_pass_ui=require('./blocks/user/user_find_password_ui');
+	var user_center_ui=require('./blocks/user/user_center_ui');
+
 	var home_block=require('./blocks/home_1');
 	var welcome_1=require('./blocks/welcome_1');
 	var main_ui=require('./blocks/main_1');
@@ -54,7 +57,11 @@ function httpGet(){
 					user_login_action.loginAction(request,response,objectPostData);
 				}else if(code=='main'){
 					main_ui.loadMain1(request,response,objectPostData);
-				}else{
+				}else if(code=='userCenter'){
+					user_center_ui.loadUserCenter(request,response,objectPostData);
+				}else if(code=='findPass'){
+                 	user_find_pass_ui.loadFindPassword(request,response,objectPostData);
+                }else{
 					response.end('Permission is denied');
 				}
 				
@@ -82,7 +89,11 @@ function httpGet(){
 				user_regist_ui.register(request,response,params);
 			}else if(code='main'){
 				main_ui.loadMain1(request,response,params);
-			}
+			}else if(code=='findPass'){
+                user_find_pass_ui.loadFindPassword(request,response,params);
+            }else if(code=='userCenter'){
+             	user_center_ui.loadUserCenter(request,response,params);
+            }
 		}
 		
 	}).listen(8083);

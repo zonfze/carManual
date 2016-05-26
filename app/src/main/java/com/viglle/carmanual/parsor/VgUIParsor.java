@@ -4,12 +4,14 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.viglle.carmanual.utils.LogUtil;
+import com.viglle.carmanual.widget.model.BannerLayoutModel;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 import com.viglle.carmanual.widget.model.VgBottomNavModel;
 import com.viglle.carmanual.widget.model.VgBottomNavPupopLayoutModel;
 import com.viglle.carmanual.widget.model.VgButtonModel;
 import com.viglle.carmanual.widget.model.VgCheckBoxModel;
 import com.viglle.carmanual.widget.model.VgContentLayoutModel;
+import com.viglle.carmanual.widget.model.VgGalleryViewModel;
 import com.viglle.carmanual.widget.model.VgImageViewModel;
 import com.viglle.carmanual.widget.model.VgRadioButtonModel;
 import com.viglle.carmanual.widget.model.VgSwitchViewModel;
@@ -57,6 +59,7 @@ public class VgUIParsor {
                 VgContentLayoutModel contentModel=new VgContentLayoutModel();
                 parsorCommonParams(rootObj, view_type, contentModel);
                 List<BaseViewModel> list = parsorChilds(context, rootObj);
+                contentModel.setClickable(rootObj.getString(VgContentLayoutModel.CLICKABLE));
                 contentModel.setChilds(list);
                 return contentModel;
             case VgViewType.VgTextView:
@@ -163,6 +166,20 @@ public class VgUIParsor {
             case VgViewType.VgWebView:
 
                 return null;
+            case VgViewType.VgBannerLayout://轮播图控件
+                BannerLayoutModel vgBannerLayout=new BannerLayoutModel();
+                vgBannerLayout.setNoScroll(rootObj.getString(BannerLayoutModel.NOSCROLL));
+                vgBannerLayout.setInterval(rootObj.getString(BannerLayoutModel.INTERVAL));
+                parsorCommonParams(rootObj, view_type, vgBannerLayout);
+                vgBannerLayout.setChilds(parsorChilds(context, rootObj));
+                return vgBannerLayout;
+            case VgViewType.VgGalleryView://轮播图控件
+                VgGalleryViewModel vgGalleryViewModel=new VgGalleryViewModel();
+                vgGalleryViewModel.setNoScroll(rootObj.getString(BannerLayoutModel.NOSCROLL));
+                vgGalleryViewModel.setInterval(rootObj.getString(BannerLayoutModel.INTERVAL));
+                parsorCommonParams(rootObj, view_type, vgGalleryViewModel);
+                vgGalleryViewModel.setChilds(parsorChilds(context, rootObj));
+                return vgGalleryViewModel;
         }
         return null;
     }
@@ -211,14 +228,7 @@ public class VgUIParsor {
         contentModel.setValidLink(VgValidParsor.parsorValidLink(rootObj));
 
 
-//        JSONObject actionLink=rootObj.getJSONObject(BaseViewModel.ACTION_LINK);
-//        LogUtil.log_e("obj",actionLink.toString());
-//        if(actionLink!=null){
-//            contentModel.setActionLink(VgEventParsor.parsorActionLink(actionLink));
-//        }
 
-//        contentModel.setGravity(rootObj.getString(BaseViewModel.GRAVITY));
-//        contentModel.setOrientation(rootObj.getString(BaseViewModel.ORIENTATION));
 
 
         String[] view_of = parsorViewOf(rootObj);
@@ -232,24 +242,32 @@ public class VgUIParsor {
 
         List<String> refList = parsorRes(rootObj);
         contentModel.setRefs(refList);//依赖
+/**        JSONObject actionLink=rootObj.getJSONObject(BaseViewModel.ACTION_LINK);
+        LogUtil.log_e("obj",actionLink.toString());
+        if(actionLink!=null){
+            contentModel.setActionLink(VgEventParsor.parsorActionLink(actionLink));
+        }
 
-//        List<String> centersList=parsorCenters(rootObj);
-//        contentModel.setCenters(centersList);//居中参数
+        contentModel.setGravity(rootObj.getString(BaseViewModel.GRAVITY));
+        contentModel.setOrientation(rootObj.getString(BaseViewModel.ORIENTATION));
+
+        List<String> centersList=parsorCenters(rootObj);
+        contentModel.setCenters(centersList);//居中参数*/
     }
 
-//    private static List<String> parsorCenters(JSONObject rootObj){
-//        List<String> list = new ArrayList<>();
-//        try {
-//            JSONArray jsonArray=rootObj.getJSONArray(BaseViewModel.CENTERS);
-//            for(int i=0;i<jsonArray.length();i++){
-//                list.add(jsonArray.getString(i));
-//            }
-//            return list;
-//        }catch (Exception  e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    };
+/**    private static List<String> parsorCenters(JSONObject rootObj){
+        List<String> list = new ArrayList<>();
+        try {
+            JSONArray jsonArray=rootObj.getJSONArray(BaseViewModel.CENTERS);
+            for(int i=0;i<jsonArray.length();i++){
+                list.add(jsonArray.getString(i));
+            }
+            return list;
+        }catch (Exception  e) {
+            e.printStackTrace();
+        }
+        return list;
+    };*/
 
     private static String[] parsorViewOf(JSONObject rootObj){
         String[] view_of=new String[]{"-1","-1","-1","-1"};

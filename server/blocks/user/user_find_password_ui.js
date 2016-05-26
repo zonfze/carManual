@@ -1,6 +1,6 @@
 var edittext_normal_color="#ffffcccc";
 var edittext_focus_color="#ff0099cc";
-var json_register_ui={
+var json_user_find_pass_ui={
 		retCode:101,
 		msg:'请求成功',
 		data:{
@@ -76,7 +76,7 @@ var json_register_ui={
 								refs:[],
 								validation:[],
 								res_key:'null',
-								text:'注   册',
+								text:'找回密码',
 								input_type:'1',
 								hint:'',
 								text_size:'48',
@@ -93,8 +93,8 @@ var json_register_ui={
 						view_type:'9999',
 						view_name:'VgContentLayout',
 						view_width:'1080',
-						clickable:'0',
 						view_height:'156',
+						clickable:'0',
 						bg_normal_color:'#ffffffff',
 						bg_focus_color:'#ffffffff',
 						view_of:['-1','12','-1','-1'],
@@ -161,8 +161,8 @@ var json_register_ui={
 						view_type:'9999',
 						view_name:'VgContentLayout',
 						view_width:'1080',
-						clickable:'0',
 						view_height:'156',
+						clickable:'0',
 						bg_normal_color:'#ffffffff',
 						bg_focus_color:'#ffffffff',
 						view_of:['-1','1','-1','-1'],
@@ -323,7 +323,7 @@ var json_register_ui={
 						refs:['3_username','6_userpass','-1_deviceId'],
 						validation:[],
 						res_key:'',
-						text:'注册',
+						text:'提   交',
 						text_size:'48',
 						text_align:'0',
 						text_color:'#ff000000',
@@ -384,9 +384,9 @@ var json_register_ui={
 		]
 	}
 };
-function register(req,res,data){
-	
-	var string =JSON.stringify(json_register_ui);
+
+function loadFindPassword(req,res,DATA){
+	var string =JSON.stringify(json_user_find_pass_ui);
 	res.end(string);
 }
-exports.register=register;
+exports.loadFindPassword=loadFindPassword;

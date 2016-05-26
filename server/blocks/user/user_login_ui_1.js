@@ -1,3 +1,5 @@
+var edittext_normal_color="#ffffcccc";
+var edittext_focus_color="#ff0099cc";
 var json_login_ui_1={
 		retCode:101,
 		msg:'请求成功',
@@ -11,6 +13,7 @@ var json_login_ui_1={
 				view_name:'VgContentLayout',
 				view_width:'1080',
 				view_height:'1920',
+				clickable:'0',
 				bg_normal_color:'#ffffffff',
 				bg_focus_color:'#ffffffff',
 				view_of:['-1','-1','-1','-1'],
@@ -18,99 +21,141 @@ var json_login_ui_1={
 				view_margins:['0','0','0','0'],
 				refs:[],
 				validation:[],
-				gravity:'center',
-				orientation:'0',
-				centers:['1','4','7'],
-				action_type:'null',
-				action:'null',
-				actionLink:{},
 				res_key:'null',
-				childs:[{
-					view_id:'1',
-					parent_id:'0',
-					visible:'1',
-					view_type:'9999',
-					view_name:'VgContentLayout',
-					view_width:'1080',
-					view_height:'156',
-					bg_normal_color:'#ffffffff',
-					bg_focus_color:'#ffffffff',
-					view_of:['-1','-1','-1','-1'],
-					view_paddings:['0','0','0','0'],
-					view_margins:['0','470','0','0'],
-					gravity:'',
-					centers:[],
-					orientation:'0',
-					refs:[],
-					validation:[],
-					action_type:'null',
-					action:'null',
-					actionLink:{},
-					res_key:'null',
-					childs:[{
-						view_id:'2',
-						parent_id:'1',
+				childs:[
+					{
+						view_id:'12',
+						parent_id:'0',
 						visible:'1',
-						view_type:'10001',
-						view_name:'VgTextView',
-						view_width:'256',
-						view_height:'136',
+						view_type:'20006',
+						view_name:'VgTopActionBar',
+						view_width:'1080',
+						view_height:'144',
+						bg_normal_color:'#ffD01109',
+						bg_focus_color:'#ffD01109',
+						view_of:['-1','-1','-1','-1'],
+						view_paddings:['0','0','0','0'],
+						view_margins:['0','0','0','0'],
+						refs:[],
+						validation:[],
+						res_key:'null',
+						childs:[
+							{
+								view_id:'13',
+								parent_id:'1',
+								visible:'1',
+								view_type:'10005',
+								view_name:'VgImageView',
+								view_width:'144',
+								view_height:'144',
+								bg_normal_color:'#00000000',
+								bg_focus_color:'#00000000',
+								view_of:['-1','-1','-1','-1'],
+								view_paddings:['15','45','15','45'],
+								view_margins:['0','0','0','0'],
+								refs:[],
+								validation:[],
+								scaleType:'2',
+								imageUrl:'http://192.168.16.198:8080/bg_btn_back.png',
+								res_key:'null',
+								childs:[]
+							},
+							{
+								view_id:'14',
+								parent_id:'1',
+								view_type:'10001',
+								view_name:'VgTextView',
+								view_width:'256',
+								visible:'1',
+								view_height:'144',
+								bg_normal_color:'#00000000',
+								bg_focus_color:'#00000000',
+								view_of:['-1','-1','-1','-1'],
+								view_paddings:['0','0','0','0'],
+								view_margins:['412','0','412','0'],
+								refs:[],
+								validation:[],
+								res_key:'null',
+								text:'登　　录',
+								input_type:'1',
+								hint:'',
+								text_size:'48',
+								text_align:"0",
+								text_color:'#ffffffff',
+								childs:[]
+							}
+							]
+					},
+					{
+						view_id:'1',
+						parent_id:'0',
+						visible:'1',
+						view_type:'9999',
+						view_name:'VgContentLayout',
+						view_width:'1080',
+						view_height:'156',
+						clickable:'0',
 						bg_normal_color:'#ffffffff',
 						bg_focus_color:'#ffffffff',
 						view_of:['-1','-1','-1','-1'],
-						view_paddings:['10','10','10','10'],
-						view_margins:['10','10','10','10'],
-						gravity:'center',
-						centers:[],
-						orientation:'0',
+						view_paddings:['0','0','0','0'],
+						view_margins:['0','470','0','0'],
+						refs:[],
 						validation:[],
-						refs:[],
-						action_type:'null',
-						action:'null',
-						actionLink:{},
 						res_key:'null',
-						text:'帐号:',
-						input_type:'1',
-						hint:'',
-						text_size:'48',
-						text_align:"2",
-						text_color:'#ffc8c8c8',
-						childs:[]
-					},{
-						view_id:'3',
-						parent_id:'1',
-						visible:'1',
-						view_type:'10002',
-						view_name:'VgTextField',
-						view_width:'824',
-						view_height:'136',
-						bg_normal_color:'#ff00ff00',
-						bg_focus_color:'#ffffcccc',
-						view_of:['2','-1','-1','-1'],
-						view_paddings:['30','30','30','30'],
-						view_margins:['20','20','20','20'],
-						gravity:'',
-						centers:[],
-						orientation:'0',
-						validation:[
-							{valid_id:'1001',msg:'不能为空'},
-							{valid_id:'1002',max:'12',min:'4',msg:'必须4-12个字符之间'}
-						],
-						refs:[],
-						action_type:'',
-						action:'null',
-						actionLink:{},
-						res_key:'username',
-						text:'test',
-						password:'0',
-						text_align:"1",
-						input_type:'1',
-						hint:'请填写手机号',
-						text_size:'48',
-						text_color:'#ffc8c8c8',
-						childs:[]
-					}]
-				},{
+						childs:[{
+							view_id:'2',
+							parent_id:'1',
+							visible:'1',
+							view_type:'10001',
+							view_name:'VgTextView',
+							view_width:'256',
+							view_height:'136',
+							bg_normal_color:'#00000000',
+                            bg_focus_color:'#00000000',
+							view_of:['-1','-1','-1','-1'],
+							view_paddings:['10','10','10','10'],
+							view_margins:['10','10','10','10'],
+							validation:[],
+							refs:[],
+							res_key:'null',
+							text:'帐   号:',
+							input_type:'1',
+							hint:'',
+							text_size:'48',
+							text_align:"2",
+							text_color:'#ff000000',
+							childs:[]
+						},{
+							view_id:'3',
+							parent_id:'1',
+							visible:'1',
+							view_type:'10002',
+							view_name:'VgTextField',
+							view_width:'824',
+							view_height:'136',
+							bg_normal_color:edittext_normal_color,
+							bg_focus_color:edittext_focus_color,
+							view_of:['2','-1','-1','-1'],
+							view_paddings:['30','30','30','30'],
+							view_margins:['20','20','20','20'],
+							validation:[
+								{valid_id:'1001',msg:'不能为空'},
+								{valid_id:'1002',max:'12',min:'4',msg:'必须4-12个字符之间'}
+							],
+							refs:[],
+							res_key:'username',
+							text:'test',
+							password:'0',
+							text_align:"1",
+							input_type:'1',
+							hint:'请填写手机号',
+							text_size:'48',
+							text_color:'#ffc8c8c8',
+							childs:[]
+						}]
+					},
+					{
 						view_id:'4',
 						parent_id:'0',
 						visible:'1',
@@ -118,19 +163,14 @@ var json_login_ui_1={
 						view_name:'VgContentLayout',
 						view_width:'1080',
 						view_height:'156',
+						clickable:'0',
 						bg_normal_color:'#ffffffff',
 						bg_focus_color:'#ffffffff',
 						view_of:['-1','1','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','10','0','0'],
-						gravity:'',
-						centers:[],
-						orientation:'0',
 						refs:[],
 						validation:[],
-						action_type:'null',
-						action:'null',
-						actionLink:{},
 						res_key:'null',
 						validation:[],
 						childs:[{
@@ -146,21 +186,15 @@ var json_login_ui_1={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['10','10','10','10'],
 								view_margins:['10','10','10','10'],
-								gravity:'',
-								centers:[],
-								orientation:'0',
 								validation:[],
 								refs:[],
-								action_type:'null',
-								action:'null',
-								actionLink:{},
 								res_key:'null',
-								text:'密码:',
+								text:'密   码:',
 								input_type:'1',
 								hint:'',
 								text_size:'48',
 								text_align:"2",
-								text_color:'#ffc8c8c8',
+								text_color:'#ff000000',
 								childs:[]
 							},{
 								view_id:'6',
@@ -170,23 +204,17 @@ var json_login_ui_1={
 								view_name:'VgTextField',
 								view_width:'824',
 								view_height:'136',
-								bg_normal_color:'#ff00ff00',
-								bg_focus_color:'#ffffcccc',
+								bg_normal_color:edittext_normal_color,
+                            	bg_focus_color:edittext_focus_color,
 								view_of:['5','-1','-1','-1'],
 								view_paddings:['30','30','30','30'],
 								view_margins:['20','20','20','20'],
-								gravity:'',
 								validation:[
 									{valid_id:'1001',msg:'不能为空'},
 									{valid_id:'1002',max:'12',min:'6',msg:'必须6-12个字符之间'},
 									{valid_id:'1003',rule:'[0-9]*',msg:'密码必须是纯数字'}
 								],
-								centers:[],
-									orientation:'0',
 								refs:[],
-								action_type:'null',
-								action:'null',
-								actionLink:{},
 								res_key:'userpass',
 								text:'123456',
 								input_type:'2',
@@ -197,7 +225,8 @@ var json_login_ui_1={
 								text_color:'#ffc8c8c8',
 								childs:[]
 							}]
-					},{
+						},
+					{
 						view_id:'7',
 						parent_id:'0',
 						visible:'1',
@@ -210,33 +239,16 @@ var json_login_ui_1={
 						view_of:['-1','4','-1','-1'],
 						view_paddings:['10','10','10','10'],
 						view_margins:['20','48','20','20'],
-						gravity:'',
-						centers:[],
-						orientation:'0',
 						refs:[],
 						validation:[],
-						action_type:'null',
-						actionLink:{
-							event_type:'1002',
-							actionLink:[{
-								actionType:'10014',
-								url:'http://192.168.16.198:8083/',
-								ref_ui:['3','6'],
-								params:[
-									'device_id=12345678',
-									'code=loginAction'
-								]
-								
-							}]
-						},
-						action:'null',
 						res_key:'',
 						text:'登陆',
 						text_size:'48',
 						text_align:'0',
 						text_color:'#ff000000',
 						childs:[]
-					},{
+					},
+					{
 						view_id:'8',
 						parent_id:'0',
 						visible:'1',
@@ -244,19 +256,14 @@ var json_login_ui_1={
 						view_name:'VgContentLayout',
 						view_width:'1080',
 						view_height:'156',
+						clickable:'0',
 						bg_normal_color:'#ffffffff',
 						bg_focus_color:'#ffffffff',
 						view_of:['-1','7','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','10','0','0'],
-						gravity:'',
-						centers:[],
-						orientation:'0',
 						refs:[],
 						validation:[],
-						action_type:'null',
-						action:'null',
-						actionLink:{},
 						res_key:'null',
 						childs:[{
 								view_id:'9',
@@ -266,19 +273,13 @@ var json_login_ui_1={
 								view_name:'VgTextView',
 								view_width:'256',
 								view_height:'136',
-								bg_normal_color:'#ffffffff',
-								bg_focus_color:'#ffffffff',
+								bg_normal_color:'#00000000',
+                                bg_focus_color:edittext_focus_color,
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['10','10','10','10'],
 								view_margins:['568','10','10','10'],
-								gravity:'',
-								centers:[],
-								orientation:'0',
 								refs:[],
-								action_type:'null',
-								action:'null',
 								validation:[],
-								actionLink:{},
 								res_key:'null',
 								text:'找回密码',
 								input_type:'1',
@@ -295,18 +296,12 @@ var json_login_ui_1={
 								view_name:'VgTextView',
 								view_width:'256',
 								view_height:'136',
-								bg_normal_color:'#ffffffff',
-								bg_focus_color:'#ffffffff',
+								bg_normal_color:'#00000000',
+                            	bg_focus_color:edittext_focus_color,
 								view_of:['9','-1','-1','-1'],
-								view_paddings:['30','30','30','30'],
-								view_margins:['20','20','20','20'],
-								gravity:'',
-								centers:[],
-								orientation:'0',
+								view_paddings:['10','10','10','10'],
+								view_margins:['20','10','20','10'],
 								refs:[],
-								action_type:'null',
-								action:'null',
-								actionLink:{},
 								validation:[],
 								res_key:'userpass',
 								text:'注   册',
@@ -318,112 +313,97 @@ var json_login_ui_1={
 								text_color:'#ff0000ff',
 								childs:[]
 							}]
-					},{
-						view_id:'11',
-						parent_id:'0',
-						visible:'1',
-						view_type:'10006',
-						view_name:'VgRadioButton',
-						view_width:'256',
-						view_height:'136',
-						bg_normal_color:'#ffffffff',
-						bg_focus_color:'#ffffffff',
-						view_of:['-1','8','-1','-1'],
-						view_paddings:['30','30','30','30'],
-						view_margins:['20','20','20','20'],
-						gravity:'',
-						isChecked:'0',
-						centers:[],
-						orientation:'0',
-						validation:[
-							{valid_id:'1001',msg:'必选'}
+					}
+				]
+
+			},
+			eventLink:[
+				{
+					event_type:'1002',
+					view_id:'7',
+					actionLink:[{
+						actionType:'10014',
+						url:'http://192.168.16.198:8083/',
+						ref_ui:['3','6'],
+						result:{
+							onOk:[{
+								event_type:'1000',
+								actionLink:[{
+									actionType:'10001',
+									text:'登陆成功',
+									params:[],
+									modify:[]
+								},{
+									actionType:'10009',
+									url:'http://192.168.16.198:8083/',
+									params:[
+										'device_id=12345678',
+										'code=main'
+									],
+									modify:[]
+								}]
+							}],
+							onFail:[]
+						},
+						params:[
+							'device_id=12345678',
+							'code=loginAction'
 						],
-						refs:[],
-						action_type:'null',
-						action:'null',
-						actionLink:{},
-						res_key:'userpass',
-						text:'记住密码',
-						input_type:'2',
-						password:'1',
-						text_align:'0',
-						hint:'',
-						text_size:'48',
-						text_color:'#ff0000ff',
-						childs:[]
-				}]
-			
-		},
-		eventLink:[{
-			event_type:'1002',
-			view_id:'7',
-			actionLink:[{
-				actionType:'10014',
-				url:'http://192.168.16.198:8083/',
-				ref_ui:['3','6'],
-				result:{
-					onOk:[{
-						event_type:'1000',
-						actionLink:[{
-							actionType:'10001',
-							text:'登陆成功',
-							params:[],
-							modify:[]
+						modify:[{
+							ref_id:'10',
+							f_type:'10002',
+							f_value:'#ff00f0f0'
 						},{
-							actionType:'10009',
-							url:'http://192.168.16.198:8083/',
-							params:[
-								'device_id=12345678',
-								'code=main'
-							],
-							modify:[]
+							ref_id:'10',
+							f_type:'10001',
+							f_value:'修改成功'
 						}]
-					}],
-					onFail:[]
+					}]
 				},
-				params:[
-					'device_id=12345678',
-					'code=loginAction'
-				],
-				modify:[{
-					ref_id:'10',
-					f_type:'10002',
-					f_value:'#ff00f0f0'
-				},{
-					ref_id:'10',
-					f_type:'10001',
-					f_value:'修改成功'
-				}]
-			}]
-		},{
-			event_type:'1002',
-			view_id:'9',
-			actionLink:[{
-				actionType:'10007',
-				url:'http://192.168.16.198:8083/',
-				ref_ui:[],
-				params:[
-					'device_id=12345678',
-					'code=panelUI'
-				],
-				modify:[]
-			}]
-		},{
-			event_type:'1002',
-			view_id:'10',
-			actionLink:[{
-				actionType:'10007',
-				url:'http://192.168.16.198:8083/',
-				ref_ui:[],
-				params:[
-					'device_id=12345678',
-					'code=panelUI'
-				],
-				modify:[]
-			}]
-		}]
-		
-	}
+				{
+					event_type:'1002',
+					view_id:'9',
+					actionLink:[{
+						actionType:'10007',
+						url:'http://192.168.16.198:8083/',
+						ref_ui:[],
+						params:[
+							'device_id=12345678',
+							'code=findPass'
+						],
+						modify:[]
+					}]
+				},
+				{
+					event_type:'1002',
+					view_id:'10',
+					actionLink:[{
+						actionType:'10007',
+						url:'http://192.168.16.198:8083/',
+						ref_ui:[],
+						params:[
+							'device_id=12345678',
+							'code=registerUI'
+						],
+						modify:[]
+					}]
+				},
+				{
+					event_type:'1002',
+					view_id:'13',
+					actionLink:[{
+						actionType:'10008',
+						url:'http://192.168.16.198:8083/',
+						ref_ui:[],
+						params:[
+							'device_id=12345678',
+							'code=panelUI'
+						],
+						modify:[]
+					}]
+				}
+			]
+		}
 };
 function loginUI(req,res,data){
 	

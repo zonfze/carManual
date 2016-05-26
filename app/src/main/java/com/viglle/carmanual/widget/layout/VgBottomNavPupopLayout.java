@@ -79,7 +79,7 @@ public class VgBottomNavPupopLayout extends LinearLayout {
         mFrgManager = ((BaseActivity) getContext()).getSupportFragmentManager();
         setOrientation(HORIZONTAL);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AppUtil.dip2px(getContext(), 48)));
-        setBackgroundColor(Color.parseColor("#88cccccc"));
+        setBackgroundColor(Color.parseColor("#ffe6e6e6"));
         drawable=new Drawable() {
             @Override
             public void draw(Canvas canvas) {
@@ -275,7 +275,6 @@ public class VgBottomNavPupopLayout extends LinearLayout {
         setItemBackgroud(itemLayout);
         textView.setText(model.getTitle());
         textView.setTextSize(AppUtil.px2sp(getContext(),42));
-//            textView.setBackgroundColor(Color.parseColor("#ffffffff"));
         textView.setTextColor(Color.parseColor("#ff000000"));
         textView.setGravity(Gravity.CENTER);
         itemLayout.addView(textView);

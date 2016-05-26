@@ -24,17 +24,21 @@ import com.viglle.carmanual.widget.VgSwitchView;
 import com.viglle.carmanual.widget.VgTextField;
 import com.viglle.carmanual.widget.VgTextView;
 import com.viglle.carmanual.widget.entity.ViewTreeBean;
+import com.viglle.carmanual.widget.layout.VgBannerLayout;
 import com.viglle.carmanual.widget.layout.VgBottomNavLayout;
 import com.viglle.carmanual.widget.layout.VgBottomNavPupopLayout;
 import com.viglle.carmanual.widget.layout.VgContentLayout;
+import com.viglle.carmanual.widget.layout.VgGalleryView;
 import com.viglle.carmanual.widget.layout.VgTopActionBar;
 import com.viglle.carmanual.widget.layout.VgViewPager;
+import com.viglle.carmanual.widget.model.BannerLayoutModel;
 import com.viglle.carmanual.widget.model.BaseViewModel;
 import com.viglle.carmanual.widget.model.VgBottomNavModel;
 import com.viglle.carmanual.widget.model.VgBottomNavPupopLayoutModel;
 import com.viglle.carmanual.widget.model.VgButtonModel;
 import com.viglle.carmanual.widget.model.VgCheckBoxModel;
 import com.viglle.carmanual.widget.model.VgContentLayoutModel;
+import com.viglle.carmanual.widget.model.VgGalleryViewModel;
 import com.viglle.carmanual.widget.model.VgImageViewModel;
 import com.viglle.carmanual.widget.model.VgRadioButtonModel;
 import com.viglle.carmanual.widget.model.VgSwitchViewModel;
@@ -43,6 +47,9 @@ import com.viglle.carmanual.widget.model.VgTextViewModel;
 import com.viglle.carmanual.widget.model.VgTopActionBarModel;
 import com.viglle.carmanual.widget.model.VgViewPagerModel;
 import com.viglle.carmanual.widget.model.VgViewType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/15.
@@ -81,11 +88,11 @@ public class ViewFactory {
             case VgViewType.VgImageView:
                 return createVgImageView(ctx, (VgImageViewModel) modelTree, viewTreeBean);
             case VgViewType.VgCheckBox:
-                return createVgCheckBox(ctx,(VgCheckBoxModel)modelTree,viewTreeBean);
+                return createVgCheckBox(ctx, (VgCheckBoxModel) modelTree, viewTreeBean);
             case VgViewType.VgSwitchView:
-                return createVgSwitchView(ctx,(VgSwitchViewModel)modelTree,viewTreeBean);
+                return createVgSwitchView(ctx, (VgSwitchViewModel) modelTree, viewTreeBean);
             case VgViewType.VgRadioButton:
-                return createVgRadioButton(ctx,(VgRadioButtonModel)modelTree,viewTreeBean);
+                return createVgRadioButton(ctx, (VgRadioButtonModel) modelTree, viewTreeBean);
             case VgViewType.VgListView:
 
                 return null;
@@ -107,19 +114,17 @@ public class ViewFactory {
             case VgViewType.VgBottomNavLayout:
                 return createBottomNavLayout(ctx,(VgBottomNavModel)modelTree,viewTreeBean);
             case VgViewType.VgBottomNavPupopLayout:
-                return createBottomNavPupLayout(ctx,(VgBottomNavPupopLayoutModel)modelTree,viewTreeBean);
+                return createBottomNavPupLayout(ctx, (VgBottomNavPupopLayoutModel) modelTree, viewTreeBean);
             case VgViewType.VgTopActionBar:
                 VgTopActionBar vgTopActionBar=createVgTopActionBar(ctx, (VgTopActionBarModel) modelTree, viewTreeBean);
-                for(int i=0;i<modelTree.getChilds().size();i++){
-                    vgTopActionBar.addView(createViewTree(ctx,modelTree.getChilds().get(i),viewTreeBean));
-                }
                 return vgTopActionBar;
             case VgViewType.VgViewPager:
                 return createVgViewPager(ctx, (VgViewPagerModel) modelTree, viewTreeBean);
+            case VgViewType.VgBannerLayout://轮播图控件
+                return createVgBannerLayout(ctx, (BannerLayoutModel) modelTree, viewTreeBean);
+            case VgViewType.VgGalleryView://轮播图控件
+                return createVgGalleryView(ctx, (VgGalleryViewModel) modelTree, viewTreeBean);
         }
-
-
-
 
         return null;
     }
@@ -131,7 +136,7 @@ public class ViewFactory {
         RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         model.setVgView(bottomNavLayout);
 
-        configCommonParams(ctx,model,bottomNavLayout,params);
+        configCommonParams(ctx, model, bottomNavLayout, params);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         bottomNavLayout.setDatas(model.getDatas());
         bottomNavLayout.setLayoutParams(params);
@@ -146,7 +151,7 @@ public class ViewFactory {
         model.setVgView(bottomNavPupLayout);
         modelMap.put(model);
         RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        configCommonParams(ctx,model,bottomNavPupLayout,params);
+        configCommonParams(ctx, model, bottomNavPupLayout, params);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         bottomNavPupLayout.setDatas(model.getDatas());
         bottomNavPupLayout.setLayoutParams(params);
@@ -167,15 +172,59 @@ public class ViewFactory {
 //        setVgViewMargins(ctx, params, model);//设置外边距
 //        setVgViewPaddings(ctx, vgViewPager, model);//设置内边距
 //        setVgViewBackground(ctx, model, vgViewPager);//设置背景样式
-        configCommonParams(ctx,model,vgViewPager,params);
+        configCommonParams(ctx, model, vgViewPager, params);
         vgViewPager.setLayoutParams(params);
 
         modelMap.put(model);
         return vgViewPager;
     }
 
+    public static VgBannerLayout createVgBannerLayout(Context ctx,BannerLayoutModel model,ViewTreeBean modelMap){
+        VgBannerLayout vgBannerLayout=new VgBannerLayout(ctx);
+        RelativeLayout.LayoutParams params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
+        configCommonParams(ctx, model, vgBannerLayout, params);
+        model.setVgView(vgBannerLayout);
+        vgBannerLayout.setId(model.getView_id());
+        vgBannerLayout.setNoScroll(model.noNoScroll());
+        List<BaseViewModel> childs=model.getChilds();
+
+        if(childs!=null&&!childs.isEmpty()){
+            List<View> views=new ArrayList<>();
+            for(int i=0;i<childs.size();i++){
+               BaseViewModel childModel= model.getChilds().get(i);
+                views.add(createViewTree(ctx,childModel,modelMap));
+            }
+            vgBannerLayout.setDatas(views);
+        }
+        vgBannerLayout.setLayoutParams(params);
+        return vgBannerLayout;
+    }
+
+
+
+    public static VgGalleryView createVgGalleryView(Context ctx,VgGalleryViewModel model,ViewTreeBean modelMap){
+        VgGalleryView vgGalleryView=new VgGalleryView(ctx);
+        RelativeLayout.LayoutParams params= setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
+        configCommonParams(ctx, model, vgGalleryView, params);
+        model.setVgView(vgGalleryView);
+        vgGalleryView.setId(model.getView_id());
+        vgGalleryView.setNoScroll(model.noNoScroll());
+        List<BaseViewModel> childs=model.getChilds();
+        vgGalleryView.setInterval(model.getInterval());
+        if(childs!=null&&!childs.isEmpty()){
+            List<View> views=new ArrayList<>();
+            for(int i=0;i<childs.size();i++){
+                BaseViewModel childModel= model.getChilds().get(i);
+                views.add(createViewTree(ctx,childModel,modelMap));
+            }
+            vgGalleryView.setDatas(views);
+        }
+        vgGalleryView.setLayoutParams(params);
+        return vgGalleryView;
+    }
+
     private static void createEvent(Context ctx,ViewTreeBean viewTreeBean,BaseEventModel model){
-        EventFactory.createEvent(ctx,viewTreeBean,model);
+        EventFactory.createEvent(ctx, viewTreeBean, model);
     }
 
     public static VgContentLayout createVgContentLayout(Context ctx,VgContentLayoutModel model,ViewTreeBean modelMap){
@@ -186,8 +235,12 @@ public class ViewFactory {
 //        setVgViewMargins(ctx, params, model);//设置外边距
 //        setVgViewPaddings(ctx, rootLayout, model);//设置内边距
 //        setVgViewBackground(ctx, model, rootLayout);//设置背景样式
-        configCommonParams(ctx,model,rootLayout,params);
+        configCommonParams(ctx, model, rootLayout, params);
         rootLayout.setLayoutParams(params);
+        if(model.getClickable()){
+            rootLayout.setClickable(true);
+            rootLayout.setFocusable(true);
+        }
         rootLayout.setId(model.getView_id());
         model.setVgView(rootLayout);
         modelMap.put(model);
@@ -221,6 +274,12 @@ public class ViewFactory {
         topActionBar.setId(model.getView_id());
         model.setVgView(topActionBar);
         modelMap.put(model);
+        if(model.getChilds()!=null&&!model.getChilds().isEmpty()){
+            for(int i=0;i<model.getChilds().size();i++){
+                topActionBar.addView(createViewTree(ctx,model.getChilds().get(i),modelMap));
+            }
+        }
+
         return topActionBar;
     }
 
@@ -395,6 +454,7 @@ public class ViewFactory {
     public static VgImageView createVgImageView(Context ctx,VgImageViewModel model,ViewTreeBean modelMap){
         VgImageView imageView = new VgImageView(ctx);
         model.setVgView(imageView);
+        imageView.setId(model.getView_id());
         RelativeLayout.LayoutParams params = setWidthAndHeight(ctx,model.getView_width(), model.getView_height());
         //setVgViewOf(model, params);
         //setVgViewMargins(ctx, params, model);

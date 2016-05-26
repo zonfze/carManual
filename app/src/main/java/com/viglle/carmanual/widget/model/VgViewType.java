@@ -17,6 +17,7 @@ public final class VgViewType {
     public static final int VgListView = 10009;
     public static final int VgScrollView = 10010;
     public static final int VgHorizentalScrollView = 10011;
+    public static final int VgWebView = 10012;
 
     public static final int VgLeftNavLayout = 20001;
     public static final int VgTopNavLayout = 20002;
@@ -25,7 +26,9 @@ public final class VgViewType {
     public static final int VgBottomNavPupopLayout = 20005;
     public static final int VgTopActionBar = 20006;
     public static final int VgViewPager = 20008;
-    public static final int VgWebView = 20009;
+
+    public static final int VgBannerLayout = 20009;
+    public static final int VgGalleryView = 20010;//轮播图(画廊)
 
 
 }
