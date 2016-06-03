@@ -35,10 +35,7 @@ public class WebCustomActivity extends BaseActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
        Intent intent= getIntent();
-
         if(intent!=null){
             url=intent.getStringExtra("url");
         }

@@ -59,6 +59,9 @@ public class ValidFactory {
     private static boolean checkTextParam(Context ctx,BaseViewModel baseViewModel,String valueStr){
 
         List<BaseValidModel> validLink=baseViewModel.getValidLink();
+        if(validLink==null||validLink.isEmpty()){
+            return true;
+        }
 //        boolean isOk=false;
         for(BaseValidModel model:validLink){
             int validId= model.getValid_id();

@@ -142,8 +142,10 @@ var json_register_ui={
 							view_paddings:['30','30','30','30'],
 							view_margins:['20','20','20','20'],
 							refs:[],
-							validation:[],
-							res_key:'username',
+							validation:[
+								{valid_id:'1001',msg:'不能为空'}
+							],
+							res_key:'phone',
 							text:'18319388532',
 							password:'0',
 							text_align:"1",
@@ -185,7 +187,7 @@ var json_register_ui={
 								view_paddings:['10','10','10','10'],
 								view_margins:['10','10','10','10'],
 								refs:[],
-								validation:[],
+								validation:[{valid_id:'1001',msg:'不能为空'}],
 								res_key:'null',
 								text:'验证码:',
 								input_type:'1',
@@ -208,7 +210,7 @@ var json_register_ui={
 								view_paddings:['30','30','30','30'],
 								view_margins:['20','20','20','20'],
 								refs:[],
-								validation:[],
+								validation:[{valid_id:'1001',msg:'不能为空'}],
 								res_key:'qcode',
 								text:'123456',
 								input_type:'2',
@@ -231,9 +233,9 @@ var json_register_ui={
 								view_of:['6','-1','-1','-1'],
 								view_paddings:['10','10','10','10'],
 								view_margins:['20','20','20','20'],
-								refs:['3_username'],
+								refs:['3_phone'],
 								validation:[],
-								res_key:'',
+								res_key:'phone',
 								text:'获取验证码',
 								text_size:'48',
 								text_align:'0',
@@ -323,7 +325,7 @@ var json_register_ui={
 						refs:['3_username','6_userpass','-1_deviceId'],
 						validation:[],
 						res_key:'',
-						text:'注册',
+						text:'注   册',
 						text_size:'48',
 						text_align:'0',
 						text_color:'#ff000000',
@@ -338,19 +340,7 @@ var json_register_ui={
 				actionLink:[{
 					actionType:'10001',
 					text:'点击了注册按钮',
-					params:[
-						'device_id=12345678',
-						'code=panelUI'
-					],
-					modify:[]
-				},{
-					actionType:'10008',
-					url:'http://192.168.16.198:8083/',
-					ref_ui:[],
-					params:[
-						'device_id=12345678',
-						'code=panelUI'
-					],
+					params:[],
 					modify:[]
 				}]
 			},
@@ -358,13 +348,66 @@ var json_register_ui={
 				event_type:'1002',
 				view_id:'7',
 				actionLink:[{
-					actionType:'10001',
-					text:'点击了获取验证码按钮',
+					actionType:'10014',
+					show_type:'0',
+					url:'http://192.168.16.198:8083/',
+					ref_ui:['3'],
 					params:[
 						'device_id=12345678',
-						'code=panelUI'
+						'code=codeAction'
 					],
-					modify:[]
+					modify:[],
+					result:{
+						onOk:[{
+							event_type:'1000',
+							actionLink:[{
+								actionType:'10011',
+								time:'10000',
+								change_id:'7',
+								params:[],
+								modify:[{
+									ref_id:'7',
+									f_type:'10001',
+									f_value:'重新获取'
+								}]
+							}]
+						}],
+						onFail:[{
+							event_type:'1000',
+							actionLink:[{
+								actionType:'10001',
+								text:'',
+								params:[],
+								modify:[{
+									ref_id:'7',
+									f_type:'1005',
+									f_value:'1'
+								},{
+									ref_id:'7',
+									f_type:'10001',
+									f_value:'重新获取'
+								}]
+							}]
+						}],
+						onErr:[{
+							event_type:'1000',
+							actionLink:[{
+								actionType:'10001',
+								text:'',
+								params:[],
+								modify:[{
+									ref_id:'7',
+									f_type:'1006',
+									f_value:'1'
+								},{
+									ref_id:'7',
+									f_type:'10001',
+									f_value:'重新获取'
+								}]
+							}]
+						}]
+					}
+
 				}]
 			},
 			{
@@ -372,6 +415,7 @@ var json_register_ui={
 				view_id:'13',
 				actionLink:[{
 					actionType:'10008',
+					show_type:'0',
 					url:'http://192.168.16.198:8083/',
 					ref_ui:[],
 					params:[

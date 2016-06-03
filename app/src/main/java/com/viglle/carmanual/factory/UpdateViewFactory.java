@@ -56,11 +56,17 @@ public class UpdateViewFactory {
             case FType.LAYOUT_HEIGHT:
 
                 break;
-            case FType.BG_COLOR:
+            case FType.BG_COLOR://背景
                 modifyBg(ctx, model, viewTreeBean, ref_id);
                 break;
-            case FType.VISIBLE:
+            case FType.VISIBLE://可见性
                 modifyVisible(ctx, model, viewTreeBean, ref_id);
+                break;
+            case FType.CLICKABLE://可点击
+                modifyClickable(ctx, model, viewTreeBean, ref_id);
+                break;
+            case FType.ENABLE://是否可以被使用
+                modifyEnable(ctx, model, viewTreeBean, ref_id);
                 break;
             case FType.TEXT:
                 modifyText(ctx,model,viewTreeBean,ref_id);
@@ -111,6 +117,47 @@ public class UpdateViewFactory {
                 break;
         }
     }
+
+    private static void modifyClickable(Context ctx, BaseFModel model, ViewTreeBean viewTreeBean, int ref_id){
+        String clickableStr=model.getF_value();
+        if(clickableStr==null||clickableStr.equals("")||clickableStr.equalsIgnoreCase("null")){
+            return;
+        }
+        if(!AppUtil.isNumeric(clickableStr)){
+            return;
+        }
+        int clickable=Integer.parseInt(clickableStr);
+        View view=viewTreeBean.getViewById(ref_id);
+        if(view==null){
+            return;
+        }
+        if(clickable==0){
+            view.setClickable(false);
+        }else{
+            view.setClickable(true);
+        }
+    }
+
+    private static void modifyEnable(Context ctx, BaseFModel model, ViewTreeBean viewTreeBean, int ref_id){
+        String enableStr=model.getF_value();
+        if(enableStr==null||enableStr.equals("")||enableStr.equalsIgnoreCase("null")){
+            return;
+        }
+        if(!AppUtil.isNumeric(enableStr)){
+            return;
+        }
+        int enable=Integer.parseInt(enableStr);
+        View view=viewTreeBean.getViewById(ref_id);
+        if(view==null){
+            return;
+        }
+        if(enable==0){
+            view.setEnabled(false);
+        }else{
+            view.setEnabled(true);
+        }
+    }
+
     private static void modifyText(Context ctx ,BaseFModel model, ViewTreeBean viewTreeBean, int ref_id) {
 
         TextView view = (TextView)viewTreeBean.getViewById(ref_id);

@@ -1,0 +1,13 @@
+var jsonC={
+    code:'101',
+    msg:'底部导航菜单',
+    data:[
+        {labelid:'1',title:'汽修宝典',url:'http://192.168.16.198:8083/?code=home',showType:'0',sub_menu:[]},
+        {labelid:'2',title:'个人中心',url:'http://www.baidu.com',showType:'1',sub_menu:[]}
+    ]
+}
+function test1(req,res,DATA){
+	var string =JSON.stringify(jsonC);
+	res.end(string);
+}
+exports.test1=test1;

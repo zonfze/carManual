@@ -12,12 +12,15 @@ import java.util.List;
  * Created by Administrator on 2016/5/3.
  */
 public abstract class BaseActionModel {
-    private String actionType;//action的类型
+    private int actionType;//action的类型
     public static final String ACTION_TYPE="actionType";
 
     private List<TwoValues<String,String>> params=new ArrayList<>();
     public static final String PARAMS="params";
 
+    /**
+     * ref_ui 主要是说明该动作需要获取哪些控件上的值
+     */
     private List<Integer>ref_ui=new ArrayList<>();
     public static final String REF_UI="ref_ui";
 
@@ -30,17 +33,18 @@ public abstract class BaseActionModel {
 
 
     public int getActionType() {
-        if(actionType==null||actionType.equals("")||actionType.equals("null")){
-            return 0;
-        }
-        if(!AppUtil.isNumeric(actionType)){
-            return 0;
-        }
-        return Integer.parseInt(actionType);
+
+        return actionType;
     }
 
     public void setActionType(String actionType) {
-        this.actionType = actionType;
+        if(actionType==null||actionType.equals("")||actionType.equals("null")){
+            this.actionType = 0;
+        }
+        if(!AppUtil.isNumeric(actionType)){
+            this.actionType = 0;
+        }
+        this.actionType = Integer.parseInt(actionType);
     }
 
     public List<TwoValues<String,String>> getParams() {

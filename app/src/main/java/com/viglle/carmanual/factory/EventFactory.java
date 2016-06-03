@@ -38,11 +38,11 @@ public class EventFactory {
         switch (event_type){
             case EventType.AUTO_DRIVE://自动触发
                 EventAutoModel autoModel= (EventAutoModel) eventModel;
-                createAutoStart(ctx,null,autoModel);
+                createAutoStart(ctx,viewTreeBean,autoModel);
                 break;
             case EventType.TIME_DRIVE://倒计时触发
                 EventTimerModel eventTimerModel= (EventTimerModel) eventModel;
-                createEventTimer(ctx,null,eventTimerModel);
+                createEventTimer(ctx,viewTreeBean,eventTimerModel);
                 break;
             case EventType.TOUCH_CLICK_DRIVE://点击触发
                 EventClickModel eventClickModel= (EventClickModel) eventModel;
@@ -82,6 +82,7 @@ public class EventFactory {
         }
         final View view=viewTreeBean.getViewById(model.getView_id());
         if(view==null){//避免空指针异常
+            LogUtil.log_e("click view is NULL");
             return;
         }
 

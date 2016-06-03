@@ -15,7 +15,8 @@ function httpGet(){
 	var user_regist_ui=require('./blocks/user/user_register_ui');
 	var user_find_pass_ui=require('./blocks/user/user_find_password_ui');
 	var user_center_ui=require('./blocks/user/user_center_ui');
-
+	var user_code_action=require('./blocks/user/user_code_action');
+	var bottomnv=require('./blocks/test/bottomnv');
 	var home_block=require('./blocks/home_1');
 	var welcome_1=require('./blocks/welcome_1');
 	var main_ui=require('./blocks/main_1');
@@ -61,6 +62,10 @@ function httpGet(){
 					user_center_ui.loadUserCenter(request,response,objectPostData);
 				}else if(code=='findPass'){
                  	user_find_pass_ui.loadFindPassword(request,response,objectPostData);
+                }else if(code=='codeAction'){
+                	user_code_action.codeAction(request,response,objectPostData);
+                }else if(code=='test'){
+                	bottomnv.test1(request,response,objectPostData);
                 }else{
 					response.end('Permission is denied');
 				}
@@ -87,12 +92,16 @@ function httpGet(){
 				user_login_ui.loginUI(request,response,params);
 			}else if(code=='registerUI'){
 				user_regist_ui.register(request,response,params);
-			}else if(code='main'){
+			}else if(code=='main'){
 				main_ui.loadMain1(request,response,params);
 			}else if(code=='findPass'){
                 user_find_pass_ui.loadFindPassword(request,response,params);
             }else if(code=='userCenter'){
              	user_center_ui.loadUserCenter(request,response,params);
+            }else if(code=='test'){
+                bottomnv.test1(request,response,params);
+            }else if(code=='codeAction'){
+                user_code_action.codeAction(request,response,params);
             }
 		}
 		

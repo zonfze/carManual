@@ -13,7 +13,9 @@ import com.viglle.carmanual.widget.model.VgCheckBoxModel;
 import com.viglle.carmanual.widget.model.VgContentLayoutModel;
 import com.viglle.carmanual.widget.model.VgGalleryViewModel;
 import com.viglle.carmanual.widget.model.VgImageViewModel;
+import com.viglle.carmanual.widget.model.VgListViewModel;
 import com.viglle.carmanual.widget.model.VgRadioButtonModel;
+import com.viglle.carmanual.widget.model.VgScrollViewModel;
 import com.viglle.carmanual.widget.model.VgSwitchViewModel;
 import com.viglle.carmanual.widget.model.VgTextFieldModel;
 import com.viglle.carmanual.widget.model.VgTextViewModel;
@@ -32,38 +34,39 @@ import java.util.List;
  * Created by Administrator on 2016/4/15.
  */
 public class VgUIParsor {
-    public static final String UI="ui";
+    public static final String UI = "ui";
+
     public static BaseViewModel parserUIModelTree(Context context, JSONObject obj) throws JSONException {
-        if(obj==null){
+        if (obj == null) {
             return null;
         }
-        LogUtil.log_w(">>>>"+obj.toString());
+        LogUtil.log_w(">>>>" + obj.toString());
         JSONObject rootObj = obj.getJSONObject(UI);
-        return parserModel(context,rootObj);
+        return parserModel(context, rootObj);
     }
 
     public static BaseViewModel parserModel(Context context, JSONObject rootObj) throws JSONException {
 
-        if(!checkObj(rootObj)) {
+        if (!checkObj(rootObj)) {
             return null;
         }
 
-        int view_type=0;
+        int view_type = 0;
         try {
-            view_type =Integer.parseInt(rootObj.getString(BaseViewModel.VIEW_TYPE));
-        }catch (Exception  e){
+            view_type = Integer.parseInt(rootObj.getString(BaseViewModel.VIEW_TYPE));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        switch (view_type){
+        switch (view_type) {
             case VgViewType.VgContentLayout:
-                VgContentLayoutModel contentModel=new VgContentLayoutModel();
+                VgContentLayoutModel contentModel = new VgContentLayoutModel();
                 parsorCommonParams(rootObj, view_type, contentModel);
                 List<BaseViewModel> list = parsorChilds(context, rootObj);
                 contentModel.setClickable(rootObj.getString(VgContentLayoutModel.CLICKABLE));
                 contentModel.setChilds(list);
                 return contentModel;
             case VgViewType.VgTextView:
-                VgTextViewModel textViewModel=new VgTextViewModel();
+                VgTextViewModel textViewModel = new VgTextViewModel();
                 parsorCommonParams(rootObj, view_type, textViewModel);
                 textViewModel.setText(rootObj.getString(VgTextViewModel.TEXT));
                 textViewModel.setHint(rootObj.getString(VgTextViewModel.HINT));
@@ -74,7 +77,7 @@ public class VgUIParsor {
                 textViewModel.setText_size(rootObj.getString(VgTextViewModel.TEXT_SIZE));
                 return textViewModel;
             case VgViewType.VgTextField:
-                VgTextFieldModel textFieldModel=new VgTextFieldModel();
+                VgTextFieldModel textFieldModel = new VgTextFieldModel();
                 parsorCommonParams(rootObj, view_type, textFieldModel);
                 textFieldModel.setText(rootObj.getString(VgTextViewModel.TEXT));
                 textFieldModel.setHint(rootObj.getString(VgTextViewModel.HINT));
@@ -85,7 +88,7 @@ public class VgUIParsor {
                 textFieldModel.setText_size(rootObj.getString(VgTextFieldModel.TEXT_SIZE));
                 return textFieldModel;
             case VgViewType.VgButton:
-                VgButtonModel buttonModel=new VgButtonModel();
+                VgButtonModel buttonModel = new VgButtonModel();
                 parsorCommonParams(rootObj, view_type, buttonModel);
                 buttonModel.setText(rootObj.getString(VgButtonModel.TEXT));
                 buttonModel.setText_align(rootObj.getString(VgButtonModel.TEXT_ALIGN));
@@ -93,13 +96,13 @@ public class VgUIParsor {
                 buttonModel.setText_size(rootObj.getString(VgButtonModel.TEXT_SIZE));
                 return buttonModel;
             case VgViewType.VgImageView:
-                VgImageViewModel imageViewModel=new VgImageViewModel();
+                VgImageViewModel imageViewModel = new VgImageViewModel();
                 parsorCommonParams(rootObj, view_type, imageViewModel);
                 imageViewModel.setSrc(rootObj.getString(VgImageViewModel.SRC));
                 imageViewModel.setScaleType(rootObj.getString(VgImageViewModel.SCALE_TYPE));
                 return imageViewModel;
             case VgViewType.VgCheckBox:
-                VgCheckBoxModel checkBoxModel=new VgCheckBoxModel();
+                VgCheckBoxModel checkBoxModel = new VgCheckBoxModel();
                 parsorCommonParams(rootObj, view_type, checkBoxModel);
                 checkBoxModel.setText(rootObj.getString(VgCheckBoxModel.TEXT));
                 checkBoxModel.setIsChecked(rootObj.getString(VgCheckBoxModel.ISCHECKED));
@@ -108,7 +111,7 @@ public class VgUIParsor {
                 checkBoxModel.setText_size(rootObj.getString(VgCheckBoxModel.TEXT_SIZE));
                 return checkBoxModel;
             case VgViewType.VgRadioButton:
-                VgRadioButtonModel radioButtonModel=new VgRadioButtonModel();
+                VgRadioButtonModel radioButtonModel = new VgRadioButtonModel();
                 parsorCommonParams(rootObj, view_type, radioButtonModel);
                 radioButtonModel.setText(rootObj.getString(VgRadioButtonModel.TEXT));
                 radioButtonModel.setIsChecked(rootObj.getString(VgCheckBoxModel.ISCHECKED));
@@ -117,16 +120,20 @@ public class VgUIParsor {
                 radioButtonModel.setText_size(rootObj.getString(VgRadioButtonModel.TEXT_SIZE));
                 return radioButtonModel;
             case VgViewType.VgSwitchView:
-                VgSwitchViewModel switchViewModel=new VgSwitchViewModel();
+                VgSwitchViewModel switchViewModel = new VgSwitchViewModel();
                 parsorCommonParams(rootObj, view_type, switchViewModel);
                 switchViewModel.setIsChecked(rootObj.getString(VgSwitchViewModel.ISCHECKED));
                 return switchViewModel;
             case VgViewType.VgListView:
-
-                return null;
+                VgListViewModel listViewModel = new VgListViewModel();
+                parsorCommonParams(rootObj, view_type, listViewModel);
+                listViewModel.setChilds(parsorChilds(context, rootObj));
+                return listViewModel;
             case VgViewType.VgScrollView:
-
-                return null;
+                VgScrollViewModel scrollViewModel = new VgScrollViewModel();
+                parsorCommonParams(rootObj, view_type, scrollViewModel);
+                scrollViewModel.setChilds(parsorChilds(context, rootObj));
+                return scrollViewModel;
             case VgViewType.VgHorizentalScrollView:
 
                 return null;
@@ -140,22 +147,22 @@ public class VgUIParsor {
 
                 return null;
             case VgViewType.VgBottomNavLayout:
-                VgBottomNavModel bottomNavModel=new VgBottomNavModel();
+                VgBottomNavModel bottomNavModel = new VgBottomNavModel();
                 parsorCommonParams(rootObj, view_type, bottomNavModel);
                 bottomNavModel.setDatas(VgBottomNavModel.parseDatas(rootObj));
                 return bottomNavModel;
             case VgViewType.VgBottomNavPupopLayout:
-                VgBottomNavPupopLayoutModel navPupopLayoutModel=new VgBottomNavPupopLayoutModel();
+                VgBottomNavPupopLayoutModel navPupopLayoutModel = new VgBottomNavPupopLayoutModel();
                 parsorCommonParams(rootObj, view_type, navPupopLayoutModel);
                 navPupopLayoutModel.setDatas(VgBottomNavPupopLayoutModel.parseDatas(rootObj));
                 return navPupopLayoutModel;
             case VgViewType.VgViewPager:
-                VgViewPagerModel viewPagerModel=new VgViewPagerModel();
+                VgViewPagerModel viewPagerModel = new VgViewPagerModel();
                 viewPagerModel.setNoScroll(rootObj.getString(VgViewPagerModel.NOSCROLL));
                 parsorCommonParams(rootObj, view_type, viewPagerModel);
                 return viewPagerModel;
             case VgViewType.VgTopActionBar:
-                VgTopActionBarModel topActionBar=new VgTopActionBarModel();
+                VgTopActionBarModel topActionBar = new VgTopActionBarModel();
                 parsorCommonParams(rootObj, view_type, topActionBar);
                 List<BaseViewModel> barList = parsorChilds(context, rootObj);
                 topActionBar.setChilds(barList);
@@ -167,14 +174,14 @@ public class VgUIParsor {
 
                 return null;
             case VgViewType.VgBannerLayout://轮播图控件
-                BannerLayoutModel vgBannerLayout=new BannerLayoutModel();
+                BannerLayoutModel vgBannerLayout = new BannerLayoutModel();
                 vgBannerLayout.setNoScroll(rootObj.getString(BannerLayoutModel.NOSCROLL));
                 vgBannerLayout.setInterval(rootObj.getString(BannerLayoutModel.INTERVAL));
                 parsorCommonParams(rootObj, view_type, vgBannerLayout);
                 vgBannerLayout.setChilds(parsorChilds(context, rootObj));
                 return vgBannerLayout;
             case VgViewType.VgGalleryView://轮播图控件
-                VgGalleryViewModel vgGalleryViewModel=new VgGalleryViewModel();
+                VgGalleryViewModel vgGalleryViewModel = new VgGalleryViewModel();
                 vgGalleryViewModel.setNoScroll(rootObj.getString(BannerLayoutModel.NOSCROLL));
                 vgGalleryViewModel.setInterval(rootObj.getString(BannerLayoutModel.INTERVAL));
                 parsorCommonParams(rootObj, view_type, vgGalleryViewModel);
@@ -186,24 +193,24 @@ public class VgUIParsor {
 
     @NonNull
     private static List<BaseViewModel> parsorChilds(Context context, JSONObject rootObj) {
-        List<BaseViewModel> list=new ArrayList<>();
-        try{
-            JSONArray arr=rootObj.getJSONArray(BaseViewModel.CHILDS);
-            for(int i=0;i<arr.length();i++){
-                JSONObject obj=arr.getJSONObject(i);
-                BaseViewModel mmm=parserModel(context,obj);
+        List<BaseViewModel> list = new ArrayList<>();
+        try {
+            JSONArray arr = rootObj.getJSONArray(BaseViewModel.CHILDS);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject obj = arr.getJSONObject(i);
+                BaseViewModel mmm = parserModel(context, obj);
                 list.add(mmm);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
 
 
-
     /**
      * 解析公共属性函数
+     *
      * @param rootObj
      * @param view_type
      * @param contentModel
@@ -228,9 +235,6 @@ public class VgUIParsor {
         contentModel.setValidLink(VgValidParsor.parsorValidLink(rootObj));
 
 
-
-
-
         String[] view_of = parsorViewOf(rootObj);
         contentModel.setView_of(view_of);//相对方位
 
@@ -243,41 +247,43 @@ public class VgUIParsor {
         List<String> refList = parsorRes(rootObj);
         contentModel.setRefs(refList);//依赖
 /**        JSONObject actionLink=rootObj.getJSONObject(BaseViewModel.ACTION_LINK);
-        LogUtil.log_e("obj",actionLink.toString());
-        if(actionLink!=null){
-            contentModel.setActionLink(VgEventParsor.parsorActionLink(actionLink));
-        }
+ LogUtil.log_e("obj",actionLink.toString());
+ if(actionLink!=null){
+ contentModel.setActionLink(VgEventParsor.parsorActionLink(actionLink));
+ }
 
-        contentModel.setGravity(rootObj.getString(BaseViewModel.GRAVITY));
-        contentModel.setOrientation(rootObj.getString(BaseViewModel.ORIENTATION));
+ contentModel.setGravity(rootObj.getString(BaseViewModel.GRAVITY));
+ contentModel.setOrientation(rootObj.getString(BaseViewModel.ORIENTATION));
 
-        List<String> centersList=parsorCenters(rootObj);
-        contentModel.setCenters(centersList);//居中参数*/
+ List<String> centersList=parsorCenters(rootObj);
+ contentModel.setCenters(centersList);//居中参数*/
     }
 
-/**    private static List<String> parsorCenters(JSONObject rootObj){
-        List<String> list = new ArrayList<>();
-        try {
-            JSONArray jsonArray=rootObj.getJSONArray(BaseViewModel.CENTERS);
-            for(int i=0;i<jsonArray.length();i++){
-                list.add(jsonArray.getString(i));
-            }
-            return list;
-        }catch (Exception  e) {
-            e.printStackTrace();
-        }
-        return list;
-    };*/
+    /**
+     * private static List<String> parsorCenters(JSONObject rootObj){
+     * List<String> list = new ArrayList<>();
+     * try {
+     * JSONArray jsonArray=rootObj.getJSONArray(BaseViewModel.CENTERS);
+     * for(int i=0;i<jsonArray.length();i++){
+     * list.add(jsonArray.getString(i));
+     * }
+     * return list;
+     * }catch (Exception  e) {
+     * e.printStackTrace();
+     * }
+     * return list;
+     * };
+     */
 
-    private static String[] parsorViewOf(JSONObject rootObj){
-        String[] view_of=new String[]{"-1","-1","-1","-1"};
+    private static String[] parsorViewOf(JSONObject rootObj) {
+        String[] view_of = new String[]{"-1", "-1", "-1", "-1"};
         try {
-            JSONArray view_of_array=rootObj.getJSONArray(BaseViewModel.VIEW_OF);
-            for(int i=0;i<view_of_array.length();i++){
-                view_of[i]=view_of_array.getString(i);
+            JSONArray view_of_array = rootObj.getJSONArray(BaseViewModel.VIEW_OF);
+            for (int i = 0; i < view_of_array.length(); i++) {
+                view_of[i] = view_of_array.getString(i);
             }
             return view_of;
-        }catch (Exception  e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return view_of;
@@ -285,44 +291,44 @@ public class VgUIParsor {
 
     @NonNull
     private static List<String> parsorRes(JSONObject rootObj) {
-        final List<String> refList=new ArrayList<>();
+        final List<String> refList = new ArrayList<>();
         try {
-            JSONArray array=rootObj.getJSONArray(VgButtonModel.REFS);
-            for(int i=0;i<array.length();i++){
-                String view_id=array.getString(i);
+            JSONArray array = rootObj.getJSONArray(VgButtonModel.REFS);
+            for (int i = 0; i < array.length(); i++) {
+                String view_id = array.getString(i);
                 refList.add(view_id);
             }
             return refList;
-        }catch (Exception  e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-       return refList;
+        return refList;
     }
 
-    private static String[] parsorMargins(JSONObject rootObj){
-        String margins[]=new String[]{"0","0","0","0"};
-        try{
-            JSONArray view_margins=rootObj.getJSONArray(VgButtonModel.VIEW_MARGINS);
-            for(int i=0;i<view_margins.length();i++){
-                margins[i]=view_margins.getString(i);
+    private static String[] parsorMargins(JSONObject rootObj) {
+        String margins[] = new String[]{"0", "0", "0", "0"};
+        try {
+            JSONArray view_margins = rootObj.getJSONArray(VgButtonModel.VIEW_MARGINS);
+            for (int i = 0; i < view_margins.length(); i++) {
+                margins[i] = view_margins.getString(i);
             }
             return margins;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return margins;
     }
 
-    private static String[] parsorPaddings(JSONObject rootObj){
-        String paddings[]=new String[]{"0","0","0","0"};
-        try{
-            JSONArray view_paddings=rootObj.getJSONArray(VgButtonModel.VIEW_PADDINGS);
-            for(int i=0;i<view_paddings.length();i++){
-                paddings[i]=view_paddings.getString(i);
+    private static String[] parsorPaddings(JSONObject rootObj) {
+        String paddings[] = new String[]{"0", "0", "0", "0"};
+        try {
+            JSONArray view_paddings = rootObj.getJSONArray(VgButtonModel.VIEW_PADDINGS);
+            for (int i = 0; i < view_paddings.length(); i++) {
+                paddings[i] = view_paddings.getString(i);
             }
             return paddings;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -330,11 +336,11 @@ public class VgUIParsor {
     }
 
     private static boolean checkObj(JSONObject obj) {
-        if(obj==null){//参数合法校验
+        if (obj == null) {//参数合法校验
             return false;
         }
-        String objStr=obj.toString();
-        if(objStr.equals("{}")||objStr.equals("")||objStr.equals("null")){//参数合法校验
+        String objStr = obj.toString();
+        if (objStr.equals("{}") || objStr.equals("") || objStr.equals("null")) {//参数合法校验
             return false;
         }
         return true;

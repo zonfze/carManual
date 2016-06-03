@@ -269,7 +269,7 @@ var json_user_center_ui={
 						bg_focus_color:'#ff666ccc',
 						view_of:['-1','10','-1','-1'],
 						view_paddings:['0','0','0','0'],
-						view_margins:['0','3','0','0'],
+						view_margins:['0','1','0','0'],
 						refs:[],
 						validation:[],
 						res_key:'null',
@@ -333,7 +333,7 @@ var json_user_center_ui={
 						bg_focus_color:'#ff666ccc',
 						view_of:['-1','13','-1','-1'],
 						view_paddings:['0','0','0','0'],
-						view_margins:['0','3','0','0'],
+						view_margins:['0','1','0','0'],
 						refs:[],
 						validation:[],
 						res_key:'null',
@@ -461,7 +461,7 @@ var json_user_center_ui={
 						bg_focus_color:'#ff666ccc',
 						view_of:['-1','19','-1','-1'],
 						view_paddings:['0','0','0','0'],
-						view_margins:['0','3','0','0'],
+						view_margins:['0','1','0','0'],
 						refs:[],
 						validation:[],
 						res_key:'null',
@@ -583,6 +583,7 @@ var json_user_center_ui={
 			view_id:'2',
 			actionLink:[{
 				actionType:'10008',
+				show_type:'0',
 				url:'http://192.168.16.198:8083/',
 				ref_ui:[],
 				params:[
@@ -591,7 +592,92 @@ var json_user_center_ui={
 				],
 				modify:[]
 			}]
-		}]
+		},{
+			event_type:'1002',
+			view_id:'10',
+			actionLink:[{
+				actionType:'10007',
+				show_type:'0',
+				url:'http://192.168.16.198:8083/',
+				ref_ui:[],
+				params:[
+					'device_id=12345678',
+					'code=panelUI'
+				],
+				modify:[]
+			}]
+		},{
+			event_type:'1002',
+			view_id:'13',
+			actionLink:[{
+				actionType:'10007',
+				show_type:'0',
+				url:'http://192.168.16.198:8083/',
+				ref_ui:[],
+				params:[
+					'device_id=12345678',
+					'code=panelUI'
+				],
+				modify:[]
+			}]
+		},{
+			event_type:'1002',
+			view_id:'16',
+			actionLink:[{
+				actionType:'10007',
+				show_type:'0',
+				url:'http://192.168.16.198:8083/',
+				ref_ui:[],
+				params:[
+					'device_id=12345678',
+					'code=panelUI'
+				],
+				modify:[]
+			}]
+		},{
+			event_type:'1002',
+			view_id:'19',
+			actionLink:[{
+				actionType:'10007',
+				show_type:'1',
+				url:'http://www.jianshu.com/',
+				ref_ui:[],
+				params:[
+					'device_id=12345678',
+					'code=panelUI'
+				],
+				modify:[]
+			}]
+		},{
+			event_type:'1002',
+			view_id:'22',
+			actionLink:[{
+				actionType:'10007',
+				url:'http://sina.com',
+				show_type:'1',
+				ref_ui:[],
+				params:[
+					'device_id=12345678',
+					'code=panelUI'
+				],
+				modify:[]
+			}]
+		},{
+			event_type:'1002',
+			view_id:'25',
+			actionLink:[{
+				actionType:'10007',
+				url:'http://baidu.com/',
+				show_type:'1',
+				ref_ui:[],
+				params:[
+					'device_id=12345678',
+					'code=panelUI'
+				],
+				modify:[]
+			}]
+		}
+		]
 	}
 };
 

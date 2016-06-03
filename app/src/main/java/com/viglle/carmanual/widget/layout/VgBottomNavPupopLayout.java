@@ -249,9 +249,9 @@ public class VgBottomNavPupopLayout extends LinearLayout {
         LayoutParams itemLayoutParams=new LayoutParams(0, AppUtil.dip2px(getContext(),48));
         itemLayoutParams.weight=1;
         if(p==mDatas.size()-1){
-            itemLayoutParams.setMargins(0, 1, 0, 0);
+            itemLayoutParams.setMargins(0, 2, 0, 0);
         }else{
-            itemLayoutParams.setMargins(0, 1, 1, 0);
+            itemLayoutParams.setMargins(0, 2, 1, 0);
         }
 
         itemLayout.setLayoutParams(itemLayoutParams);

@@ -28,8 +28,8 @@ var json_panel_ui={
 					view_name:'VgTopActionBar',
 					view_width:'1080',
 					view_height:'156',
-					bg_normal_color:'#cc0000cc',
-					bg_focus_color:'#cc0000cc',
+					bg_normal_color:'#ffD01109',
+					bg_focus_color:'#ffD01109',
 					view_of:['-1','-1','-1','-1'],
 					view_paddings:['0','0','0','0'],
 					view_margins:['0','0','0','0'],
@@ -90,6 +90,7 @@ var json_panel_ui={
 			view_id:'2',
 			actionLink:[{
 				actionType:'10008',
+				show_type:'0',
 				url:'http://192.168.16.198:8083/',
 				ref_ui:[],
 				params:[

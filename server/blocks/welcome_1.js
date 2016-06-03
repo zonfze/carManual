@@ -46,6 +46,7 @@ var json_ui_1={
 			time:'5000',
 			actionLink:[{
 				actionType:'10009',
+				show_type:'0',
 				url:'http://192.168.16.198:8083/',
 				params:[
 					'deviceid=12345678',

@@ -13,7 +13,8 @@ public class FType{
     public static final int LAYOUT_HEIGHT=1002;//控件高度
     public static final int BG_COLOR=1003;//背景颜色
     public static final int VISIBLE=1004;//可见性(1,可见;2,不可见但是占据屏幕空间;0不可见,不暂居空间)
-
+    public static final int ENABLE=1005;//是否可用;
+    public static final int CLICKABLE=1006;//是否可以被点击
 
 
     public static final int TEXT=10001;//文字

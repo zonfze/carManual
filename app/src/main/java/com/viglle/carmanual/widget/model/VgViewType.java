@@ -14,10 +14,11 @@ public final class VgViewType {
     public static final int VgCheckBox = 10006;
     public static final int VgSwitchView = 10007;
     public static final int VgGridView = 10008;
-    public static final int VgListView = 10009;
+    public static final int VgListView = 10009;//列表控件
     public static final int VgScrollView = 10010;
     public static final int VgHorizentalScrollView = 10011;
     public static final int VgWebView = 10012;
+    public static final int VgRecyclerView = 10013;//列表控件
 
     public static final int VgLeftNavLayout = 20001;
     public static final int VgTopNavLayout = 20002;

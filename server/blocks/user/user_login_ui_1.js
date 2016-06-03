@@ -324,6 +324,7 @@ var json_login_ui_1={
 					actionLink:[{
 						actionType:'10014',
 						url:'http://192.168.16.198:8083/',
+						show_type:'0',
 						ref_ui:['3','6'],
 						result:{
 							onOk:[{
@@ -332,10 +333,15 @@ var json_login_ui_1={
 									actionType:'10001',
 									text:'登陆成功',
 									params:[],
-									modify:[]
+									modify:[{
+										ref_id:'10',
+										f_type:'10001',
+										f_value:'修改成功'
+									}]
 								},{
 									actionType:'10009',
 									url:'http://192.168.16.198:8083/',
+									show_type:'0',
 									params:[
 										'device_id=12345678',
 										'code=main'
@@ -353,10 +359,6 @@ var json_login_ui_1={
 							ref_id:'10',
 							f_type:'10002',
 							f_value:'#ff00f0f0'
-						},{
-							ref_id:'10',
-							f_type:'10001',
-							f_value:'修改成功'
 						}]
 					}]
 				},
@@ -366,6 +368,7 @@ var json_login_ui_1={
 					actionLink:[{
 						actionType:'10007',
 						url:'http://192.168.16.198:8083/',
+						show_type:'0',
 						ref_ui:[],
 						params:[
 							'device_id=12345678',
@@ -379,6 +382,7 @@ var json_login_ui_1={
 					view_id:'10',
 					actionLink:[{
 						actionType:'10007',
+						show_type:'0',
 						url:'http://192.168.16.198:8083/',
 						ref_ui:[],
 						params:[
@@ -393,6 +397,7 @@ var json_login_ui_1={
 					view_id:'13',
 					actionLink:[{
 						actionType:'10008',
+						show_type:'0',
 						url:'http://192.168.16.198:8083/',
 						ref_ui:[],
 						params:[

@@ -5,7 +5,9 @@ import com.viglle.carmanual.action.model.ActionCloseNewModel;
 import com.viglle.carmanual.action.model.ActionCloseUIModel;
 import com.viglle.carmanual.action.model.ActionHttpModel;
 import com.viglle.carmanual.action.model.ActionNewUIModel;
+import com.viglle.carmanual.action.model.ActionTimeModel;
 import com.viglle.carmanual.action.model.ActionToastModel;
+import com.viglle.carmanual.action.model.ActionUIModel;
 import com.viglle.carmanual.action.model.BaseActionModel;
 import com.viglle.carmanual.action.model.BaseFModel;
 import com.viglle.carmanual.action.model.FModel;
@@ -84,6 +86,7 @@ public class VgActionParsor {
             case ActionType.ACTION_NEW_PANEL://打开一个界面
                 ActionNewUIModel uiModel=new ActionNewUIModel();
                 uiModel.setUrl(jsonObject.getString(ActionNewUIModel.URL));
+                uiModel.setShowType(jsonObject.getString(ActionUIModel.SHOW_TYPE));
                 uiModel.setActionType(actionTypeStr);
                 uiModel.setParams(parsorParams(jsonObject));
                 uiModel.setModifidLink(parsorFModelLink(jsonObject));
@@ -97,6 +100,7 @@ public class VgActionParsor {
             case ActionType.ACTION_CLOSE_AND_NEW_PANEL://打开一个界面并关闭上一个界面
                 ActionCloseNewModel closeNewModel=new ActionCloseNewModel();
                 closeNewModel.setUrl(jsonObject.getString(ActionCloseNewModel.URL));
+                closeNewModel.setShowType(jsonObject.getString(ActionUIModel.SHOW_TYPE));
                 closeNewModel.setActionType(actionTypeStr);
                 closeNewModel.setParams(parsorParams(jsonObject));
                 closeNewModel.setModifidLink(parsorFModelLink(jsonObject));
@@ -115,8 +119,14 @@ public class VgActionParsor {
 
                 break;
             case ActionType.ACTION_COUNT_DOWN_TIMER://倒计时
-
-                break;
+                ActionTimeModel timeModel=new ActionTimeModel();
+                timeModel.setActionType(actionTypeStr);
+                timeModel.setParams(parsorParams(jsonObject));
+                timeModel.setModifidLink(parsorFModelLink(jsonObject));
+//                timeModel.setRef_ui(parsorRefUi(jsonObject));
+                timeModel.setChange_view_id(jsonObject.getString(ActionTimeModel.CHANGEVIEW_ID));
+                timeModel.setTime(jsonObject.getString(ActionTimeModel.TIME));
+                return timeModel;
             case ActionType.ACTION_SHOW_DIALOG://弹出对话框
 
                 break;

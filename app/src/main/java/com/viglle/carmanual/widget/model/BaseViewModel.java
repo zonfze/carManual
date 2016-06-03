@@ -14,16 +14,16 @@ public class BaseViewModel implements Serializable{
     private String view_id;
     public static final String VIEW_ID="view_id";
 
-    private String view_type;
+    private int view_type;
     public static final String VIEW_TYPE="view_type";
 
     private String view_name;
     public static final String VIEW_NAME="view_name";
 
-    private String view_width;
+    private int view_width;
     public static final String VIEW_WIDTH="view_width";
 
-    private String view_height;
+    private int view_height;
     public static final String VIEW_HEIGHT="view_height";
 
     private List<BaseViewModel> childs;//子view
@@ -61,7 +61,7 @@ public class BaseViewModel implements Serializable{
     private String bg_focus_color;
     public static final String BG_FOCUS_COLOR="bg_focus_color";
 
-    private String visible;//控件的可见性;0代表不可见且不占用屏幕空间;1代表可见;2代表不可见带是占用屏幕空间
+    private int visible;//控件的可见性;0代表不可见且不占用屏幕空间;1代表可见;2代表不可见带是占用屏幕空间
     public static final String VISIBLE="visible";
 
 
@@ -99,19 +99,20 @@ public class BaseViewModel implements Serializable{
     }
 
     public int getView_type() {
-        if(isaNull(view_type)){
-            new Exception("view_type 不能为空"+view_type);
-            return 9999;
-        }
-        if(!AppUtil.isNumeric(view_type)){
-            new Exception("view_type 不能为非数字字符"+view_type);
-            return 9999;
-        }
-        return Integer.parseInt(view_type);
+
+        return view_type;
     }
 
     public void setView_type(String view_type) {
-        this.view_type = view_type;
+        if(isaNull(view_type)){
+            new Exception("view_type 不能为空"+view_type);
+            this.view_type = 9999;
+        }
+        if(!AppUtil.isNumeric(view_type)){
+            new Exception("view_type 不能为非数字字符"+view_type);
+            this.view_type = 9999;
+        }
+        this.view_type = Integer.parseInt(view_type);
     }
 
     public String getView_name() {
@@ -217,38 +218,35 @@ public class BaseViewModel implements Serializable{
     }
 
     public int getView_width() {
-        if(isaNull(view_width)){
-            new Exception("view_width 不能为空"+view_width);
-            return 0;
-        }
-        if(!AppUtil.isNumeric(view_width)){
-            new Exception("view_width 不能为非数字字符"+view_width);
-            return 0;
-        }
-//        if(view_width.equals("1080")){
-//            return AppUtil.getScreenWidth()
-//        }
-        return Integer.parseInt(view_width);
+        return view_width;
     }
 
     public void setView_width(String view_width) {
-        this.view_width = view_width;
+        if(isaNull(view_width)){
+            new Exception("view_width 不能为空"+view_width);
+            this.view_width = 0;
+        }
+        if(!AppUtil.isNumeric(view_width)){
+            new Exception("view_width 不能为非数字字符"+view_width);
+            this.view_width = 0;
+        }
+        this.view_width =Integer.parseInt(view_width);
     }
 
     public int getView_height() {
-        if(isaNull(view_height)){
-            new Exception("view_height 不能为空"+view_height);
-            return 0;
-        }
-        if(!AppUtil.isNumeric(view_height)){
-            new Exception("view_height 不能为非数字字符"+view_height);
-            return 0;
-        }
-        return Integer.parseInt(view_height);
+        return view_height;
     }
 
     public void setView_height(String view_height) {
-        this.view_height = view_height;
+        if(isaNull(view_height)){
+            new Exception("view_height 不能为空"+view_height);
+            this.view_height = 0;
+        }
+        if(!AppUtil.isNumeric(view_height)){
+            new Exception("view_height 不能为非数字字符"+view_height);
+            this.view_height = 0;
+        }
+        this.view_height =Integer.parseInt(view_height);
     }
 
     public int[] getView_of() {
@@ -365,17 +363,17 @@ public class BaseViewModel implements Serializable{
     }
 
     public int getVisible() {
-        if(isaNull(visible)){
-            return 0;
-        }
-        if(!AppUtil.isNumeric(visible)){
-            return 0;
-        }
-        return Integer.parseInt(visible);
+       return visible;
     }
 
     public void setVisible(String visible) {
-        this.visible = visible;
+        if(isaNull(visible)){
+            this.visible = 0;
+        }
+        if(!AppUtil.isNumeric(visible)){
+            this.visible = 0;
+        }
+        this.visible = Integer.parseInt(visible);
     }
 
     public void setBg_focus_color(String bg_focus_color) {
