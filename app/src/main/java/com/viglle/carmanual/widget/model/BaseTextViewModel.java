@@ -1,9 +1,6 @@
 package com.viglle.carmanual.widget.model;
 
 import com.viglle.carmanual.utils.AppUtil;
-import com.viglle.carmanual.validation.BaseValidModel;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/22.
@@ -32,8 +29,8 @@ public abstract class BaseTextViewModel extends BaseViewModel{
     private String drawablePadding;
     public static final String DRAWABLE_PADDING="drawablePadding";
 
-    private List<BaseValidModel> validLink;
-    public static final String VALID_LINK="validation";
+//    private List<BaseValidModel> validLink;
+//    public static final String VALID_LINK="validation";
 
 
     public String getText() {

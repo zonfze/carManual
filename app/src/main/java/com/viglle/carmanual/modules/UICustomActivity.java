@@ -41,6 +41,7 @@ public class UICustomActivity extends BaseActivity{
         List<TwoValues<String,String>> params ;
         mUiType= UIType.UI_LOGIN;
         Intent intent=getIntent();
+//        getScreenParams();//打印屏幕分辨率
         if(intent==null){
             params=new ArrayList<>();
         }else{
@@ -54,20 +55,24 @@ public class UICustomActivity extends BaseActivity{
 //            handlerResult(jsonStr);
 //            return;
 //        }
-            HttpUtil.httpPost(url, params, new HttpHandlerInterface() {
-                @Override
-                public void onSuccess(String data) {
-                    handlerResult(data);
-                }
+        HttpUtil.httpPost(url, params, new HttpHandlerInterface() {
+            @Override
+            public void onSuccess(String data) {
+                handlerResult(data);
+            }
 
-                @Override
-                public void onFailure(int statusCode, IOException e) {
+            @Override
+            public void onFailure(int statusCode, IOException e) {
 
-                    LogUtil.log_e(e.toString());
-                }
-            });
+                LogUtil.log_e(e.toString());
+            }
+        });
+    }
 
-
+    private void getScreenParams(){
+        LogUtil.log_e("width="+getResources().getDisplayMetrics().widthPixels);
+        LogUtil.log_e("heigh="+getResources().getDisplayMetrics().heightPixels);
+        LogUtil.log_e("density="+getResources().getDisplayMetrics().density);
     }
 
     private void handlerResult(String jsonStr){

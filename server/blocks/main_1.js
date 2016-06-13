@@ -17,7 +17,7 @@ var json_main_ui_1={
 				view_of:['-1','-1','-1','-1'],
 				view_paddings:['0','0','0','0'],
 				view_margins:['0','0','0','0'],
-				refs:[],
+				ref_views:[],
 				validation:[],
 				res_key:'null',
 				childs:[{
@@ -34,7 +34,7 @@ var json_main_ui_1={
 					view_of:['-1','-1','-1','2'],
 					view_paddings:['0','0','0','0'],
 					view_margins:['0','0','0','0'],
-					refs:[],
+					ref_views:[],
 					validation:[],
 					res_key:'null',
 					childs:[]
@@ -52,7 +52,7 @@ var json_main_ui_1={
 					view_paddings:['0','0','0','0'],
 					view_margins:['0','0','0','0'],
 					layout_mode:'1',
-					refs:['1_verborse'],
+					ref_views:['1_verborse'],
 					validation:[],
 					res_key:'null',
 					childs:[],
@@ -67,11 +67,11 @@ var json_main_ui_1={
 					]
 				}]
 			},
-		eventLink:[{
+			eventLink:[{
 			event_type:'1007',
 			actionLink:[]
 		}]
-	}
+		}
 }
 function loadMain1(req,res,DATA){
 	var string =JSON.stringify(json_main_ui_1);

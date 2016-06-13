@@ -62,7 +62,9 @@ import java.util.List;
 public class ViewFactory {
     public static final int DefaultWidth = 1080;//约定宽按三倍屏尺寸
     public static final int DefaultHeight = 1920;//约定高按三倍屏尺寸
+    public static final int MATCH_PARENT = -9999;//
     public static final int STATUS_BAR_HEIGHT = 25 * 3;//手机状态栏的高度
+
 //    private static ViewFactory instance=null;
 //    public static ViewFactory getInstance(){
 //        if(instance==null){
@@ -233,7 +235,11 @@ public class ViewFactory {
         }
         scrollView.setLayoutParams(params);
         scrollView.addView(layout);
-        scrollView.setVerticalScrollBarEnabled(false);
+        if(!model.getIsShowBar()){
+            scrollView.setVerticalScrollBarEnabled(false);
+        }else{
+            scrollView.setVerticalScrollBarEnabled(true);
+        }
         scrollView.setId(model.getView_id());
         model.setVgView(scrollView);
         viewTreeBean.put(model);
@@ -524,7 +530,11 @@ public class ViewFactory {
 
     @NonNull
     private static RelativeLayout.LayoutParams setWidthAndHeight(Context ctx, int view_width, int view_height) {
-        if (view_width == DefaultWidth && view_height == DefaultHeight) {//当宽=1080;高=1920;代表全屏;所以应该获取手机的屏幕高宽作为实际的高宽
+        if(view_width==MATCH_PARENT&&view_height==MATCH_PARENT){
+            view_width = AppUtil.getScreenWidth(ctx);
+            view_height = AppUtil.getScreenHeight(ctx);
+            return new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        }else if (view_width == DefaultWidth && view_height == DefaultHeight) {//当宽=1080;高=1920;代表全屏;所以应该获取手机的屏幕高宽作为实际的高宽
             view_width = AppUtil.getScreenWidth(ctx);
             view_height = AppUtil.getScreenHeight(ctx);
             return new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -537,8 +547,12 @@ public class ViewFactory {
                 view_height = AppUtil.getScreenHeight(ctx);
                 return new RelativeLayout.LayoutParams(AppUtil.calWidth(ctx, view_width), RelativeLayout.LayoutParams.MATCH_PARENT);
             }
+
             int width = AppUtil.calWidth(ctx, view_width);
             int height = AppUtil.calHeight(ctx, view_height);
+            if(view_width==view_height){
+                height = width;
+            }
             return new RelativeLayout.LayoutParams(width, height);
         }
 

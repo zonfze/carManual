@@ -38,8 +38,8 @@ public class BaseViewModel implements Serializable{
     private int [] view_paddings={0,0,0,0};//四个方向的内边距 [左，上，右，下]（默认为0），元素是像素值
     public static final String VIEW_PADDINGS="view_paddings";
 
-    private String event_type;//事件的触发类型；常用的有click,longclick,scroll,slide这几种
-    public static final String EVENT_TYPE="event_type";
+//    private String event_type;//事件的触发类型；常用的有click,longclick,scroll,slide这几种
+//    public static final String EVENT_TYPE="event_type";
 
 
     private String key;//作为一个预留字段,在VgTextView;VgTextField;VgRadionButton;VgCheckBox;VgSwitchView中 一般作为action 中的请求参数的key
@@ -53,7 +53,7 @@ public class BaseViewModel implements Serializable{
 
 //    private List<Integer> refs;//动作依赖的View_id;通过view_id获取对应的View控件
     RefsBean refs;
-    public static final String REFS="refs";
+    public static final String REFS="ref_views";
 
     private String bg_normal_color;
     public static final String BG_NORMAL_COLOR="bg_normal_color";
@@ -61,7 +61,7 @@ public class BaseViewModel implements Serializable{
     private String bg_focus_color;
     public static final String BG_FOCUS_COLOR="bg_focus_color";
 
-    private int visible;//控件的可见性;0代表不可见且不占用屏幕空间;1代表可见;2代表不可见带是占用屏幕空间
+    private int visible;//控件的可见性;0 代表不可见且不占用屏幕空间;1 代表可见;2 代表不可见带是占用屏幕空间
     public static final String VISIBLE="visible";
 
 
@@ -326,13 +326,13 @@ public class BaseViewModel implements Serializable{
         }
     }
 
-    public String getEvent_type() {
-        return event_type;
-    }
-
-    public void setEvent_type(String event_type) {
-        this.event_type = event_type;
-    }
+//    public String getEvent_type() {
+//        return event_type;
+//    }
+//
+//    public void setEvent_type(String event_type) {
+//        this.event_type = event_type;
+//    }
 
     public String getBg_normal_color() {
         if(isaNull(bg_normal_color)){

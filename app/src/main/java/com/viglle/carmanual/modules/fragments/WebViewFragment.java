@@ -55,14 +55,13 @@ public class WebViewFragment extends BaseFragment{
         mVwebView.setLayoutParams(paramsWeb);
         mVwebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mVwebView.getSettings().setJavaScriptEnabled(true);
+
+        mVwebView.getSettings().setAllowFileAccess(true);//设置启用或禁止访问文件数据
+        mVwebView.getSettings().setUseWideViewPort(true);
+        mVwebView.getSettings().setLoadWithOverviewMode(true);
         mVwebView.getSettings().setSupportZoom(true);
         mVwebView.getSettings().setBuiltInZoomControls(true);
-        mVwebView.getSettings().setAllowFileAccess(true);//设置启用或禁止访问文件数据
-        mVwebView.getSettings().setSupportMultipleWindows(true);
-        mVwebView.getSettings().setUseWideViewPort(true);
-//        mVwebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        mVwebView.getSettings().setLoadWithOverviewMode(true);
-
+        mVwebView.getSettings().setDisplayZoomControls(true);
         mVwebView.setWebViewClient(new MyWebViewClient());
         mVwebView.setWebChromeClient(new MyWebChromeClient());
 //        setBackForward();//设置记录历史，按物理"返回"键回退到上一页

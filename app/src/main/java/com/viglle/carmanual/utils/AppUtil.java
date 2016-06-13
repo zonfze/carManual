@@ -96,14 +96,23 @@ public class AppUtil {
     }
 
     public static int calWidth(Context ctx,int pxValue){
-        final float density=ctx.getResources().getDisplayMetrics().density;
-        return (int)((pxValue/3)*density+0.5f);
+        return pxValue*getScreenWidth(ctx)/1080;
     }
 
     public static int calHeight(Context ctx,int pxValue){
-        final float density=ctx.getResources().getDisplayMetrics().density;
-        return (int)((pxValue/3)*density+0.5f);
+        return pxValue*getScreenHeight(ctx)/1920;
     }
+
+
+//    public static int calWidth(Context ctx,int pxValue){
+//        final float density=ctx.getResources().getDisplayMetrics().density;
+//        return (int)((pxValue/3)*density+0.5f);
+//    }
+
+//    public static int calHeight(Context ctx,int pxValue){
+//        final float density=ctx.getResources().getDisplayMetrics().density;
+//        return (int)((pxValue/3)*density+0.5f);
+//    }
 
     /**
      * get the screen width

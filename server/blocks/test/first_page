@@ -1,0 +1,152 @@
+var json_ui_1={
+	retCode:101,
+	msg:'',
+	playload:{
+	   res_type:'1001',
+	   ui:{
+			view_id:'0',
+			parent_id:'-1',
+			visible:'1',
+			view_type:'9999',
+			view_name:'VgContentLayout',
+			view_width:'1080',
+			view_height:'1920',
+			clickable:'0',
+			bg_normal_color:'#ffffffff',
+			bg_focus_color:'#ffffffff',
+			view_of:['-1','-1','-1','-1'],
+			view_paddings:['0','0','0','0'],
+			view_margins:['0','0','0','0'],
+			refs:[],
+			validation:[],
+			res_key:'null',
+			childs:[{
+				view_id:'1',
+				parent_id:'0',
+				visible:'1',
+				view_type:'10005',
+				view_name:'VgImageView',
+				view_width:'1080',
+				view_height:'1920',
+				bg_normal_color:'#ffffffff',
+				bg_focus_color:'#ffffffff',
+				view_of:['-1','-1','-1','-1'],
+				view_paddings:['0','0','0','0'],
+				view_margins:['0','0','0','0'],
+				refs:[],
+				validation:[],
+				scaleType:'1',
+				imageUrl:'http://192.168.16.198:8080/happy_new_year.png',
+				res_key:'null',
+				childs:[]
+			}]
+
+		},
+	   view_click:{
+         id: "101",
+         click_type: "7",
+         mview: "",
+         data: [
+           {
+             id: "10101",
+             action_type: "2",
+             mview: "1001",
+             data: {
+               address: "login",
+               code: "10002",
+               url: "http://192.168.16.198:8083/",
+               device_id: "1234567890a"
+             }
+           }
+         ],
+         json: {
+           type: "1",
+           value: "4000"
+         }
+       },
+       address:'welcome',
+       id:'10001',
+       version:'1',
+       view_data:''
+	}
+};
+
+
+function welcomeUI1(req,res,DATA){
+	res.end(JSON.stringify(json_ui_1));
+}
+exports.welcomeUI1=welcomeUI1;
+
+var json_ui_1={
+	retCode:101,
+	msg:'',
+	payload:{
+		res_type:'1001',
+		ui:{
+			view_id:'0',
+			parent_id:'-1',
+			visible:'1',
+			view_type:'9999',
+			view_name:'VgContentLayout',
+			view_width:'1080',
+			view_height:'1920',
+			clickable:'0',
+			bg_normal_color:'#ffffffff',
+			bg_focus_color:'#ffffffff',
+			view_of:['-1','-1','-1','-1'],
+			view_paddings:['0','0','0','0'],
+			view_margins:['0','0','0','0'],
+			ref_views:[],
+			validation:[],
+			res_key:'null',
+			childs:[{
+				view_id:'1',
+				parent_id:'0',
+				visible:'1',
+				view_type:'10005',
+				view_name:'VgImageView',
+				view_width:'1080',
+				view_height:'1920',
+				bg_normal_color:'#ffffffff',
+				bg_focus_color:'#ffffffff',
+				view_of:['-1','-1','-1','-1'],
+				view_paddings:['0','0','0','0'],
+				view_margins:['0','0','0','0'],
+				ref_views:[],
+				validation:[],
+				scaleType:'1',
+				imageUrl:'http://192.168.16.198:8080/happy_new_year.png',
+				res_key:'null',
+				childs:[]
+			}]
+
+		},
+		view_click:[{
+         id: "101",
+         click_type: "7",
+         mview: "",
+         data: [
+           {
+             id: "10101",
+             action_type: "2",
+             mview: "1001",
+             data: {
+               address: "login",
+               code: "10002",
+               url: "http://192.168.16.198:8082/",
+               device_id: "1234567890a"
+             }
+           }
+         ],
+         json: {
+           type: "1",
+           value: "4000"
+         }
+       }],
+        address:'welcome',
+        id:'10001',
+        version:'1',
+        view_data:''
+	}
+};
+

@@ -16,7 +16,12 @@ function httpGet(){
 	var user_find_pass_ui=require('./blocks/user/user_find_password_ui');
 	var user_center_ui=require('./blocks/user/user_center_ui');
 	var user_code_action=require('./blocks/user/user_code_action');
+	var user_info_ui=require('./blocks/user/user_info_ui');
+	var user_level_info_ui=require('./blocks/user/user_level_info_ui');
+	var user_check_identify_ui=require('./blocks/user/user_check_identify_ui');
 	var bottomnv=require('./blocks/test/bottomnv');
+	var first_page=require('./blocks/test/first_page');
+	var login_page=require('./blocks/test/login_page');
 	var home_block=require('./blocks/home_1');
 	var welcome_1=require('./blocks/welcome_1');
 	var main_ui=require('./blocks/main_1');
@@ -64,14 +69,23 @@ function httpGet(){
                  	user_find_pass_ui.loadFindPassword(request,response,objectPostData);
                 }else if(code=='codeAction'){
                 	user_code_action.codeAction(request,response,objectPostData);
+                }else if(code=='identify'){
+                	user_check_identify_ui.userIdentify(request,response,objectPostData);
+                }else if(code=='info'){
+                	user_info_ui.userInfo(request,response,objectPostData);
+                }else if(code=='level'){
+                	user_level_info_ui.userLevelInfo(request,response,objectPostData);
                 }else if(code=='test'){
                 	bottomnv.test1(request,response,objectPostData);
-                }else{
+                }else if(code=='10002'){
+                	login_page.loginUI_1(request,response,objectPostData);
+                }else if(code=='10001'){
+                      first_page.welcomeUI1(request,response,objectPostData);
+                } else{
 					response.end('Permission is denied');
 				}
 				
 			});
-			
 		}else{
 			
 			var params=url.parse(request.url,true).query;
@@ -100,8 +114,19 @@ function httpGet(){
              	user_center_ui.loadUserCenter(request,response,params);
             }else if(code=='test'){
                 bottomnv.test1(request,response,params);
+            }else if(code=='identify'){
+                user_check_identify_ui.userIdentify(request,response,params);
+            }else if(code=='level'){
+                user_level_info_ui.userLevelInfo(request,response,params);
+            }else if(code=='info'){
+                user_info_ui.userInfo(request,response,params);
             }else if(code=='codeAction'){
                 user_code_action.codeAction(request,response,params);
+            }else if(code=='10002'){
+				login_page.loginUI_1(request,response,params);
+			 }
+            else if(code=='10001'){
+            	first_page.welcomeUI1(request,response,params);
             }
 		}
 		

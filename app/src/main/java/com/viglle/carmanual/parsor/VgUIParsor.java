@@ -132,6 +132,7 @@ public class VgUIParsor {
             case VgViewType.VgScrollView:
                 VgScrollViewModel scrollViewModel = new VgScrollViewModel();
                 parsorCommonParams(rootObj, view_type, scrollViewModel);
+                scrollViewModel.setIsShowBar(rootObj.getString(VgScrollViewModel.SHOWBAR));
                 scrollViewModel.setChilds(parsorChilds(context, rootObj));
                 return scrollViewModel;
             case VgViewType.VgHorizentalScrollView:

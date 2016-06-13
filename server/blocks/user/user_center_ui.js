@@ -17,7 +17,7 @@ var json_user_center_ui={
 				view_of:['-1','-1','-1','-1'],
 				view_paddings:['0','0','0','0'],
 				view_margins:['0','0','0','0'],
-				refs:[],
+				ref_views:[],
 				validation:[],
 				res_key:'null',
 				childs:[
@@ -34,7 +34,7 @@ var json_user_center_ui={
 						view_of:['-1','-1','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','0','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -51,7 +51,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['15','45','15','45'],
 								view_margins:['0','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'2',
 								imageUrl:'http://192.168.16.198:8080/bg_btn_back.png',
@@ -71,7 +71,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['412','0','412','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'个人中心',
@@ -98,7 +98,7 @@ var json_user_center_ui={
 						view_of:['-1','1','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','0','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -115,7 +115,7 @@ var json_user_center_ui={
                                 view_of:['-1','-1','-1','-1'],
                                 view_paddings:['45','45','45','45'],
                                 view_margins:['0','0','0','0'],
-                                refs:[],
+                                ref_views:[],
                                 validation:[],
                                 scaleType:'1',
                                 imageUrl:'http://192.168.16.198:8080/self_icon_default.png',
@@ -135,7 +135,7 @@ var json_user_center_ui={
                                 view_of:['6','-1','-1','-1'],
                                 view_paddings:['0','0','0','0'],
                                 view_margins:['0','0','0','0'],
-                                refs:[],
+                                ref_views:[],
                                 validation:[],
                                 res_key:'null',
                                 text:'呢称',
@@ -159,7 +159,7 @@ var json_user_center_ui={
 								view_of:['6','7','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['0','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'未登录/未认证',
@@ -183,7 +183,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','88','0','88'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -206,7 +206,7 @@ var json_user_center_ui={
 						view_of:['-1','4','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','45','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -223,7 +223,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['380','0','380','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'个人信息',
@@ -247,7 +247,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -270,7 +270,7 @@ var json_user_center_ui={
 						view_of:['-1','10','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','1','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -287,7 +287,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['380','0','380','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'职业信息',
@@ -311,7 +311,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -334,7 +334,7 @@ var json_user_center_ui={
 						view_of:['-1','13','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','1','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -351,7 +351,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['380','0','380','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'身份认证',
@@ -375,7 +375,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -398,7 +398,7 @@ var json_user_center_ui={
 						view_of:['-1','16','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','45','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -415,7 +415,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['380','0','380','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'权限说明',
@@ -439,7 +439,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -462,7 +462,7 @@ var json_user_center_ui={
 						view_of:['-1','19','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','1','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -479,7 +479,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['380','0','380','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'关于宝典',
@@ -503,7 +503,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -526,7 +526,7 @@ var json_user_center_ui={
 						view_of:['-1','22','-1','-1'],
 						view_paddings:['0','0','0','0'],
 						view_margins:['0','45','0','0'],
-						refs:[],
+						ref_views:[],
 						validation:[],
 						res_key:'null',
 						childs:[
@@ -543,7 +543,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['0','0','0','0'],
 								view_margins:['380','0','380','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								res_key:'null',
 								text:'登录/退出登录',
@@ -567,7 +567,7 @@ var json_user_center_ui={
 								view_of:['-1','-1','-1','-1'],
 								view_paddings:['45','45','45','45'],
 								view_margins:['936','0','0','0'],
-								refs:[],
+								ref_views:[],
 								validation:[],
 								scaleType:'1',
 								imageUrl:'http://192.168.16.198:8080/arrow_right.png',
@@ -602,7 +602,7 @@ var json_user_center_ui={
 				ref_ui:[],
 				params:[
 					'device_id=12345678',
-					'code=panelUI'
+					'code=info'
 				],
 				modify:[]
 			}]
@@ -616,7 +616,7 @@ var json_user_center_ui={
 				ref_ui:[],
 				params:[
 					'device_id=12345678',
-					'code=panelUI'
+					'code=level'
 				],
 				modify:[]
 			}]
@@ -630,7 +630,7 @@ var json_user_center_ui={
 				ref_ui:[],
 				params:[
 					'device_id=12345678',
-					'code=panelUI'
+					'code=identify'
 				],
 				modify:[]
 			}]

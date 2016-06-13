@@ -99,7 +99,7 @@ var json_login_ui_1={
 						bg_focus_color:'#ffffffff',
 						view_of:['-1','-1','-1','-1'],
 						view_paddings:['0','0','0','0'],
-						view_margins:['0','700','0','0'],
+						view_margins:['0','470','0','0'],
 						ref_views:[],
 						validation:[],
 						res_key:'null',
@@ -317,98 +317,77 @@ var json_login_ui_1={
 				]
 
 			},
-			eventLink:[
-				{
-					event_type:'1002',
-					view_id:'7',
-					actionLink:[{
-						actionType:'10014',
-						url:'http://192.168.16.198:8083/',
-						show_type:'0',
-						ref_ui:['3','6'],
-						result:{
-							onOk:[{
-								event_type:'1000',
-								actionLink:[{
-									actionType:'10001',
-									text:'登陆成功',
-									params:[],
-									modify:[]
-								},{
-									actionType:'10009',
-									url:'http://192.168.16.198:8083/',
-									show_type:'0',
-									params:[
-										'device_id=12345678',
-										'code=main'
-									],
-									modify:[]
-								}]
-							}],
-							onFail:[]
-						},
-						params:[
-							'device_id=12345678',
-							'code=loginAction'
-						],
-						modify:[{
-							ref_id:'10',
-							f_type:'10002',
-							f_value:'#ff00f0f0'
-						}]
-					}]
-				},
-				{
-					event_type:'1002',
-					view_id:'9',
-					actionLink:[{
-						actionType:'10007',
-						url:'http://192.168.16.198:8083/',
-						show_type:'0',
-						ref_ui:[],
-						params:[
-							'device_id=12345678',
-							'code=findPass'
-						],
-						modify:[]
-					}]
-				},
-				{
-					event_type:'1002',
-					view_id:'10',
-					actionLink:[{
-						actionType:'10007',
-						show_type:'0',
-						url:'http://192.168.16.198:8083/',
-						ref_ui:[],
-						params:[
-							'device_id=12345678',
-							'code=registerUI'
-						],
-						modify:[]
-					}]
-				},
-				{
-					event_type:'1002',
-					view_id:'13',
-					actionLink:[{
-						actionType:'10008',
-						show_type:'0',
-						url:'http://192.168.16.198:8083/',
-						ref_ui:[],
-						params:[
-							'device_id=12345678',
-							'code=panelUI'
-						],
-						modify:[]
-					}]
-				}
-			]
+			view_click:{
+             id: "101",
+             click_type: "1",
+             mview: "7",
+             data: [
+               {
+                 id: "10101",
+                 action_type: "1",
+                 mview: "1001",
+                 data: {
+                   content: "开始执行点击事件",
+                   type: "1"
+                 }
+               },
+                {
+                   id: "10101",
+                   action_type: "5",
+                   mview: "1001",
+                   data: {
+                      postkey : ["code","phone","pwd","deverid","ver"],
+                   url:"http://www.haohaoxiuche.com/hhxc-api/jishi/2.0.0/index.php",
+                    code:" 110102",
+                    fail:{},
+                    success:{ id: "101",
+                                click_type: "0",
+                                mview: "",
+                                data: [
+                                    {
+                                        id: "10101",
+                                        action_type: "1",
+                                        mview: "1001",
+                                        data: {
+                                           content: "开始执行点击事件",
+                                            type :"1"
+                                        }
+                                    },
+								 	{
+									  id: "10101",
+									  action_type: "2",
+									  mview: "1001",
+									  data: {
+										address: "login",
+										code: "10002",
+										url: "http://192.168.16.198:8083/",
+										device_id: "1234567890a"
+									 }
+									}
+                                ],
+                                json: {}
+                    },
+                    intent:{},
+                    ver:"20160517"
+
+                   }
+               }
+
+             ],
+             json: {
+               type: "1",
+               value: "4000"
+             }
+           },
+            address:'login',
+            id:'10001',
+            version:'1',
+            view_data:''
 		}
 };
-function loginUI(req,res,data){
-	
+function loginUI_1(req,res,data){
+
 	var string =JSON.stringify(json_login_ui_1);
 	res.end(string);
 }
-exports.loginUI=loginUI;
+exports.loginUI_1=loginUI_1;

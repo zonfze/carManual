@@ -6,8 +6,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class CommonAdapter extends BaseAdapter {
     private Context mCtx;
+    private List<Map<String,String>> mList=new ArrayList<>();
 
     public CommonAdapter(Context ctx) {
         mCtx = ctx;
@@ -27,6 +32,8 @@ public class CommonAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
