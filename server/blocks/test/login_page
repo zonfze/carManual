@@ -317,12 +317,13 @@ var json_login_ui_1={
 				]
 
 			},
-			view_click:{
+			view_click:[
+				{
              id: "101",
              click_type: "1",
              mview: "7",
              data: [
-               {
+               	{
                  id: "10101",
                  action_type: "1",
                  mview: "1001",
@@ -378,7 +379,8 @@ var json_login_ui_1={
                type: "1",
                value: "4000"
              }
-           },
+           }
+           ],
             address:'login',
             id:'10001',
             version:'1',
