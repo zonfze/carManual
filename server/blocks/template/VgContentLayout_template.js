@@ -1,0 +1,20 @@
+{
+    view_id:'0',
+    parent_id:'-1',
+    visible:'1',
+    view_type:'9999',
+    view_name:'VgContentLayout',
+    view_width:'1080',
+    view_height:'1920',
+    clickable:'0',
+    bg_normal_color:'#ffffffff',
+    bg_focus_color:'#ffffffff',
+    view_of:['-1','-1','-1','-1'],
+    view_paddings:['0','0','0','0'],
+    view_margins:['0','0','0','0'],
+    layout_mode:'1',
+    refs:[],
+    validation:[],
+    res_key:'null',
+    childs:[]
+}

@@ -1,0 +1,31 @@
+ /*
+    这个控件需要与VgViewPager一起使用;具有关联性
+ */
+{
+    view_id:'2',
+    parent_id:'0',
+    visible:'1',
+    view_of:['-1','-1','-1','-1'],
+    view_type:'20005',
+    view_name:'VgContentLayout',
+    view_width:'1080',
+    view_height:'144',
+    bg_normal_color:'#ffe6e6e6',
+    bg_focus_color:'#ffe6e6e6',
+    view_paddings:['0','0','0','0'],
+    view_margins:['0','0','0','0'],
+    layout_mode:'1',
+    ref_views:['1_verborse'],/**  关联VgViewPager的view_id **/
+    validation:[],
+    res_key:'null',
+    childs:[],
+    datas:[
+        {labelid:'1',title:'常用资料',url:'http://192.168.16.198:8083/?code=home',showType:'0',sub_menu:[]},
+        {labelid:'2',title:'汽修人',url:'http://www.baidu.com',showType:'1',sub_menu:[]},
+        {labelid:'3',title:'我',url:'http://192.168.16.198:8083/?code=home',showType:'0',
+            sub_menu:[
+                {labelid:'301',title:'登陆',url:'http://www.baidu.com',showType:'1',sub_menu:[]},
+                {labelid:'302',title:'注册',url:'http://192.168.16.198:8083/?code=registerUI',showType:'0',sub_menu:[]}
+        ]}
+    ]
+}

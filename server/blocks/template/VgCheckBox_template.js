@@ -1,0 +1,28 @@
+{
+    view_id:'2',
+    parent_id:'0',
+    visible:'0',
+    view_type:'10006',
+    view_name:'错选框',
+    view_width:'256',
+    view_height:'136',
+    bg_normal_color:'#ffffffff',
+    bg_focus_color:'#ffffffff',
+    view_of:['-1','8','-1','-1'],
+    view_paddings:['30','30','30','30'],
+    view_margins:['20','20','20','20'],
+    isChecked:'0',
+    validation:[
+        {valid_id:'1001',msg:'必选'}
+    ],
+    ref_views:[],
+    res_key:'userpass',
+    text:'记住密码',
+    input_type:'2',
+    password:'1',
+    text_align:'0',
+    hint:'',
+    text_size:'48',
+    text_color:'#ff0000ff',
+    childs:[]
+}

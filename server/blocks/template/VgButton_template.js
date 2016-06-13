@@ -1,0 +1,22 @@
+{
+    view_id:'2',
+    parent_id:'0',
+    visible:'1',
+    view_type:'10003',
+    view_name:'VgButton',
+    view_width:'1080',
+    view_height:'136',
+    bg_normal_color:'#00000000',
+    bg_focus_color:'#00000000',
+    view_of:['-1','-1','-1','-1'],
+    view_paddings:['0','0','0','0'],
+    view_margins:['0','0','0','0'],
+    ref_views:[],
+    validation:[],
+    res_key:'',
+    text:'登陆',
+    text_size:'48',
+    text_align:'0',
+    text_color:'#ff000000',
+    childs:[]
+}

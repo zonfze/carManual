@@ -1,0 +1,28 @@
+{
+    view_id:'2',
+    parent_id:'1',
+    visible:'1',
+    view_type:'10002',
+    view_name:'VgTextField',
+    view_width:'824',
+    view_height:'136',
+    bg_normal_color:'#ff00ff00',
+    bg_focus_color:'#ffffcccc',
+    view_of:['2','-1','-1','-1'],
+    view_paddings:['30','30','30','30'],
+    view_margins:['20','20','20','20'],
+    validation:[
+        {valid_id:'1001',msg:'不能为空'},
+        {valid_id:'1002',max:'12',min:'4',msg:'必须4-12个字符之间'}
+    ],
+    ref_views:[],
+    res_key:'username',
+    text:'test',
+    password:'0',
+    text_align:"1",
+    input_type:'1',
+    hint:'请填写手机号',
+    text_size:'48',
+    text_color:'#ffc8c8c8',
+    childs:[]
+}
